@@ -26,10 +26,49 @@ block body
                     button.button How it Works
 
             .slide
-              h1 How it Works
+              .row
+                .twelve.columns
+                  h1.text-center How it Works
+
+              .row
+                //- TODO
+                mixin img()
+                  div(style="background-color:#e1e1e1;height:200px;") placeholder
+
+                .four.columns
+                  .text-center
+                    h2 Step 1
+                    p submit rent request
+                    +img()
+                .four.columns
+                  .text-center
+                    h2 Step 2
+                    p your rent request is published
+                    +img()
+                .four.columns
+                  .text-center
+                    h2 Step 3
+                    p owners contact you
+                    +img()
 
             .slide
-              h1 About us
+              .row
+                .twelve.columns
+                  h1.text-center About us
+              .row
+                .four.columns.offset-by-two.columns.p-home--info-card
+                  h2.text-center Mission
+                .four.columns.p-home--info-card
+                  h2.text-center History
+              .row
+                .four.columns.offset-by-two.columns.p-home--info-card
+                  h2.text-center Press
+                .four.columns.p-home--info-card
+                  h2.text-center Contact Us
 
             .slide
-              h2 Find Travelers
+              .row
+                .twelve.columns
+                  .text-center
+                    h2 Find Travelers
+                    p Text text text

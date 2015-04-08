@@ -1,6 +1,8 @@
 @carousel-control-top: 100px;
 @carousel-control-z-index: 50;
 
+@info-card-height: 200px;
+
 .p-home {
 
   .p-home--center-unit {
@@ -20,6 +22,13 @@
     font-size: 1.1em;
   }
 
+  .p-home--info-card {
+    height: @info-card-height;
+    background-color: @light-grey;
+    margin-bottom: 40px;
+  }
+
+  // TODO move to separate component?
   .carousel {
     .controls {
       position: relative;
