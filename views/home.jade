@@ -1,0 +1,35 @@
+extends layout
+
+block body
+
+  .p-home
+    .row
+      .twelve.columns
+        .carousel
+          .controls
+            a(href="#")
+              i.js-prev.left.arrow.fa.fa-chevron-left.fa-4x
+            a(href="#")
+              i.js-next.right.arrow.fa.fa-chevron-right.fa-4x
+
+          .slides(data-slick='{"slidesToShow": 1, "slidesToScroll": 1}')
+            .slide
+              .row
+                .twelve.columns
+                  h1.text-center Welcome to Rent Liason
+
+              .row
+                .u-full-width
+                  .p-home--center-unit
+                    button.button.button-primary.p-home--big-button Get Started
+                    .text-deemphasize.text-center by completing a rent request
+                    button.button How it Works
+
+            .slide
+              h1 How it Works
+
+            .slide
+              h1 About us
+
+            .slide
+              h2 Find Travelers

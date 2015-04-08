@@ -1,0 +1,41 @@
+@carousel-control-top: 100px;
+@carousel-control-z-index: 50;
+
+.p-home {
+
+  .p-home--center-unit {
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+
+    button {
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+      margin-top: 10px;
+    }
+  }
+
+  .p-home--wide-button {
+    font-size: 1.1em;
+  }
+
+  .carousel {
+    .controls {
+      position: relative;
+      .arrow {
+        position: absolute;
+        z-index: @carousel-control-z-index;
+        top: @carousel-control-top;
+
+        &.right {
+          right: 0px;
+        }
+
+        &.left {
+          left: 0px;
+        }
+      }
+    }
+  }
+}
