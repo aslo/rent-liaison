@@ -11,7 +11,7 @@ module.exports = function(grunt) {
         paths: {
           requireLib: '../../bower_components/requirejs/require'
         },
-        out: ".tmp/public/js/source.min.js",
+        out: ".tmp/public/js/main.js",
         include: 'requireLib',
         optimize: 'uglify2',
         name: 'main',

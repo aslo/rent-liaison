@@ -8,6 +8,7 @@ bower_components
 # sails
 .tmp
 dump.rdb
+www/
 
 # node / npm
 lib-cov
