@@ -3,8 +3,8 @@ module.exports = function (grunt) {
 		'compileAssets',
 		'requirejs:compile',
     'concat',
-		'uglify',
-		'cssmin',
+		// 'uglify',
+		// 'cssmin',
 		'clean:build',
 		'copy:build'
 	]);
