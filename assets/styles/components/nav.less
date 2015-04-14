@@ -1,9 +1,11 @@
 @nav-height: 6.5rem;
+@nav-margin-bottom: 30px;
 
 .nav {
   .u-full-width;
   border-bottom: solid @light-grey 1px;
   height: @nav-height;
+  margin-bottom: @nav-margin-bottom;
 
   .nav-list {
     list-style: none;
@@ -22,6 +24,9 @@
     text-decoration: none;
     line-height: @nav-height;
     color: @font-color;
-  }
 
+    &.active {
+      color: @primary-color;
+    }
+  }
 }

@@ -1,15 +1,16 @@
 require.config({
+  baseUrl: '/js',
 
   deps: ["main"],
 
   paths: {
-    jquery: '../../bower_components/jquery/dist/jquery.min',
-    // lodash: '../../bower_components/lodash/lodash.min',
-    underscore: '../../bower_components/lodash/lodash.min', // TODO
-    backbone: '../../bower_components/backbone/backbone',
+    jquery: './vendor/jquery/dist/jquery.min',
+    // lodash: '../vendor/lodash/lodash.min',
+    underscore: './vendor/lodash/lodash.min', // TODO
+    backbone: './vendor/backbone/backbone',
 
     // jquery plugins
-    slick: '../../bower_components/slick.js/slick/slick.min'
+    slick: './vendor/slick.js/slick/slick.min'
   },
 
   // map: {

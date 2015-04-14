@@ -9,9 +9,9 @@ module.exports = function(grunt) {
         baseUrl: "assets/js",
         mainConfigFile: "assets/js/config.js",
         paths: {
-          requireLib: '../../bower_components/requirejs/require'
+          requireLib: './vendor/requirejs/require'
         },
-        out: ".tmp/public/js/main.js",
+        out: ".tmp/public/js/source.js",
         include: 'requireLib',
         optimize: 'uglify2',
         name: 'main',
