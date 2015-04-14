@@ -31,7 +31,7 @@
     "sails-disk": "~0.10.0"
   },
   "scripts": {
-    "start": "node app.js --prod",
+    "start": "sails lift --prod",
     "debug": "node debug app.js",
     "postinstall": "bower install"
   },
