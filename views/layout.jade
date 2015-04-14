@@ -6,9 +6,9 @@ html
     title Rent Liason
 
     //- styles
-    link(rel="stylesheet" href="/styles/importer.css")
-    link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
     block styles
+      link(rel="stylesheet" href="/styles/importer.css")
+      link(rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css")
 
   body
     .container
@@ -17,5 +17,10 @@ html
 
       block body
 
-    //- scripts
-    script(src="/js/main.js")
+    block scripts
+      //- scripts
+      if process.env.NODE_ENV == 'development'
+        script(src="/js/vendor/requirejs/require.js")
+        script(src="/js/config.js")
+      else
+        script(src="/js/source.js")
