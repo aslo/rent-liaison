@@ -3,7 +3,7 @@ config/local.js
 
 # dependencies
 node_modules
-bower_components
+assets/js/vendor
 
 # sails
 .tmp
