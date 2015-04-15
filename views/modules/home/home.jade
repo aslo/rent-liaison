@@ -1,0 +1,30 @@
+extends ../../layout
+
+block body
+
+  #js-home.p-home
+    .row
+      .twelve.columns
+        .carousel
+          .controls
+            a(href="#")
+              i.js-prev.left.arrow.fa.fa-chevron-left.fa-4x
+            a(href="#")
+              i.js-next.right.arrow.fa.fa-chevron-right.fa-4x
+
+          .slides(data-slick='{"slidesToShow": 1, "slidesToScroll": 1}')
+
+            .slide
+              include ./_landing
+
+            .slide(hidden="true")
+              include ./_rent_request
+
+            .slide(hidden="true")
+              include ./_how_it_works
+
+            .slide(hidden="true")
+              include ./_about
+
+            .slide(hidden="true")
+              include ./_property_owners
