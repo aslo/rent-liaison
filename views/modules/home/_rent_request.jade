@@ -2,3 +2,43 @@
   .twelve.columns
     h1.text-center Rent Request
 
+.row
+  .offset-by-two.columns.eight.columns
+    form
+      fieldset
+        legend Where to?
+        .row
+          .six.columns
+            select#destination.u-full-width(name="destination")
+              option East Hampton
+
+      fieldset
+        legend When?
+        .row
+          .three.columns
+            label(for="startDate") Start Date
+            input#startDate.js-pikaday.u-full-width(type="text", required)
+          .three.columns
+            label(for="endDate") End Date
+            input#endDate.js-pikaday.u-full-width(type="text", required)
+        .row
+          label
+            input(type="checkbox")
+            .label-body my dates are flexible
+
+
+      fieldset
+        legend Who are you?
+        .row
+          .four.columns
+            label(for="firstName") First Name
+            input#firstName.u-full-width(type="text", required)
+          .four.columns
+            label(for="lastName") Last Name
+            input#lastName.u-full-width(type="text", required)
+        .row
+          .eight.columns
+            label(for="email") Email
+            input#email.u-full-width(type="email", required)
+
+        input.button-primary(type="submit", value="Submit")

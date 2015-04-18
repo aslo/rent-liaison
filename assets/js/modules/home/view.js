@@ -1,7 +1,8 @@
 define([
   'backbone',
-  'slick'
-], function(Backbone, slick){
+  'slick',
+  'pikaday'
+], function(Backbone, slick, Pikaday){
 
   return Backbone.View.extend({
     initialize: function(){
@@ -11,6 +12,11 @@ define([
       this.$carouselEl.slick({
         prevArrow: $('.js-prev'),
         nextArrow: $('.js-next')
+      });
+
+      // init date picker
+      this.$('.js-pikaday').each(function(i, el){
+        new Pikaday({ field: el });
       });
 
       this.$carouselEl.on('beforeChange', this.onCarouselChange);

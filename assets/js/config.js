@@ -8,6 +8,7 @@ require.config({
     // lodash: '../vendor/lodash/lodash.min',
     underscore: './vendor/lodash/lodash.min', // TODO
     backbone: './vendor/backbone/backbone',
+    pikaday: './vendor/pikaday/pikaday',
 
     // jquery plugins
     slick: './vendor/slick.js/slick/slick.min'
