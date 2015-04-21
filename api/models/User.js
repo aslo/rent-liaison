@@ -8,7 +8,44 @@
 module.exports = {
 
   attributes: {
+    firstName: {
+      type: 'string',
+      required: true
+    },
+    lastName: {
+      type: 'string',
+      required: true
+    },
+    email: {
+      type: 'email',
+      required: true
+    },
+    phone: {
+      type: 'string'
+    },
+    dateOfBirth: {
+      type: 'date'
+    },
+    occupation: {
+      type: 'string'
+    },
 
+    // address fields
+    address1: {
+      type: 'string'
+    },
+    address2: {
+      type: 'string'
+    },
+    city: {
+      type: 'string'
+    },
+    state: {
+      type: 'string'
+    },
+    zip: {
+      type: 'string'
+    }
   }
 };
 
