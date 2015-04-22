@@ -39,9 +39,9 @@
   "main": "app.js",
   "repository": {
     "type": "git",
-    "url": "git://github.com/alex/snorlax.git"
+    "url": "git://github.com/aslo/snorlax.git"
   },
-  "author": "alex",
+  "author": "Alex Sloan <alex.b.sloan@gmail.com>",
   "license": "",
   "devDependencies": {}
 }
