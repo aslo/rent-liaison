@@ -1,10 +1,14 @@
 define([
   'backbone',
   'slick',
-  'pikaday'
-], function(Backbone, slick, Pikaday){
+
+  // subviews
+  'modules/home/rentalRequestView'
+
+], function(Backbone, slick, RentalRequestView){
 
   return Backbone.View.extend({
+
     initialize: function(){
       this.$carouselEl = $('*[data-slick]');
 
@@ -14,19 +18,21 @@ define([
         nextArrow: $('.js-next')
       });
 
-      // init date picker
-      this.$('.js-pikaday').each(function(i, el){
-        new Pikaday({ field: el });
-      });
+      // init subviews
+      this.rentalRequestView = new RentalRequestView({ el: this.$('#js-rent-request') });
 
+      // wire up listeners
       this.$carouselEl.on('beforeChange', this.onCarouselChange);
       Backbone.PubSub.on('nav_navbar', this.onNavEvent, this);
     },
+
     onCarouselChange: function(e, slick, currentSlide, nextSlide){
       Backbone.PubSub.trigger('nav_carousel', nextSlide, this);
     },
+
     onNavEvent: function(index){
       this.$carouselEl.slick('slickGoTo', index);
     }
+
   });
 });

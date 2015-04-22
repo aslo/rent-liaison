@@ -3,8 +3,8 @@
     h1.text-center Rent Request
 
 .row
-  .offset-by-two.columns.eight.columns
-    form
+  .offset-by-three.columns.eight.columns
+    form.js-rent-request-form(action="/rentalrequest", method="POST")
       fieldset
         legend Where to?
         .row
@@ -17,28 +17,27 @@
         .row
           .three.columns
             label(for="startDate") Start Date
-            input#startDate.js-pikaday.u-full-width(type="text", required)
+            input#startDate.js-pikaday.u-full-width(name="startDate", type="text")
           .three.columns
             label(for="endDate") End Date
-            input#endDate.js-pikaday.u-full-width(type="text", required)
+            input#endDate.js-pikaday.u-full-width(name="endDate", type="text")
         .row
           label
-            input(type="checkbox")
+            input#datesAreFlexible(name="datesAreFlexible", value="true", type="checkbox")
             .label-body my dates are flexible
-
 
       fieldset
         legend Who are you?
         .row
           .four.columns
             label(for="firstName") First Name
-            input#firstName.u-full-width(type="text", required)
+            input#firstName.u-full-width(name="user[firstName]", type="text")
           .four.columns
             label(for="lastName") Last Name
-            input#lastName.u-full-width(type="text", required)
+            input#lastName.u-full-width(name="user[lastName]", type="text")
         .row
           .eight.columns
             label(for="email") Email
-            input#email.u-full-width(type="email", required)
+            input#email.u-full-width(name="user[email]", type="email")
 
-        input.button-primary(type="submit", value="Submit")
+      input.button-primary(type="submit", value="Submit")

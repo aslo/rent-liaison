@@ -11,7 +11,8 @@ require.config({
     pikaday: './vendor/pikaday/pikaday',
 
     // jquery plugins
-    slick: './vendor/slick.js/slick/slick.min'
+    slick: './vendor/slick.js/slick/slick.min',
+    serializeJSON: './vendor/jquery.serializeJSON/jquery.serializejson'
   },
 
   // map: {
@@ -27,6 +28,7 @@ require.config({
     backbone: {
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
-    }
+    },
+    serializeJSON: ['jquery']
   }
 });
