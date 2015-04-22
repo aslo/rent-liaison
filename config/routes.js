@@ -22,9 +22,8 @@
 
 module.exports.routes = {
 
-  '/': {
-    view: 'modules/home/home'
-  }
+  'get /': { view: 'modules/home/home' },
+  'get /rentalrequest/:uri': 'RentalRequestController.findByUri'
 
   /***************************************************************************
   *                                                                          *
