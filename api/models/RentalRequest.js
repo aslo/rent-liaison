@@ -38,6 +38,9 @@ module.exports = {
       type: 'boolean',
       required: true,
       defaultsTo: false
+    },
+    travelers: {
+      type: 'integer'
     }
   },
 
@@ -45,7 +48,7 @@ module.exports = {
     chars = 'abcdefghijklmnopqrstuvwxyz1234567890-_.';
 
     uri = '';
-    for (var i = 0; i <= URI_LENGTH; i++) {
+    for (var i = 0; i < URI_LENGTH; i++) {
       uri += chars[_.random(chars.length - 1)];
     }
 

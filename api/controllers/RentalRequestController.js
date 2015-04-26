@@ -14,6 +14,9 @@ module.exports = {
 
     RentalRequest.create(req.body)
     .then(function(result){
+
+      // TODO MailService.sendActivationEmail
+
       res.json(202, {});
     });
 
@@ -25,8 +28,12 @@ module.exports = {
 
     RentalRequest.find({ where: { uri: req.params.uri }, limit: 1 })
     .populate('user')
-    .then(function(result) {
-      res.json(result);
+    .then(function(rentalRequests) {
+      // 400
+      if (rentalRequests.length < 1) return next();
+
+      rentalRequest = rentalRequests[0]
+      res.render('rentalRequest', { rentalRequest: rentalRequest });
     });
   }
 };

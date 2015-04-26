@@ -8,6 +8,12 @@
 module.exports = {
 
   attributes: {
+    status: {
+      type: 'string',
+      enum: ['ACTIVE', 'INACTIVE', 'UNCONFIRMED'],
+      defaultsTo: 'UNCONFIRMED'
+    },
+
     firstName: {
       type: 'string',
       required: true
