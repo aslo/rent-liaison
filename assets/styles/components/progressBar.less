@@ -1,0 +1,16 @@
+@progress-bar-height: 25px;
+@progress-bar-background-color: white;
+@progress-bar-fill-color: @dark-grey;
+
+.progress-bar {
+  height: @progress-bar-height;
+  background-color: @progress-bar-background-color;
+  border: solid @light-grey 1px;
+  margin: 10px 0 10px 0;
+
+  span {
+    height: 100%;
+    display: block;
+    background-color: @progress-bar-fill-color;
+  }
+}
