@@ -1,5 +1,6 @@
 # configuration
 config/local.js
+.env
 
 # dependencies
 node_modules
