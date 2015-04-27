@@ -7,7 +7,7 @@ module.exports = {
       to:      to,
       from:    'noreply@rentliason.com',
       subject: 'Activate Your Account',
-      html:    null
+      html:    '<p>blah blah blah</p>'
     }, cb);
   }
 }

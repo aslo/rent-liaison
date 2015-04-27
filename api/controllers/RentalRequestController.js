@@ -5,15 +5,18 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
+var Step = require('step');
+
 module.exports = {
 
-  create: function(req, res) {
+  create: function(req, res, next) {
 
     // TODO validate
     // * end date after start, etc
 
     RentalRequest.create(req.body)
-    .then(function(result){
+    .exec(function(err, result){
+      if (err) return next(err);
 
       // TODO MailService.sendActivationEmail
 
@@ -22,19 +25,55 @@ module.exports = {
 
   },
 
-  findByUri: function(req, res) {
-
+  findByUri: function(req, res, next) {
     // TODO validate the uri
 
-    RentalRequest.find({ where: { uri: req.params.uri }, limit: 1 })
-    .populate('user')
-    .then(function(rentalRequests) {
-      // 400
-      if (rentalRequests.length < 1) return next();
+    var rentalRequest = undefined;
+    Step(
+      function(){
+        RentalRequest.find({ where: { uri: req.params.uri }, limit: 1 })
+        .populate('user')
+        .exec(this);
+      },
+      function(err, rentalRequests) {
+        if (err) return next(err);
 
-      rentalRequest = rentalRequests[0]
-      res.render('rentalRequest', { rentalRequest: rentalRequest });
-    });
+        // 400
+        if (rentalRequests.length < 1) return next();
+        rentalRequest = rentalRequests[0]
+
+        // activate user if necessary
+        UserService.confirmUserIfUnconfirmed(rentalRequest.user, this)
+      },
+      function(err, user) {
+        if (err) return next(err);
+
+        // if the user was just confirmed
+        if (user) {
+          req.flash('message', 'welcome');
+        }
+
+        res.render('rentalRequest', {
+          rentalRequest: rentalRequest,
+          messages: req.flash('message')
+        });
+      }
+    )
+  },
+
+  patch: function (req, res, next) {
+    // TODO validate
+
+    RentalRequest.update(req.params.id, req.body)
+    .exec(function(){
+      RentalRequest.findOne(req.params.id)
+      .populate('user')
+      .exec(function(err, result) {
+        if (err) return next(err);
+        res.json(result);
+      });
+    })
   }
+
 };
 

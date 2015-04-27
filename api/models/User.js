@@ -11,7 +11,8 @@ module.exports = {
     status: {
       type: 'string',
       enum: ['ACTIVE', 'INACTIVE', 'UNCONFIRMED'],
-      defaultsTo: 'UNCONFIRMED'
+      defaultsTo: 'UNCONFIRMED',
+      required: true
     },
 
     firstName: {
@@ -51,7 +52,12 @@ module.exports = {
     },
     zip: {
       type: 'string'
+    },
+
+    isConfirmed: function(){
+      return this.status != 'UNCONFIRMED'
     }
   }
+
 };
 

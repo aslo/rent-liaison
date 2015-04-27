@@ -13,10 +13,13 @@ module.exports = {
 
   attributes: {
 
+    // associations
     user: {
       model: 'user',
       required: true
     },
+
+    // fields
     destination: {
       required: true,
       type: 'string',
@@ -24,7 +27,7 @@ module.exports = {
     },
     uri: {
       type: 'string',
-      required: true,
+      // required: true,
       unique: true,
       size: URI_LENGTH
     },
@@ -41,10 +44,52 @@ module.exports = {
     },
     travelers: {
       type: 'integer'
+    },
+    occasion: {
+      type: 'string'
+    },
+    budget: {
+      type: 'float'
+    },
+    group_comments: {
+      type: 'string'
+    },
+
+    // instance methods
+    getCompletionPercentage: function() {
+      return 69;
+      // var ignoreFields = [
+      //   'createdAt',
+      //   'updatedAt',
+      //   'id'
+      // ];
+
+      // var totalFields = 0,
+      //     completedFields = 0;
+
+      // function count(obj) {
+      //   for (key in obj) {
+      //     if (obj[key] && typeof obj[key] === 'object') {
+      //       count(obj[key]);
+      //     } else if ((typeof obj[key] !== 'function') && ! _.contains(ignoreFields, key)) {
+      //       console.log(key);
+      //       totalFields++;
+      //       if (typeof obj[key] !== 'undefined') {
+      //         completedFields++;
+      //       }
+      //     }
+      //   }
+      // }
+
+      // if (totalFields > 0) {
+      //   return Math.round((completedFields / totalFields) * 100);
+      // } else {
+      //   return 100;
+      // }
     }
   },
 
-  beforeValidate: function(values, cb) {
+  beforeCreate: function(values, cb) {
     chars = 'abcdefghijklmnopqrstuvwxyz1234567890-_.';
 
     uri = '';

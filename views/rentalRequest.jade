@@ -1,0 +1,107 @@
+include ./mixins/forms
+include ./mixins/progress_bar
+
+extends layout
+
+block nav
+  //- empty
+
+block body
+
+  #js-rental-request(data-rental-request-id=rentalRequest.id)
+    .row
+      h1 Rental Request
+
+    if messages && messages.length
+      .row
+        .eight.columns.alert
+          strong Your Rent Request has been confirmed!&nbsp;
+          br
+          | We are already working hard to find a vacation
+          | rental to match your needs.
+          | Please bookmark this link (it's already in your email).
+          | You can return to this page to modify your Rent Request at any time.
+    .row
+      .eight.columns
+        +progress_bar(rentalRequest.getCompletionPercentage())
+
+        p your Rent Request is #{rentalRequest.getCompletionPercentage()}% complete.
+
+        p In order to make your request as attractive as possible to property owners,
+          | please add some more information about yourself and the party you will be traveling with.
+
+    .row
+      .eight.columns
+
+        form.js-user-form
+          h2 Personal Information
+          .row
+            .four.columns
+              +input('firstName', 'firstName', rentalRequest.user.firstName, 'First Name')
+            .four.columns
+              +input('lastName', 'lastName', rentalRequest.user.lastName, 'Last Name')
+
+          .row
+            .eight.columns
+              label Email
+              p= rentalRequest.user.email
+
+          .row
+            .eight.columns
+              +input('address1', 'address1', rentalRequest.user.address1, 'Address')
+              +input('address2', 'address2', rentalRequest.user.address2)
+
+          .row
+            .eight.columns
+              +input('city', 'city', rentalRequest.user.city, 'City')
+          .row
+            .five.columns
+              label(for="state") State
+              +state_select()(id="state", name="state", class="u-full-width")
+            .three.columns
+              +input('zip', 'zip', rentalRequest.user.zip, 'Zip')
+
+          .row
+            button Submit
+
+    .row
+      .eight.columns
+
+        form.js-rental-request-form
+          h2 Group Information
+          .row
+            .four.columns
+              +input('startDate', 'startDate', rentalRequest.startDate, 'Start Date')(class='js-pikaday')
+            .four.columns
+              +input('endDate', 'endDate', rentalRequest.endDate, 'End Date')(class='js-pikaday')
+          .row
+            .four.columns
+              +input('travelers', 'travelers', rentalRequest.travelers, 'Number of Travelers')(type='number')
+            .four.columns
+              label Age Range
+              p TODO -- implement this
+          .row
+            .eight.columns
+              +input('occasion', 'occasion', rentalRequest.occasion, 'Occasion')(type='text')
+
+          .row
+            .four.columns
+              +input('budget', 'budget', rentalRequest.budget, 'Budget')(type='number')
+
+          .row
+            .eight.columns
+              label(for="group-comments") Additional Comments
+              textarea.u-full-width#group-comments(name="comments")= rentalRequest.comments
+          .row
+            button Submit
+
+    .row
+      .eight.columns
+        form.js-rental-request-form
+          h2 Property Characteristics
+
+        .row
+          button Submit
+
+  script.
+    window.rentalRequest = !{JSON.stringify(rentalRequest)}
