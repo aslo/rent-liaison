@@ -40,10 +40,10 @@ module.exports = {
 
         // 400
         if (rentalRequests.length < 1) return next();
-        rentalRequest = rentalRequests[0]
+        rentalRequest = rentalRequests[0];
 
-        // activate user if necessary
-        UserService.confirmUserIfUnconfirmed(rentalRequest.user, this)
+        // activate rentalrequest if necessary
+        RentalRequestService.activateRentalRequestIfInactive(rentalRequest, this);
       },
       function(err, user) {
         if (err) return next(err);
@@ -73,6 +73,13 @@ module.exports = {
         res.json(result);
       });
     })
+  },
+
+  findActive: function (req, res) {
+    RentalRequest.find({ where: { status: 'ACTIVE' } }, function(err, results) {
+      if (err) return next(err);
+      res.json(results);
+    });
   }
 
 };

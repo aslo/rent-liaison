@@ -20,6 +20,12 @@ module.exports = {
     },
 
     // fields
+    status: {
+      type: 'string',
+      enum: ['ACTIVE', 'INACTIVE', 'UNCONFIRMED'],
+      defaultsTo: 'UNCONFIRMED',
+      required: true
+    },
     destination: {
       required: true,
       type: 'string',
@@ -56,6 +62,11 @@ module.exports = {
     },
 
     // instance methods
+
+    isUnconfirmed: function(){
+      return this.status === 'UNCONFIRMED'
+    },
+
     getCompletionPercentage: function() {
       return 69;
       // var ignoreFields = [

@@ -1,5 +1,3 @@
-var mailer = require('../lib/mailer')();
-
 module.exports = {
   /**
    * confirmUserIfUnconfirmed
@@ -8,7 +6,7 @@ module.exports = {
    * Calls back with the user object if an update was peformed, null if otherwise.
    */
   confirmUserIfUnconfirmed: function(user, cb) {
-    if (!user.isConfirmed()) {
+    if (user.isUnconfirmed()) {
       sails.log.debug('Confirming new user with id', user.id);
       User.update(user.id, {status: 'ACTIVE'}, cb);
     } else {

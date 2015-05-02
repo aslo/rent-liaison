@@ -14,7 +14,6 @@ module.exports = {
       defaultsTo: 'UNCONFIRMED',
       required: true
     },
-
     firstName: {
       type: 'string',
       required: true
@@ -54,8 +53,8 @@ module.exports = {
       type: 'string'
     },
 
-    isConfirmed: function(){
-      return this.status != 'UNCONFIRMED'
+    isUnconfirmed: function(){
+      return this.status === 'UNCONFIRMED'
     }
   }
 
