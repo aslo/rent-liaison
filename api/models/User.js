@@ -6,8 +6,17 @@
 */
 
 module.exports = {
+  // Enforce model schema in the case of schemaless databases
+  schema: true,
 
   attributes: {
+    // associations
+    passports: {
+      collection: 'Passport',
+      via: 'user'
+    },
+
+    // attributes
     status: {
       type: 'string',
       enum: ['ACTIVE', 'INACTIVE', 'UNCONFIRMED'],
@@ -22,9 +31,14 @@ module.exports = {
       type: 'string',
       required: true
     },
+    // username: {
+    //   type: 'string',
+    //   unique: true
+    // },
     email: {
       type: 'email',
-      required: true
+      required: true,
+      unique: true
     },
     phone: {
       type: 'string'
@@ -36,7 +50,7 @@ module.exports = {
       type: 'string'
     },
 
-    // address fields
+    // address
     address1: {
       type: 'string'
     },
