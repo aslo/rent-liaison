@@ -9,6 +9,7 @@
         legend Where to?
         .row
           .six.columns
+            //- TODO get from DB
             select#destination.u-full-width(name="destination")
               option East Hampton
               option West Hampton
@@ -18,11 +19,15 @@
         legend When?
         .row
           .three.columns
-            label(for="startDate") Start Date
-            input#startDate.js-pikaday.u-full-width(name="startDate", type="text")
+            label(for="js-start-date") Start Date
+            input#js-start-date.js-pikaday.u-full-width(name="startDate", type="text")
           .three.columns
-            label(for="endDate") End Date
-            input#endDate.js-pikaday.u-full-width(name="endDate", type="text")
+            label(for="js-end-date") End Date
+            input#js-end-date.js-pikaday.u-full-width(name="endDate", type="text")
+        .row
+          label
+            input#js-no-dates(value="true", type="checkbox")
+            .label-body no specific dates
         .row
           label
             input#datesAreFlexible(name="datesAreFlexible", value="true", type="checkbox")

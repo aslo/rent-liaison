@@ -12,7 +12,8 @@ require.config({
 
     // jquery plugins
     slick: './vendor/slick.js/slick/slick.min',
-    serializeJSON: './vendor/jquery.serializeJSON/jquery.serializejson'
+    serializeJSON: './vendor/jquery.serializeJSON/jquery.serializejson',
+    flip: './vendor/flip/dist/jquery.flip.min.js'
   },
 
   // map: {
@@ -29,6 +30,7 @@ require.config({
       deps: ['underscore', 'jquery'],
       exports: 'Backbone'
     },
-    serializeJSON: ['jquery']
+    serializeJSON: ['jquery'],
+    flip: ['jquery']
   }
 });

@@ -10,6 +10,7 @@ define([
   return Backbone.View.extend({
 
     events: {
+      'change #js-no-dates': 'toggleNoDates',
       'submit .js-rent-request-form': 'submitForm'
     },
 
@@ -53,6 +54,14 @@ define([
           // TODO surface this
         }
       });
+    },
+
+    toggleNoDates: function(e) {
+      console.log(e);
+      this.$('#js-startDate,#js-end-date').attr('disabled', function(index, attr){
+        return attr ? 'disabled' : null;
+      });
+
     },
 
     // empty the view's content and stop listening to events,
