@@ -14,7 +14,10 @@ module.exports = {
     // TODO validate
     // * end date after start, etc
 
-    RentalRequest.create(req.body)
+    var rentRequest = req.body;
+    rentRequest.user.type = 'RENTER';
+
+    RentalRequest.create(rentRequest)
     .exec(function(err, result){
       if (err) return next(err);
 
@@ -73,14 +76,6 @@ module.exports = {
         res.json(result);
       });
     })
-  },
-
-  findActive: function (req, res) {
-    RentalRequest.find({ where: { status: 'ACTIVE' } }, function(err, results) {
-      if (err) return next(err);
-      res.json(results);
-    });
   }
-
 };
 

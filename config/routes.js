@@ -24,21 +24,20 @@ module.exports.routes = {
 
   'GET /': { view: 'modules/home/home' },
 
-  'GET /rentalrequest': 'RentalRequestController.findActive',
+  // property owner
+  'GET /propertyowners': 'AuthController.login',
+  'GET /home': 'PropertyOwnerController.home',
+  'GET /rentalrequest': 'PropertyOwnerController.showRentalRequests',
+
+  // renter
   'GET /rentalrequest/:uri': 'RentalRequestController.findByUri',
   'PATCH /rentalrequest/:id': 'RentalRequestController.patch',
-
   'PATCH /user/:id': 'UserController.patch',
 
   // auth
-
-  'GET /login': 'AuthController.login',
   'GET /logout': 'AuthController.logout',
-  'GET /register': 'AuthController.register',
-
   'POST /auth/local': 'AuthController.callback',
   'POST /auth/local/:action': 'AuthController.callback',
-
   'GET /auth/:provider': 'AuthController.provider',
   'GET /auth/:provider/callback': 'AuthController.callback',
   'GET /auth/:provider/:action': 'AuthController.callback',

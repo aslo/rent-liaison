@@ -18,10 +18,7 @@
 
 
 module.exports.policies = {
+  '*': 'passport',
 
-  RentalRequestController: {
-    findActive: ['passport', 'sessionAuth']
-  },
-
-  '*': true
+  PropertyOwnerController: ['passport', 'sessionAuth', 'isPropertyOwner']
 };

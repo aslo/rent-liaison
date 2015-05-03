@@ -24,9 +24,10 @@ var crypto    = require('crypto');
  * @param {Function} next
  */
 exports.register = function (req, res, next) {
-  var email    = req.param('email')
-    , username = req.param('username')
-    , password = req.param('password');
+  var type     = req.body.type
+    , email    = req.body.email
+    , username = req.body.username
+    , password = req.body.password;
 
   if (!email) {
     req.flash('error', 'Error.Passport.Email.Missing');
@@ -44,7 +45,8 @@ exports.register = function (req, res, next) {
   }
 
   User.create({
-    username : username
+    type     : type
+  , username : username
   , email    : email
   }, function (err, user) {
     if (err) {

@@ -29,7 +29,8 @@ module.exports.connections = {
   *                                                                          *
   ***************************************************************************/
   localDiskDb: {
-    adapter: 'sails-disk'
+    adapter: 'sails-disk',
+    filePath: '.'
   },
 
   /***************************************************************************
@@ -40,12 +41,12 @@ module.exports.connections = {
   * Run: npm install sails-mysql                                             *
   *                                                                          *
   ***************************************************************************/
-  someMysqlServer: {
+  mysql: {
     adapter: 'sails-mysql',
-    host: 'YOUR_MYSQL_SERVER_HOSTNAME_OR_IP_ADDRESS',
-    user: 'YOUR_MYSQL_USER',
-    password: 'YOUR_MYSQL_PASSWORD',
-    database: 'YOUR_MYSQL_DB'
+    host: process.env.MYSQL_HOST,
+    user: process.env.MYSQL_USER,
+    password: process.env.MYSQL_PASSWORD,
+    database: process.env.MYSQL_DB
   },
 
   /***************************************************************************

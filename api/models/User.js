@@ -15,6 +15,10 @@ module.exports = {
       collection: 'Passport',
       via: 'user'
     },
+    renterDetails: {
+      model: 'RenterDetails',
+      via: 'user'
+    },
 
     // attributes
     status: {
@@ -23,54 +27,34 @@ module.exports = {
       defaultsTo: 'UNCONFIRMED',
       required: true
     },
-    firstName: {
+    type: {
       type: 'string',
+      enum: ['RENTER', 'PROPERTY_OWNER'],
       required: true
     },
-    lastName: {
-      type: 'string',
-      required: true
-    },
-    // username: {
-    //   type: 'string',
-    //   unique: true
-    // },
     email: {
       type: 'email',
       required: true,
       unique: true
     },
-    phone: {
+    firstName: {
       type: 'string'
     },
-    dateOfBirth: {
-      type: 'date'
-    },
-    occupation: {
+    lastName: {
       type: 'string'
     },
 
-    // address
-    address1: {
-      type: 'string'
-    },
-    address2: {
-      type: 'string'
-    },
-    city: {
-      type: 'string'
-    },
-    state: {
-      type: 'string'
-    },
-    zip: {
-      type: 'string'
+    getFullName: function() {
+      return this.firstName + " " + this.lastName;
     },
 
     isUnconfirmed: function(){
-      return this.status === 'UNCONFIRMED'
+      return this.status === 'UNCONFIRMED';
+    },
+
+    isPropertyOwner: function() {
+      return this.type === 'PROPERTY_OWNER';
     }
   }
-
 };
 

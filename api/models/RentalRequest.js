@@ -29,7 +29,7 @@ module.exports = {
     destination: {
       required: true,
       type: 'string',
-      enum: ['East Hampton']
+      enum: ['EAST_HAMPTON', 'WEST_HAMPTON', 'MONTAUK']
     },
     uri: {
       type: 'string',
