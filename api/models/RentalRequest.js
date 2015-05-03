@@ -63,8 +63,13 @@ module.exports = {
 
     // instance methods
 
-    isUnconfirmed: function(){
+    isUnconfirmed: function() {
       return this.status === 'UNCONFIRMED'
+    },
+
+    getDestination: function() {
+      var arr = this.destination.toLowerCase().split('_').map(_.capitalize);
+      return arr.join(' ');
     },
 
     getCompletionPercentage: function() {

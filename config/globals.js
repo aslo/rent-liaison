@@ -9,8 +9,7 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.globals.html
  */
 module.exports.globals = {
-
-	// _: true,
+	_: true,
 	// async: true,
 	// sails: true,
 	// services: true,

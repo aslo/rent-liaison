@@ -1,6 +1,7 @@
 define([
-  'backbone'
-], function(Backbone){
+  'backbone',
+  'pikaday'
+], function(Backbone, Pikaday){
 
   return Backbone.View.extend({
 
@@ -11,6 +12,11 @@ define([
 
     initialize: function() {
       this.model.set('id', this.$el.data('rentalRequestId'));
+
+      this.$('.js-pikaday').each(function(i, el){
+        new Pikaday({ field: el });
+      });
+
     },
 
     updateRentRequest: function (e) {

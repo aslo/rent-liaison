@@ -57,11 +57,12 @@ define([
     },
 
     toggleNoDates: function(e) {
-      console.log(e);
-      this.$('#js-startDate,#js-end-date').attr('disabled', function(index, attr){
-        return attr ? 'disabled' : null;
-      });
+      $dates = this.$('.js-date-section');
+      $dates.toggleClass('hide');
 
+      $dates.find('input').attr('disabled', function(index, attr){
+        return attr ? null : 'disabled';
+      });
     },
 
     // empty the view's content and stop listening to events,

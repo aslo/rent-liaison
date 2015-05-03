@@ -6,26 +6,20 @@ mixin rent_request_field(field, type)
   if type === 'date'
     if field
       =moment(field).format('MMM D, YYYY')
-    else
-      em not given
   else if type === 'boolean'
     if field
-      | Y
-    else
-      | N
+      span.text-center &#10003;
   else
     if field
       =field
-    else
-      em not given
 
 block body
   h1 Rent Requests
 
-  p Filter by
-  .u-pull-left
-    label Destination
-    +destination_select()
+  //- p Filter by
+  //- .u-pull-left
+  //-   label Destination
+  //-   +destination_select()
 
   //- clear float
   .u-cf
@@ -51,7 +45,7 @@ block body
           td
             +rent_request_field(rentalRequest.createdAt, 'date')
           td
-            +rent_request_field(rentalRequest.destination)
+            +rent_request_field(rentalRequest.getDestination())
           td
             +rent_request_field(rentalRequest.budget)
           td

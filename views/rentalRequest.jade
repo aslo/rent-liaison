@@ -12,6 +12,7 @@ block body
     .row
       h1 Rental Request
 
+    //- TODO - handle this properly
     if messages && messages.length
       .row
         .eight.columns.alert
@@ -48,18 +49,18 @@ block body
 
           .row
             .eight.columns
-              +input('address1', 'address1', rentalRequest.user.address1, 'Address')
-              +input('address2', 'address2', rentalRequest.user.address2)
+              +input('address1', 'renterDetails[address1]', rentalRequest.user.address1, 'Address')
+              +input('address2', 'renterDetails[address2]', rentalRequest.user.address2)
 
           .row
             .eight.columns
-              +input('city', 'city', rentalRequest.user.city, 'City')
+              +input('city', 'renterDetails[city]', rentalRequest.user.city, 'City')
           .row
             .five.columns
               label(for="state") State
-              +state_select()(id="state", name="state", class="u-full-width")
+              +state_select()(id="state", name="renterDetails[state]", class="u-full-width")
             .three.columns
-              +input('zip', 'zip', rentalRequest.user.zip, 'Zip')
+              +input('zip', 'renterDetails[zip]', rentalRequest.user.zip, 'Zip')
 
           .row
             button Submit
@@ -76,7 +77,7 @@ block body
               +input('endDate', 'endDate', rentalRequest.endDate, 'End Date')(class='js-pikaday')
           .row
             .four.columns
-              +input('travelers', 'travelers', rentalRequest.travelers, 'Number of Travelers')(type='number')
+              +input('travelers', 'travelers', rentalRequest.travelers, 'Number of Guests')(type='number')
             .four.columns
               label Age Range
               p TODO -- implement this
@@ -86,12 +87,12 @@ block body
 
           .row
             .four.columns
-              +input('budget', 'budget', rentalRequest.budget, 'Budget')(type='number')
+              +input('budget', 'budget', rentalRequest.budget, 'Budget')(type='number', step=".01")
 
           .row
             .eight.columns
               label(for="group-comments") Additional Comments
-              textarea.u-full-width#group-comments(name="comments")= rentalRequest.comments
+              textarea.u-full-width#group-comments(name="group-comments")= rentalRequest.comments
           .row
             button Submit
 

@@ -10,7 +10,7 @@ define([
 
     routes: {
       ''                     : 'home',
-      'rentalRequest/:uri'   : 'rentalRequest'
+      'rentalrequest/:uri'   : 'rentalRequest'
     },
 
     initialize: function(){

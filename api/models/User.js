@@ -6,8 +6,6 @@
 */
 
 module.exports = {
-  // Enforce model schema in the case of schemaless databases
-  schema: true,
 
   attributes: {
     // associations
@@ -38,10 +36,12 @@ module.exports = {
       unique: true
     },
     firstName: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
     lastName: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
 
     getFullName: function() {
