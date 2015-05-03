@@ -13,7 +13,7 @@ require.config({
     // jquery plugins
     slick: './vendor/slick.js/slick/slick.min',
     serializeJSON: './vendor/jquery.serializeJSON/jquery.serializejson',
-    flip: './vendor/flip/dist/jquery.flip.min.js'
+    flip: './vendor/flip/dist/jquery.flip.min'
   },
 
   // map: {
