@@ -19,31 +19,26 @@ block body
       p= error
 
   form(role="form", action="/auth/local", method="post")
-    input(type="text", name="identifier", placeholder="Username or Email")
-    input(type="password", name="password", placeholder="Password")
-    button(type="submit") Sign in
-
-  //- <% if (providers.length) {%>
-  //-   <h4>You can also use one of these...</h4>
-
-  //-   <% Object.keys(providers).forEach(function (key) { %>
-  //-     <a href="/auth/<%= providers[key].slug %>" role="button"><%= providers[key].name %></a>
-  //-   <% }) %>
-  //- <% } %>
+    .row
+      input(type="text", name="identifier", placeholder="Username or Email")
+      input(type="password", name="password", placeholder="Password")
+    .row
+      button(type="submit") Sign in
 
 
-  h2 Register
+  h2 Sign Up
 
   if errors && errors.length
     each error in errors
       p= error
 
   form(role="form", action="/auth/local/register", method="post")
-    input(type="text", name="username", placeholder="Username")
-    input(type="text", name="email", placeholder="Email")
-    input(type="password", name="password", placeholder="Password")
+    .row
+      input(type="text", name="username", placeholder="Username")
+      input(type="text", name="email", placeholder="Email")
+      input(type="password", name="password", placeholder="Password")
 
-    //- TODO not this
-    input(style="display:none", readonly, type="text", name="type", value="PROPERTY_OWNER")
-
-    button(type="submit") Sign up
+      //- TODO not this
+      input(style="display:none", readonly, type="text", name="type", value="PROPERTY_OWNER")
+    .row
+      button(type="submit") Sign up

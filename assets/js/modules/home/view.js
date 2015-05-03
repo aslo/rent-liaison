@@ -3,9 +3,10 @@ define([
   'slick',
 
   // subviews
-  'modules/home/rentalRequestView'
+  'modules/home/rentalRequestView',
+  'modules/home/landingView'
 
-], function(Backbone, slick, RentalRequestView){
+], function(Backbone, slick, RentalRequestView, LandingView){
 
   return Backbone.View.extend({
 
@@ -20,7 +21,7 @@ define([
 
       // init subviews
       this.rentalRequestView = new RentalRequestView({ el: this.$('#js-rent-request') });
-
+      this.landingView = new LandingView({ el: this.$('#js-landing') })
       // wire up listeners
       this.$carouselEl.on('beforeChange', this.onCarouselChange);
       Backbone.PubSub.on('nav_navbar', this.onNavEvent, this);
