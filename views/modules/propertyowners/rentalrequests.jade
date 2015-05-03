@@ -1,0 +1,71 @@
+include ../../mixins/rent_request
+
+extends ../../property_owner_layout
+
+mixin rent_request_field(field, type)
+  if type === 'date'
+    if field
+      =moment(field).format('MMM D, YYYY')
+    else
+      em not given
+  else if type === 'boolean'
+    if field
+      | Y
+    else
+      | N
+  else
+    if field
+      =field
+    else
+      em not given
+
+block body
+  h1 Rent Requests
+
+  p Filter by
+  .u-pull-left
+    label Destination
+    +destination_select()
+
+  //- clear float
+  .u-cf
+
+  if rentalRequests.length > 0
+    table
+      thead
+        th
+        th Created
+        th Destination
+        th Budget
+        th Guests
+        th Start Date
+        th End Date
+        th Flexible Dates?
+        th Contact
+
+      tbody
+      each rentalRequest in rentalRequests
+        tr
+          td
+            input(type="checkbox")
+          td
+            +rent_request_field(rentalRequest.createdAt, 'date')
+          td
+            +rent_request_field(rentalRequest.destination)
+          td
+            +rent_request_field(rentalRequest.budget)
+          td
+            +rent_request_field(rentalRequest.travelers)
+          td
+            +rent_request_field(rentalRequest.startDate, 'date')
+          td
+            +rent_request_field(rentalRequest.endDate, 'date')
+          td
+            +rent_request_field(rentalRequest.datesAreFlexible, 'boolean')
+          td
+            = rentalRequest.user.getFullName()
+            |&nbsp;
+            a(href="mailto:#{rentalRequest.user.email}")= rentalRequest.user.email
+
+  else
+    p Looks like there are currently no active rent requests in our system. Try checking back later!

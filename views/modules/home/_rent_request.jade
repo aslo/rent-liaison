@@ -1,3 +1,5 @@
+include ../../mixins/rent_request
+
 .row
   .twelve.columns
     h1.text-center Rent Request
@@ -9,11 +11,7 @@
         legend Where to?
         .row
           .six.columns
-            //- TODO get from DB
-            select#destination.u-full-width(name="destination")
-              option East Hampton
-              option West Hampton
-              option Montauk
+            +destination_select()(class="u-full-width")
 
       fieldset
         legend When?
