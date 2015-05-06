@@ -17,7 +17,8 @@ define([
       // init the plugin
       this.$carouselEl.slick({
         prevArrow: $('.js-prev'),
-        nextArrow: $('.js-next')
+        nextArrow: $('.js-next'),
+        accessibility: false
       });
 
       // init subviews

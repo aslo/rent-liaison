@@ -26,14 +26,13 @@ define([
       e.preventDefault();
       var self = this;
 
-      var $formInputs = this.$(e.target).find('input,select');
-      // $formInputs.attr('disabled', 'disabled');
+      var email = this.$('[name="user[email]"]').val();
+
+      var $formInputs = this.$(e.target).find('input, select');
+      var attrs = $formInputs.serializeJSON();
+      $formInputs.attr('disabled', 'disabled');
 
       var model = new RentalRequest();
-
-      var email = this.$('[name="user[email]"]').val();
-      var attrs = $formInputs.serializeJSON();
-
       model.save(attrs, {
         success: function(model, response, options){
           self.clear();
@@ -43,7 +42,7 @@ define([
             + "<div class='offset-by-two columns eight columns'>"
             + "<p>Almost done!</p>"
             + "<p>A confirmation email has been sent to <strong><%= email %></strong>. "
-            + "Please click the confirmation link in the email to complete the process.</p>"
+            + "Please click the confirmation link in your email to complete the process.</p>"
             + "</div>"
             + "</div>");
 
@@ -51,7 +50,12 @@ define([
         },
         error: function(model, response, options){
           console.error(arguments);
-          // TODO surface this
+
+          $formInputs.removeAttr('disabled');
+
+          this.$('.js-form-alert')
+            .html('Whoops! Looks like something went wrong on our end. Please try again.')
+            .show();
         }
       });
     },
