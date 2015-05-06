@@ -31,7 +31,8 @@ module.exports = {
         if (err) return next(err);
 
         var mailTo = result.user.email;
-        MailService.sendActivationEmail(mailTo, this);
+        var uri = result.uri;
+        MailService.sendActivationEmail(mailTo, uri, this);
       },
       function(err, mailerResult){
         if (err) return next(err);
