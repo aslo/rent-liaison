@@ -1,8 +1,9 @@
-var mailer = require('../lib/mailer')();
+var Mailer = require('../lib/mailer');
 
 module.exports = {
 
   sendActivationEmail: function(to, cb) {
+    mailer = new Mailer();
     mailer.send({
       to:      to,
       from:    'noreply@rentliason.com',

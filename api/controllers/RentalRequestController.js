@@ -10,22 +10,34 @@ var Step = require('step');
 module.exports = {
 
   create: function(req, res, next) {
-
     // TODO validate
     // * end date after start, etc
 
     var rentRequest = req.body;
     rentRequest.user.type = 'RENTER';
 
-    RentalRequest.create(rentRequest)
-    .exec(function(err, result){
-      if (err) return next(err);
+    Step(
+      function(){
+        RentalRequest.create(rentRequest, this);
+      },
+      function(err, result){
+        if (err) return next(err);
+        RentalRequest
+          .findOne(result.id)
+          .populate('user')
+          .exec(this);
+      },
+      function(err, result){
+        if (err) return next(err);
 
-      // TODO MailService.sendActivationEmail
-
-      res.json(202, {});
-    });
-
+        var mailTo = result.user.email;
+        MailService.sendActivationEmail(mailTo, this);
+      },
+      function(err, mailerResult){
+        if (err) return next(err);
+        res.send(202, {});
+      }
+    )
   },
 
   findByUri: function(req, res, next) {
