@@ -5,7 +5,7 @@ module.exports = {
   sendActivationEmail: function(to, uri, cb) {
     mailer = new Mailer();
 
-    var absoluteUrl = 'http://' + process.env.HOST_NAME + '/rentalrequest/' + uri;
+    var absoluteUrl = 'http://' + process.env.HOST + ':' + process.env.PORT + '/rentalrequest/' + uri;
 
     mailer.send({
       to:      to,
