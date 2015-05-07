@@ -10,6 +10,7 @@
  */
 
 module.exports.bootstrap = function(cb) {
+
   // Load env-specific variables
   require('dotenv').load()
 

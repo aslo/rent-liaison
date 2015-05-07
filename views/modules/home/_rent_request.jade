@@ -5,7 +5,10 @@ include ../../mixins/rent_request
     h1.text-center Rent Request
 
 .row
-  .offset-by-three.columns.eight.columns
+  .offset-by-three.columns.seven.columns
+
+    .js-form-alert.alert.hide
+
     form.js-rent-request-form(action="/rentalrequest", method="POST")
       fieldset
         legend Where to?
@@ -15,10 +18,6 @@ include ../../mixins/rent_request
 
       fieldset
         legend When?
-        .row
-          label
-            input#js-no-dates(value="true", type="checkbox")
-            .label-body no specific dates
 
         .js-date-section
           .row
@@ -32,6 +31,10 @@ include ../../mixins/rent_request
             label
               input#datesAreFlexible(name="datesAreFlexible", value="true", type="checkbox")
               .label-body my dates are flexible
+        .row
+          label
+            input#js-no-dates(value="true", type="checkbox")
+            .label-body no specific dates
 
       fieldset
         legend Who are you?

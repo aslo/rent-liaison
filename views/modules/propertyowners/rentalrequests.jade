@@ -58,7 +58,7 @@ block body
             +rent_request_field(rentalRequest.datesAreFlexible, 'boolean')
           td
             = rentalRequest.user.getFullName()
-            |&nbsp;
+            br
             a(href="mailto:#{rentalRequest.user.email}")= rentalRequest.user.email
 
   else
