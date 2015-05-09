@@ -11,9 +11,6 @@
 
 module.exports.bootstrap = function(cb) {
 
-  // Load env-specific variables
-  require('dotenv').load()
-
   sails.services.passport.loadStrategies();
 
   cb();
