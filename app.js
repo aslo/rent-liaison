@@ -24,6 +24,10 @@ process.chdir(__dirname);
 
 // Ensure a "sails" can be located:
 (function() {
+
+  // Load env-specific variables
+  require('dotenv').load()
+
   var sails;
   try {
     sails = require('sails');
