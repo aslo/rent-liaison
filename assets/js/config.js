@@ -13,7 +13,10 @@ require.config({
     // jquery plugins
     slick: './vendor/slick.js/slick/slick.min',
     serializeJSON: './vendor/jquery.serializeJSON/jquery.serializejson',
-    flip: './vendor/flip/dist/jquery.flip.min'
+    flip: './vendor/flip/dist/jquery.flip.min',
+
+    // bootstrap stuff
+    modal: './vendor/bootstrap/js/modal'
   },
 
   // map: {

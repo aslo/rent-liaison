@@ -28,6 +28,7 @@ module.exports.routes = {
   'GET /propertyowners': 'AuthController.login',
   'GET /home': 'PropertyOwnerController.home',
   'GET /rentalrequest': 'PropertyOwnerController.showRentalRequests',
+  'GET /properties': 'PropertyOwnerController.showProperties',
 
   // renter
   'GET /rentalrequest/:uri': 'RentalRequestController.findByUri',

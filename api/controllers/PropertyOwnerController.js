@@ -27,6 +27,14 @@ module.exports = {
         rentalRequests: results
       })
     });
+  },
+
+  showProperties: function (req, res, next) {
+    Property.find({ user: req.user.id }, function(err, properties){
+      res.view('modules/propertyowners/properties', {
+        properties: properties
+      });
+    });
   }
 };
 

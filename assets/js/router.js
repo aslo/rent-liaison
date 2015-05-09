@@ -3,14 +3,16 @@ define([
   'views/nav',
   'modules/home/view',
   'modules/rentalRequest/view',
-  'modules/rentalRequest/model'
-], function(Backbone, NavView, HomeView, RentalRequestView, RentalRequestModel){
+  'modules/rentalRequest/model',
+  'modules/property/view'
+], function(Backbone, NavView, HomeView, RentalRequestView, RentalRequestModel, PropertiesView){
 
   return Backbone.Router.extend({
 
     routes: {
       ''                     : 'home',
-      'rentalrequest/:uri'   : 'rentalRequest'
+      'rentalrequest/:uri'   : 'rentalrequest',
+      'properties'           : 'properties'
     },
 
     initialize: function(){
@@ -29,6 +31,14 @@ define([
         this._cache.rentalRequestView = new RentalRequestView({
           el: Backbone.$('#js-rental-request'),
           model: new RentalRequestModel(window.rentalRequest)
+        });
+      }
+    },
+
+    properties: function() {
+      if (!this._cache.propertiesView) {
+        this._cache.propertiesView = new PropertiesView({
+          el: Backbone.$('#js-properties')
         });
       }
     },

@@ -1,0 +1,26 @@
+extends ../../property_owner_layout
+
+block body
+
+  #js-properties
+
+    .row
+      h1 My Properties
+
+      button.button-primary.js-create(type="button")
+        i.fa.fa-plus
+        | &nbsp; Create Property Profile
+
+    form.js-create-property-form.hide
+      .row
+        label Name
+        input(type="text")
+      .row
+        label Description
+        textarea
+
+    if properties.length > 0
+      ul
+        each p in properties
+          li= p.id
+
