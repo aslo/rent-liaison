@@ -16,7 +16,9 @@ require.config({
     flip: './vendor/flip/dist/jquery.flip.min',
 
     // bootstrap stuff
-    modal: './vendor/bootstrap/js/modal'
+    modal: './vendor/bootstrap/js/modal',
+
+    jade: './vendor/jade/runtime'
   },
 
   // map: {
