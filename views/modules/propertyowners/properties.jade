@@ -1,3 +1,5 @@
+include ../../mixins/property
+
 extends ../../property_owner_layout
 
 block body
@@ -7,9 +9,7 @@ block body
     .row
       h1 My Property Profiles
 
-      button.button-primary.js-create(type="button")
-        i.fa.fa-plus
-        | &nbsp; Create
+      +create_button()(class='js-create', type='button')
 
     if properties.length > 0
       .property-list
@@ -17,7 +17,7 @@ block body
           .row
             .property-list-item.u-full-width
               .property-list-item-url.pull-right
-                a(href="/property/#{p.slug}", target="_blank") view public link &nbsp;
+                a(href="/property/#{p.slug}", target="_blank") view public listing &nbsp;
                   i.fa.fa-external-link
 
               .property-list-item-image.pull-left

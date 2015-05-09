@@ -1,22 +1,30 @@
 include ../../mixins/rent_request
-include ../../mixins/rent_request
+include ../../mixins/property
 
-form(action="/property", method="post")
+form.js-property-form
+
+  .row
+    .six.columns
+      .hide.alert.js-error-alert
+
   .row
     .six.columns
       label Property Name
       input.u-full-width(name="name", type="text")
+
   .row
     .six.columns
       label Description
       textarea.u-full-width(name="description")
+
   .row
     .six.columns
       label Location
-      +destination_select()(name="location")
+      +destination_select()(name="location", class="u-full-width")
+
   .row
     .six.columns
       label Amenities
-      input(type="text", name="amenities")
+      input.u-full-width(type="text", name="amenities")
 
-  button.button-primary(type="submit") Create
+  +create_button()(type="submit")

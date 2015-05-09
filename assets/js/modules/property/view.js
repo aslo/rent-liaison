@@ -1,26 +1,24 @@
 define([
   'backbone',
-  'tpl',
-  'views/modal'
-], function(Backbone, Tpl, Modal){
+  'modules/property/formModal',
+  'modules/property/model'
+
+], function(Backbone, FormModal, Property){
   return Backbone.View.extend({
 
-    propertyFormTemplate: new Tpl('views/modules/propertyowners/_property_form'),
-
-    events: {
-      'click .js-create': 'create'
+    initialize: function(){
+      this.createView = new FormModal({
+        model: new Property()
+      })
     },
 
-    create: function(e) {
+    events: {
+      'click .js-create': 'showForm'
+    },
+
+    showForm: function(e) {
       e.preventDefault();
-
-      var form = this.propertyFormTemplate.render();
-
-      var m  = new Modal({
-        title: 'New Property Profile',
-        body: form
-      })
-      m.render();
+      this.createView.render();
     }
   })
 })

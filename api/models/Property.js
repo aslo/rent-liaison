@@ -13,7 +13,7 @@ module.exports = {
       type: 'string',
       required: true,
       minLength: 8,
-      regex: /[\w\s]+/
+      regex: /^[\w\s]+$/
     },
     slug: {
       type: 'string',
@@ -34,25 +34,32 @@ module.exports = {
   },
 
   beforeValidate: function(values, cb) {
-    if (!name) cb(); // will be caught in validation
+    if (!values.name) return cb(); // will be caught in validation
 
-    var slug = values.name.toLowerCase().replace(/\s+/g, '-');
+    var slug = values.name.trim().toLowerCase().replace(/\s+/g, '-');
 
     // check to make sure the slug is unique
     Property.find({ slug: slug }, function(err, properties){
       if (err) return cb(err);
 
       if (properties.length > 0) {
+        slug += '0'
 
-        var matches = slug.match(/^([\w-])(\d+)$/);
-        var firstPart = matches[0];
-        var number = +matches[1];
+        // TODO
+        // var matches = slug.match(/^([\w-]+)(\d+)$/);
 
-        // if it already ends with a number, increment
-        if (!isNaN(number)) {
-          number++;
-          slug = firstPart + number.toString()
-        }
+        // if (matches) {
+        //   // the slug ends with a number - parse it and increment
+        //   var firstPart = matches[1];
+        //   var number = +matches[2];
+
+        //   number++;
+        //   slug = firstPart + number.toString()
+
+        // } else {
+        //   // if the regex didn't match, there is no number at the end
+        //   slug = slug + '1'
+        // }
       }
 
       values.slug = slug;
