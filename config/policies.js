@@ -20,5 +20,10 @@
 module.exports.policies = {
   '*': 'passport',
 
-  PropertyOwnerController: ['passport', 'sessionAuth', 'isPropertyOwner']
+  PropertyOwnerController: ['passport', 'sessionAuth', 'isPropertyOwner'],
+
+  PropertyController: {
+    index: ['passport', 'sessionAuth', 'isPropertyOwner'],
+    create: ['passport', 'sessionAuth', 'isPropertyOwner']
+  }
 };

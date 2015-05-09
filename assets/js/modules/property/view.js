@@ -20,7 +20,6 @@ define([
         title: 'New Property Profile',
         body: form
       })
-      console.log();
       m.render();
     }
   })

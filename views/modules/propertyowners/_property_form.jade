@@ -1,4 +1,22 @@
+include ../../mixins/rent_request
+include ../../mixins/rent_request
 
-label Property Name
-input(type="text")
+form(action="/property", method="post")
+  .row
+    .six.columns
+      label Property Name
+      input.u-full-width(name="name", type="text")
+  .row
+    .six.columns
+      label Description
+      textarea.u-full-width(name="description")
+  .row
+    .six.columns
+      label Location
+      +destination_select()(name="location")
+  .row
+    .six.columns
+      label Amenities
+      input(type="text", name="amenities")
 
+  button.button-primary(type="submit") Create

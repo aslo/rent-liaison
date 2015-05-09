@@ -4,7 +4,8 @@ module.exports = {
     //associations
     user: {
       model: 'user',
-      via: 'property'
+      via: 'property',
+      required: true
     },
 
     //attributes
@@ -12,7 +13,7 @@ module.exports = {
       type: 'string',
       required: true,
       minLength: 8,
-      regex: '[\w\s]+' // alphanumeric plus spaces
+      regex: /[\w\s]+/
     },
     slug: {
       type: 'string',
@@ -32,10 +33,13 @@ module.exports = {
     // TODO pictures:
   },
 
-  beforeCreate: function(values, cb) {
-    var slug = values.name.replace('\s', '-')
+  beforeValidate: function(values, cb) {
+    if (!name) cb(); // will be caught in validation
+
+    var slug = values.name.toLowerCase().replace(/\s+/g, '-');
+
     // check to make sure the slug is unique
-    this.prototype.find({ slug: slug }, function(err, properties){
+    Property.find({ slug: slug }, function(err, properties){
       if (err) return cb(err);
 
       if (properties.length > 0) {

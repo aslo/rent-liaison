@@ -2,25 +2,36 @@ extends ../../property_owner_layout
 
 block body
 
-  #js-properties
+  #js-properties.p-properties
 
     .row
-      h1 My Properties
+      h1 My Property Profiles
 
       button.button-primary.js-create(type="button")
         i.fa.fa-plus
-        | &nbsp; Create Property Profile
-
-    form.js-create-property-form.hide
-      .row
-        label Name
-        input(type="text")
-      .row
-        label Description
-        textarea
+        | &nbsp; Create
 
     if properties.length > 0
-      ul
+      .property-list
         each p in properties
-          li= p.id
+          .row
+            .property-list-item.u-full-width
+              .property-list-item-url.pull-right
+                a(href="/property/#{p.slug}", target="_blank") view public link &nbsp;
+                  i.fa.fa-external-link
 
+              .property-list-item-image.pull-left
+
+              .property-list-item-title
+                h4= p.name
+
+              .property-list-item-description
+                = p.location
+                br
+                |Amenities: #{p.amenities}
+
+              .property-list-item-controls
+                button.js-edit Edit
+
+    else
+      h3 You haven't created any properties yet.
