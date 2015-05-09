@@ -21,7 +21,7 @@ module.exports.session = {
   * of your users, forcing them to log in again.                             *
   *                                                                          *
   ***************************************************************************/
-  secret: '641853289dd036609c33b65ea6705ce9',
+  secret: process.env.SESSION_SECRET,
 
 
   /***************************************************************************
@@ -41,7 +41,7 @@ module.exports.session = {
   * session store that can be shared across multiple Sails.js servers        *
   ***************************************************************************/
 
-  // adapter: 'redis',
+  adapter: 'connect-redis',
 
   /***************************************************************************
   *                                                                          *
