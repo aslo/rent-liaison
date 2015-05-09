@@ -1,8 +1,12 @@
 define([
   'backbone',
+  'tpl',
   'views/modal'
-], function(Backbone, Modal){
+], function(Backbone, Tpl, Modal){
   return Backbone.View.extend({
+
+    propertyFormTemplate: new Tpl('views/modules/propertyowners/_property_form'),
+
     events: {
       'click .js-create': 'create'
     },
@@ -10,11 +14,13 @@ define([
     create: function(e) {
       e.preventDefault();
 
+      var form = this.propertyFormTemplate.render();
+
       var m  = new Modal({
-        title: 'Create Property',
-        body: ':)',
-        footer: ''
+        title: 'New Property Profile',
+        body: form
       })
+      console.log();
       m.render();
     }
   })

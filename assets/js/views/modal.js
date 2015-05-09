@@ -1,9 +1,12 @@
 define([
   'backbone',
+  'tpl',
   'modal'
-], function(Backbone, modal){
+], function(Backbone, Tpl, modal){
 
   return Backbone.View.extend({
+    template: new Tpl('views/partials/modal'),
+
     initialize: function(options){
       this.title = options.title;
       this.body = options.body;
@@ -11,38 +14,20 @@ define([
     },
 
     render: function() {
-      this.$el.html(this.template({
+      this.$el.html(this.template.render({
         title: this.title,
         body: this.body,
         footer: this.footer
       }))
 
-      this.$('.modal').modal().on('hidden', function(){
-        this.remove();
-      });
-
       $(document.body).append(this.el)
 
-      return this;
-    },
+      this.$('.modal').modal().on('hidden', function(){
+        this.remove()
+      });
 
-    template: _.template(
-        '<div class="modal fade">'
-      + '<div class="modal-dialog modal-lg">'
-      + '<div class="modal-content">'
-      +   '<div class="modal-header">'
-      +     '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-      +     '<h4 class="modal-title"><%= title %></h4>'
-      +   '</div>'
-      +   '<div class="modal-body">'
-      +     '<%= body %>'
-      +   '</div>'
-      +   '<div class="modal-footer">'
-      +     '<%= footer %>'
-      +   '</div>'
-      + '</div><!-- /.modal-content -->'
-      + '</div><!-- /.modal-dialog -->'
-      + '</div><!-- /.modal -->'
-    )
+      return this;
+    }
+
   });
 });
