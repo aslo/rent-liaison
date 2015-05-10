@@ -3,7 +3,7 @@ var Mailer = require('../lib/mailer');
 module.exports = {
 
   sendActivationEmail: function(to, uri, cb) {
-    mailer = new Mailer();
+    var mailer = new Mailer();
 
     var absoluteUrl = 'http://' + process.env.HOST + ':' + process.env.PORT + '/rentalrequest/' + uri;
 
@@ -19,6 +19,17 @@ module.exports = {
         +'<p><a href="' + absoluteUrl + '">Activate your Rent request by clicking here: '+ absoluteUrl + '</a></p>'
         + '<p>Happy Renting!</p>'
     }, cb);
+  },
+
+  sendRentRequestResponseEmail: function(rentRequest, fromUser, body, cb) {
+    var mailer = new Mailer()
+    mailer.send({
+      to: rentRequest.user.email,
+      cc: fromUser.email,
+      from: 'liason@rentliason.com',
+      subject: 'A Response to Your Rent Request',
+      html: body
+    }, cb)
   }
 
 }
