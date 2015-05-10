@@ -14,7 +14,6 @@ define([
     },
 
     parse: function(response, options) {
-
       if (response.user) {
         var rawUser = response.user;
         response.user = new UserModel(rawUser);

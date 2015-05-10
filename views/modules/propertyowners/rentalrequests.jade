@@ -13,53 +13,60 @@ mixin rent_request_field(field, type)
     if field
       =field
 
+mixin rr_td()
+  td(data-rent-request-id=id)
+    block
+
 block body
-  h1 Rent Requests
 
-  //- p Filter by
-  //- .u-pull-left
-  //-   label Destination
-  //-   +destination_select()
+  #js-rental-request-collection
 
-  //- clear float
-  .u-cf
+    h1 Rent Requests
 
-  if rentalRequests.length > 0
-    table
-      thead
-        th
-        th Created
-        th Destination
-        th Budget
-        th Guests
-        th Start Date
-        th End Date
-        th Flexible Dates?
-        th Contact
+    //- p Filter by
+    //- .u-pull-left
+    //-   label Destination
+    //-   +destination_select()
 
-      tbody
-      each rentalRequest in rentalRequests
-        tr
-          td
-            input(type="checkbox")
-          td
-            +rent_request_field(rentalRequest.createdAt, 'date')
-          td
-            +rent_request_field(rentalRequest.getDestination())
-          td
-            +rent_request_field(rentalRequest.budget)
-          td
-            +rent_request_field(rentalRequest.travelers)
-          td
-            +rent_request_field(rentalRequest.startDate, 'date')
-          td
-            +rent_request_field(rentalRequest.endDate, 'date')
-          td
-            +rent_request_field(rentalRequest.datesAreFlexible, 'boolean')
-          td
-            = rentalRequest.user.getFullName()
-            br
-            a(href="mailto:#{rentalRequest.user.email}")= rentalRequest.user.email
+    //- clear float
+    .u-cf
 
-  else
-    p Looks like there are currently no active rent requests in our system. Try checking back later!
+    if rentalRequests.length > 0
+      table
+        thead
+          th Created
+          th Destination
+          th Budget
+          th Guests
+          th Start Date
+          th End Date
+          th Flexible Dates?
+          th Renter Name
+
+        tbody
+          each rr in rentalRequests
+            tr.clickable-tr.js-show-rent-request-detail(data-rent-request-id=rr.id)
+              td
+                +rent_request_field(rr.createdAt, 'date')
+              td
+                +rent_request_field(rr.getDestination())
+              td
+                +rent_request_field(rr.budget)
+              td
+                +rent_request_field(rr.travelers)
+              td
+                +rent_request_field(rr.startDate, 'date')
+              td
+                +rent_request_field(rr.endDate, 'date')
+              td
+                +rent_request_field(rr.datesAreFlexible, 'boolean')
+              td
+                = rr.user.getFullName()
+
+    else
+      p Looks like there are currently no active rent requests in our system. Try checking back later!
+
+
+  script.
+    window.rentalRequests = !{JSON.stringify(rentalRequests)}
+    window.propertyProfiles = !{JSON.stringify(propertyProfiles)}

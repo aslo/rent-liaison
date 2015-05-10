@@ -2,51 +2,49 @@ define([
   'backbone',
   'views/nav',
   'modules/home/view',
+  'modules/rentalRequest/propertyOwnerCollectionView',
   'modules/rentalRequest/view',
   'modules/rentalRequest/model',
+  'modules/rentalRequest/collection',
   'modules/property/view'
-], function(Backbone, NavView, HomeView, RentalRequestView, RentalRequestModel, PropertiesView){
+], function(Backbone, NavView, HomeView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertiesView){
 
   return Backbone.Router.extend({
 
     routes: {
       ''                     : 'home',
+      'rentalrequest'        : 'rentalrequestIndex',
       'rentalrequest/:uri'   : 'rentalrequest',
       'properties'           : 'properties'
     },
 
-    initialize: function(){
-      this._cache = {};
-    },
-
     home: function(){
       this._initNav();
-      if (!this._cache.home) {
-        this._cache.home = new HomeView({ el: Backbone.$('#js-home') });
-      }
+      new HomeView({ el: Backbone.$('#js-home') });
+    },
+
+    rentalrequestIndex: function() {
+      new RentalRequestCollectionView({
+        el: Backbone.$('#js-rental-request-collection'),
+        collection: new RentalRequestCollection(window.rentalRequests)
+      });
     },
 
     rentalRequest: function () {
-      if (!this._cache.rentalRequestView) {
-        this._cache.rentalRequestView = new RentalRequestView({
-          el: Backbone.$('#js-rental-request'),
-          model: new RentalRequestModel(window.rentalRequest)
-        });
-      }
+      new RentalRequestView({
+        el: Backbone.$('#js-rental-request'),
+        model: new RentalRequestModel(window.rentalRequest)
+      });
     },
 
     properties: function() {
-      if (!this._cache.propertiesView) {
-        this._cache.propertiesView = new PropertiesView({
-          el: Backbone.$('#js-properties')
-        });
-      }
+      new PropertiesView({
+        el: Backbone.$('#js-properties')
+      });
     },
 
     _initNav: function(){
-      if (! this._cache.nav) {
-        this._cache.nav = new NavView({ el: Backbone.$('#js-nav') });
-      }
+      new NavView({ el: Backbone.$('#js-nav') });
     }
   });
 });
