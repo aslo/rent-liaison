@@ -14,7 +14,10 @@ Mailer.prototype.send = function(options, cb) {
 
   if (process.env.MAIL_DELIVER) {
     sails.log.info('Attempting to send message');
-    this.sendgrid.send(options, cb);
+    this.sendgrid.send(options, function(){
+      sails.log.info('Mailer message sent: ', arguments);
+      cb.apply(this, arguments);
+    });
 
   } else {
     sails.log.info('MAIL_DELIVER env variable not set - mailer not sending');

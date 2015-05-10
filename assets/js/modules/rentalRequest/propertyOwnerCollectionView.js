@@ -7,7 +7,6 @@ define([
   return Backbone.View.extend({
 
     events: {
-      // 'click .js-contact'        : 'showContactDialog'
       'click .js-show-rent-request-detail': 'showRentRequestDetail'
     },
 

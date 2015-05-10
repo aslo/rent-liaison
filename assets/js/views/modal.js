@@ -8,6 +8,10 @@ define([
     template: new Tpl('views/partials/modal'),
 
     initialize: function(options){
+      if (!options) {
+        options = {}
+      }
+
       this.title = options.title;
       this.body = options.body;
       this.footer = options.footer;

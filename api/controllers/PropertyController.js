@@ -23,7 +23,9 @@ module.exports = {
   get: function(req, res, next) {
     Property.findOne({ slug: req.params.slug }, function(err, property){
       if(err) return next(err);
-      res.json(property);
+      res.view('modules/property/property', {
+        property: property
+      });
     })
   }
 }

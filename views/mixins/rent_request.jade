@@ -1,7 +1,6 @@
-mixin destination_select()
+mixin destination_select(selected)
   //- TODO get from DB
   select#destination(name="destination")&attributes(attributes)
     option(value=null)
-    option(value="EAST_HAMPTON") East Hampton
-    option(value="WEST_HAMPTON") West Hampton
-    option(value="MONTAUK") Montauk
+    each val, key in {"EAST_HAMPTON": 'East Hampton', "WEST_HAMPTON": 'West Hampton', "MONTAUK": 'Montauk'}
+      option(value=key, selected=(selected==key ? 'selected' : null))= val

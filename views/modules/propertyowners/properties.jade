@@ -31,4 +31,8 @@ block body
                 |Amenities: #{p.amenities}
 
               .property-list-item-controls
-                button.js-edit Edit
+                button.js-edit(data-property-id=p.id) Edit
+
+
+  script.
+    window.properties = !{JSON.stringify(properties)}

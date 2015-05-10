@@ -2,12 +2,16 @@ define([
   'backbone',
   'views/nav',
   'modules/home/view',
+
   'modules/rentalRequest/propertyOwnerCollectionView',
   'modules/rentalRequest/view',
   'modules/rentalRequest/model',
   'modules/rentalRequest/collection',
-  'modules/property/view'
-], function(Backbone, NavView, HomeView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertiesView){
+
+  'modules/property/collection',
+  'modules/property/views/collectionView'
+
+], function(Backbone, NavView, HomeView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView){
 
   return Backbone.Router.extend({
 
@@ -39,7 +43,8 @@ define([
 
     properties: function() {
       new PropertiesView({
-        el: Backbone.$('#js-properties')
+        el: Backbone.$('#js-properties'),
+        collection: new PropertyCollection(window.properties)
       });
     },
 

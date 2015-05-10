@@ -10,21 +10,25 @@ form.js-property-form
   .row
     .six.columns
       label Property Name
-      input.u-full-width(name="name", type="text")
+      input.u-full-width(name="name", type="text", value=property.name)
 
   .row
     .six.columns
       label Description
       textarea.u-full-width(name="description")
+        =property.description
 
   .row
     .six.columns
       label Location
-      +destination_select()(name="location", class="u-full-width")
+      +destination_select(property.location)(name="location", class="u-full-width")
 
   .row
     .six.columns
       label Amenities
-      input.u-full-width(type="text", name="amenities")
+      input.u-full-width(type="text", name="amenities", value=property.amenities)
 
-  +create_button()(type="submit")
+  if isNew
+    +create_button()(type="submit")
+  else
+    button.button-primary(type="submit") Update

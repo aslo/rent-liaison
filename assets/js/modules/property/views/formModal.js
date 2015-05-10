@@ -1,26 +1,35 @@
 define([
-  'backbone',
   'tpl',
   'views/modal'
-], function(Backbone, Tpl, Modal){
+], function(Tpl, Modal){
 
-  return Backbone.View.extend({
+  return Modal.extend({
 
-    template: new Tpl('views/modules/propertyowners/_property_form'),
+    formTpl: new Tpl('views/modules/propertyowners/_property_form'),
 
     events: {
       'submit .js-property-form': 'submitForm'
     },
 
     render: function() {
-      var m  = new Modal({
-        title: 'New Property Profile',
-        body: this.template.render()
+      if (this.model.isNew()) {
+        this.title = 'New Property Profile'
+      } else {
+        this.title = this.model.get('name')
+      }
+
+      this.body = this.formTpl.render({
+        property: this.model.toJSON(),
+        isNew: this.model.isNew()
       })
 
-      this.setElement(m.render().el);
+      Modal.prototype.render.apply(this)
 
       return this;
+    },
+
+    setModel: function(model){
+      this.model = model
     },
 
     submitForm: function(e) {
