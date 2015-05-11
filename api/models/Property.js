@@ -3,9 +3,12 @@ module.exports = {
   attributes: {
     //associations
     user: {
-      model: 'user',
-      via: 'property',
+      model: 'User',
       required: true
+    },
+    images: {
+      collection: 'Image',
+      via: 'property'
     },
 
     //attributes
@@ -30,7 +33,6 @@ module.exports = {
     amenities: {
       type: 'string'
     }
-    // TODO pictures:
   },
 
   beforeValidate: function(values, cb) {
