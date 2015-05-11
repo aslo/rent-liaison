@@ -40,6 +40,7 @@
     "sails-mysql": "^0.10.11",
     "sails-postgresql": "^0.10.14",
     "sendgrid": "^1.6.1",
+    "skipper-s3": "^0.5.5",
     "step": "0.0.5",
     "validator": "^3.39.0"
   },
