@@ -4,16 +4,18 @@ require.config({
   deps: ["main"],
 
   paths: {
-    jquery: './vendor/jquery/dist/jquery.min',
-    // lodash: '../vendor/lodash/lodash.min',
-    underscore: './vendor/lodash/lodash.min', // TODO
-    backbone: './vendor/backbone/backbone',
-    pikaday: './vendor/pikaday/pikaday',
-
+    jquery:           './vendor/jquery/dist/jquery.min',
+    // lodash:        '../vendor/lodash/lodash.min',
+    underscore:       './vendor/lodash/lodash.min', // TODO
+    backbone:         './vendor/backbone/backbone',
+    pikaday:          './vendor/pikaday/pikaday',
     // jquery plugins
-    slick: './vendor/slick.js/slick/slick.min',
-    serializeJSON: './vendor/jquery.serializeJSON/jquery.serializejson',
-    flip: './vendor/flip/dist/jquery.flip.min',
+    slick:            './vendor/slick.js/slick/slick.min',
+    serializeJSON:    './vendor/jquery.serializeJSON/jquery.serializejson',
+    flip:             './vendor/flip/dist/jquery.flip.min',
+    'jquery.ui.widget':   './vendor/blueimp-file-upload-node/js/vendor/jquery.ui.widget',
+    fileUpload:       './vendor/blueimp-file-upload-node/js/jquery.fileupload',
+    iFrameTransport:  './vendor/blueimp-file-upload-node/js/jquery.iframe-transport',
 
     // bootstrap stuff
     modal: './vendor/bootstrap/js/modal',
@@ -36,6 +38,9 @@ require.config({
       exports: 'Backbone'
     },
     serializeJSON: ['jquery'],
-    flip: ['jquery']
+    flip: ['jquery'],
+    iFrameTransport: ['jquery'],
+    'jquery.ui.widget': ['jquery'],
+    fileUpload: ['jquery', 'iFrameTransport', 'jquery.ui.widget']
   }
 });

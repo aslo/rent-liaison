@@ -22,6 +22,7 @@
     "jquery.serializeJSON": "~2.5.0",
     "flip": "~1.0.1",
     "bootstrap": "~3.3.4",
-    "jade": "~1.9.2"
+    "jade": "~1.9.2",
+    "blueimp-file-upload-node": "~9.9.3"
   }
 }

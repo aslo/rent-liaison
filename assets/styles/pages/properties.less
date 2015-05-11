@@ -12,10 +12,33 @@
       }
 
       .property-list-item-image {
-        background-color: @dark-grey;
-        height: 200px;
-        width: 300px;
-        margin-right: 10px;
+        img {
+          margin-right: 10px;
+          height: 200px;
+          width: 300px;
+        }
+
+        span.property-list-item-image-text {
+          background: rgba(0,0,0,0.5);
+          color: white;
+          cursor: pointer;
+          display: table;
+          height: 200px;
+          left: 0;
+          position: absolute;
+          top: 0;
+          width: 300px;
+          opacity: 0;
+        }
+
+        &:hover span.property-list-item-image-text {
+          opacity: 1;
+        }
+      }
+
+      .property-list-item-image-text {
+
+        z-index: -50;
       }
 
       .property-list-item-controls {
