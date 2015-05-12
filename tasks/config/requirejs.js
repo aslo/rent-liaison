@@ -6,8 +6,8 @@ module.exports = function(grunt) {
   grunt.config.set('requirejs', {
     compile: {
       options: {
-        baseUrl: "assets/js",
-        mainConfigFile: "assets/js/config.js",
+        baseUrl: ".tmp/public/js",
+        mainConfigFile: ".tmp/public/js/config.js",
         paths: {
           requireLib: './vendor/requirejs/require'
         },
