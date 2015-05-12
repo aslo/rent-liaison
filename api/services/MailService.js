@@ -1,13 +1,19 @@
 var Mailer = require('../lib/mailer');
 
-var appUrl = 'http://' + process.env.HOST + ':' + process.env.PORT;
+var getUrl = function() {
+  var url = 'http://' + process.env.HOST;
+  if (process.env.NODE_ENV == 'development') {
+    url += ':' + process.env.PORT;
+  }
+  return url;
+}
 
 module.exports = {
 
   sendActivationEmail: function(to, uri, cb) {
     var mailer = new Mailer();
 
-    var absoluteUrl = appUrl + '/rentalrequest/' + uri;
+    var absoluteUrl = getUrl() + '/rentalrequest/' + uri;
 
     mailer.send({
       to:      to,
@@ -32,7 +38,7 @@ module.exports = {
 
     for (var i=0; i<properties.length; i++) {
       var property = properties[i];
-      message += '<li><a href="' + appUrl + '/property/' + property.slug + '">' + property.name + '</a></li>'
+      message += '<li><a href="' + getUrl() + '/property/' + property.slug + '">' + property.name + '</a></li>'
     }
 
     + '</ul>'
