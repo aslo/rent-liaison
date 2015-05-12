@@ -12,6 +12,12 @@
  * http://sailsjs.org/#/documentation/reference/sails.config/sails.config.session.html
  */
 
+var url = require('url')
+
+var redisUrl = url.parse(process.env.REDISCLOUD_URL)
+var redisDb = redisUrl.auth.split(':')[0]
+var redisPass = redisUrl.auth.split(':')[1]
+
 module.exports.session = {
 
   /***************************************************************************
@@ -52,40 +58,10 @@ module.exports.session = {
   *                                                                          *
   ***************************************************************************/
 
-  // host: 'localhost',
-  // port: 6379,
-  // ttl: <redis session TTL in seconds>,
-  // db: 0,
-  // pass: <redis auth password>,
-  // prefix: 'sess:',
-
-
-  /***************************************************************************
-  *                                                                          *
-  * Uncomment the following lines to use your Mongo adapter as a session     *
-  * store                                                                    *
-  *                                                                          *
-  ***************************************************************************/
-
-  // adapter: 'mongo',
-  // host: 'localhost',
-  // port: 27017,
-  // db: 'sails',
-  // collection: 'sessions',
-
-  /***************************************************************************
-  *                                                                          *
-  * Optional Values:                                                         *
-  *                                                                          *
-  * # Note: url will override other connection settings url:                 *
-  * 'mongodb://user:pass@host:port/database/collection',                     *
-  *                                                                          *
-  ***************************************************************************/
-
-  // username: '',
-  // password: '',
-  // auto_reconnect: false,
-  // ssl: false,
-  // stringify: true
-
+  host: redisUrl.hostname,
+  port: redisUrl.port,
+  ttl: 1209600000,
+  db: redisDb,
+  pass: redisPass,
+  prefix: 'sess:',
 };
