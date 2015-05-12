@@ -16,7 +16,7 @@ module.exports = {
     });
   },
 
-  showRentalRequests: function (req, res, next) {
+  showRentalRequests: function (req, res) {
     Step(
       function(){
 
@@ -27,8 +27,9 @@ module.exports = {
         Property.find({ user: req.user.id })
         .exec(this.parallel())
 
-      }, function(err, rentalRequests, propertyProfiles) {
-        if (err) return next(err);
+      },
+      function(err, rentalRequests, propertyProfiles) {
+        if (err) return res.serverError(err);
 
         res.view('modules/propertyowners/rentalrequests', {
           moment: moment,
@@ -39,22 +40,28 @@ module.exports = {
     )
   },
 
-  respondToRentalRequest: function(req, res, next) {
+  respondToRentalRequest: function(req, res) {
+    var propertyIds = req.body.propertyIds;
+    if (!propertyIds || propertyIds.length < 1) {
+      return res.badRequest('Expected at least one propertyId')
+    }
+
     Step(
       function(){
         RentalRequest.findOne(req.params.id)
         .populate('user')
-        .exec(this)
-      },
-      function(err, rentRequest){
-        if (err) return next(err)
+        .exec(this.parallel())
 
-        console.log(req.user.email)
-        MailService.sendRentRequestResponseEmail(rentRequest, req.user, req.body.message, this)
+        Property.find({id: req.body.propertyIds})
+        .exec(this.parallel())
+      },
+      function(err, rentRequest, properties){
+        if (err) return res.serverError(err)
+        MailService.sendRentRequestResponseEmail(rentRequest, req.user, properties, this)
       },
       function(err){
-        if (err) return next(err)
-        res.send(200, {})
+        if (err) return res.serverError(err)
+        res.ok()
       }
     )
   }

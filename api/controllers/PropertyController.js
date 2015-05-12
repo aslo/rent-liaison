@@ -23,13 +23,6 @@ module.exports = {
     })
   },
 
-  update: function (req, res, next) {
-    Property.update(req.body, function(err, result){
-      if (err) return next(err)
-      res.json(result);
-    })
-  },
-
   addImageToProperty: function(req, res) {
     if (!req.file('file')) {
       return res.badRequest()

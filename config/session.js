@@ -60,7 +60,7 @@ module.exports.session = {
 
   host: redisUrl.hostname,
   port: redisUrl.port,
-  ttl: 1209600000,
+  ttl: 1209600000, // 2 weeks
   db: redisDb,
   pass: redisPass,
   prefix: 'sess:',

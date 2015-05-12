@@ -1,11 +1,13 @@
 var Mailer = require('../lib/mailer');
 
+var appUrl = 'http://' + process.env.HOST + ':' + process.env.PORT;
+
 module.exports = {
 
   sendActivationEmail: function(to, uri, cb) {
     var mailer = new Mailer();
 
-    var absoluteUrl = 'http://' + process.env.HOST + ':' + process.env.PORT + '/rentalrequest/' + uri;
+    var absoluteUrl = appUrl + '/rentalrequest/' + uri;
 
     mailer.send({
       to:      to,
@@ -21,14 +23,26 @@ module.exports = {
     }, cb);
   },
 
-  sendRentRequestResponseEmail: function(rentRequest, fromUser, body, cb) {
+  sendRentRequestResponseEmail: function(rentRequest, fromUser, properties, cb) {
     var mailer = new Mailer()
+
+    var message = 'Hello, I am reaching out via Rent Liason with a few properties that meet your parameters...'
+    + '</br>'
+    + '<ul>'
+
+    for (var i=0; i<properties.length; i++) {
+      var property = properties[i];
+      message += '<li><a href="' + appUrl + '/property/' + property.slug + '">' + property.name + '</a></li>'
+    }
+
+    + '</ul>'
+
     mailer.send({
       to: rentRequest.user.email,
       cc: fromUser.email,
       from: 'liason@rentliason.com',
-      subject: 'A Response to Your Rent Request',
-      html: body
+      subject: 'Response to Your Rent Request on rentliason.com',
+      html: message
     }, cb)
   }
 

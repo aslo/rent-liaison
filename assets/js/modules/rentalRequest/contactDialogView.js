@@ -1,8 +1,9 @@
 define([
+  'underscore',
   'tpl',
   'views/modal',
   'modules/property/collection'
-], function(Tpl, Modal, PropertyCollection){
+], function(_, Tpl, Modal, PropertyCollection){
 
   return Modal.extend({
 
@@ -61,12 +62,13 @@ define([
     },
 
     sendMessage: function(e) {
-      console.log('send message!!!!')
-      var message = this.$('.js-message-body').html()
-      console.log(this.rentRequest.url(), message);
+      var propertyIds = [];
+      $('input[type=checkbox]:checked').each(function(){
+        propertyIds.push($(this).data('propertyId'));
+      })
 
       $.post(this.rentRequest.url() + '/respond', {
-        message: message
+        propertyIds: propertyIds
       })
       .done(function(){
 
