@@ -28,6 +28,13 @@ process.chdir(__dirname);
   // Load env-specific variables
   require('dotenv').load()
 
+  process.env.URL = "http://" + process.env.HOST
+  if (process.env.NODE_ENV === 'development') {
+    process.env.URL += ':' + process.env.PORT
+  }
+
+  console.log('Starting app at url', process.env.URL)
+
   var sails;
   try {
     sails = require('sails');
