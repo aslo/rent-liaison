@@ -15,7 +15,7 @@ module.exports = function(grunt) {
         include: 'requireLib',
         optimize: 'uglify2',
         name: 'main',
-        generateSourceMaps: true,
+        generateSourceMaps: false, // to speed up build times
         preserveLicenseComments: false,
         useStrict: true,
         wrap: true
