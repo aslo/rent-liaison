@@ -5,7 +5,7 @@ include ../../mixins/rent_request
     h1.text-center Rent Request
 
 .row
-  .offset-by-three.columns.seven.columns
+  .offset-by-one.column.ten.columns
 
     .js-form-alert.alert.hide
 
@@ -13,7 +13,7 @@ include ../../mixins/rent_request
       fieldset
         legend Where to?
         .row
-          .six.columns
+          .eight.columns.offset-by-two
             +destination_select()(class="u-full-width", required="required")
 
       fieldset
@@ -21,33 +21,41 @@ include ../../mixins/rent_request
 
         .js-date-section
           .row
-            .three.columns
-              label(for="js-start-date") Start Date
+            .four.columns.offset-by-two
+              label(for="js-start-date") Arrival Date
               input#js-start-date.js-pikaday.u-full-width(name="startDate", type="text")
-            .three.columns
-              label(for="js-end-date") End Date
+              label
+                input#datesAreFlexible(name="datesAreFlexible", value="true", type="checkbox")
+                .label-body my dates are flexible
+
+            .four.columns
+              label(for="js-end-date") Departure Date
               input#js-end-date.js-pikaday.u-full-width(name="endDate", type="text")
-          .row
-            label
-              input#datesAreFlexible(name="datesAreFlexible", value="true", type="checkbox")
-              .label-body my dates are flexible
-        .row
-          label
-            input#js-no-dates(value="true", type="checkbox")
-            .label-body no specific dates
+              label
+                input#js-no-dates(value="true", type="checkbox")
+                .label-body no specific dates
 
       fieldset
         legend Who are you?
         .row
-          .four.columns
+          .four.columns.offset-by-two
             label(for="firstName") First Name
             input#firstName.u-full-width(name="user[firstName]", type="text", required)
           .four.columns
             label(for="lastName") Last Name
             input#lastName.u-full-width(name="user[lastName]", type="text", required)
         .row
-          .eight.columns
+          .four.columns.offset-by-two
             label(for="email") Email
             input#email.u-full-width(name="user[email]", type="email", required)
 
-      input.button-primary(type="submit", value="Submit")
+          .two.columns
+            label(for="adults") Adults
+            input#adults.u-full-width(name="adults", type="number", required)
+          .two.columns
+            label(for="children") Children
+            input#children.u-full-width(name="children", type="number", required)
+
+      .row
+        .three.columns.offset-by-two
+          input.button-primary(type="submit", value="Submit")
