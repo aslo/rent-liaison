@@ -73,35 +73,41 @@ module.exports = {
     },
 
     getCompletionPercentage: function() {
-      return 69;
-      // var ignoreFields = [
-      //   'createdAt',
-      //   'updatedAt',
-      //   'id'
-      // ];
+      var ignoreFields = [
+        'createdAt',
+        'updatedAt',
+        'id',
+        'passports',
+        'status',
+        'uri',
+        'datesAreFlexible'
+      ];
 
-      // var totalFields = 0,
-      //     completedFields = 0;
+      var totalFields = 0,
+          completedFields = 0;
 
-      // function count(obj) {
-      //   for (key in obj) {
-      //     if (obj[key] && typeof obj[key] === 'object') {
-      //       count(obj[key]);
-      //     } else if ((typeof obj[key] !== 'function') && ! _.contains(ignoreFields, key)) {
-      //       console.log(key);
-      //       totalFields++;
-      //       if (typeof obj[key] !== 'undefined') {
-      //         completedFields++;
-      //       }
-      //     }
-      //   }
-      // }
+      function count(obj) {
+        for (key in obj) {
+          if (! _.contains(ignoreFields, key)) {
+            if (obj[key] && typeof obj[key] === 'object') {
+              count(obj[key]);
+            } else if (typeof obj[key] !== 'function') {
+              totalFields++;
+              if (obj[key]) {
+                completedFields++;
+              }
+            }
+          }
+        }
+      }
 
-      // if (totalFields > 0) {
-      //   return Math.round((completedFields / totalFields) * 100);
-      // } else {
-      //   return 100;
-      // }
+      count(this);
+
+      if (totalFields > 0) {
+        return Math.round((completedFields / totalFields) * 100);
+      } else {
+        return 100;
+      }
     }
   },
 

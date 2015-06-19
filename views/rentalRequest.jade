@@ -12,11 +12,12 @@ block body
   #js-rental-request(data-rental-request-id=rentalRequest.id)
 
     .row
-      .pull-left.three.columns
+      .three.columns
         +side_tab_list()
           +tab("personal-info", true) Personal Info
           +tab("group-info") Group Info
           +tab("property-info") Property Info
+
       .nine.columns
         .row
           h1 Rental Request
