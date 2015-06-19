@@ -1,0 +1,12 @@
+mixin side_tab_list(tabs)
+  ul.side-tabs(role="tablist")
+    block
+
+mixin tab(tabPanelId, isActive)
+  li.tab(role="presentation", class= isActive ? 'active' : '')
+    a(href="##{tabPanelId}", role="tab", data-toggle="tab")
+      block
+
+mixin tab_panel(id, isActive)
+  .tab-pane(id=id, role="tabpanel", class= isActive ? 'active' : '')
+    block

@@ -19,6 +19,7 @@ require.config({
 
     // bootstrap stuff
     modal: './vendor/bootstrap/js/modal',
+    tab: './vendor/bootstrap/js/tab',
 
     jade: './vendor/jade/runtime'
   },

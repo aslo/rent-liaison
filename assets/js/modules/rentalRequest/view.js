@@ -1,7 +1,8 @@
 define([
   'backbone',
-  'pikaday'
-], function(Backbone, Pikaday){
+  'pikaday',
+  'tab'
+], function(Backbone, Pikaday, tab){
 
   return Backbone.View.extend({
 
@@ -16,6 +17,8 @@ define([
       this.$('.js-pikaday').each(function(i, el){
         new Pikaday({ field: el });
       });
+
+      this.$('[data-toggle=tab]').tab();
 
     },
 
