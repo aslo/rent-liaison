@@ -61,10 +61,9 @@ define([
     },
 
     toggleNoDates: function(e) {
-      $dates = this.$('.js-date-section');
-      $dates.toggleClass('hide');
+      $dates = this.$('#js-start-date,#js-end-date,#datesAreFlexible')
 
-      $dates.find('input').attr('disabled', function(index, attr){
+      $dates.attr('disabled', function(index, attr){
         return attr ? null : 'disabled';
       });
     },
