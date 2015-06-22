@@ -40,9 +40,8 @@ define([
           var template = _.template(
             "<div class='row'>"
             + "<div class='offset-by-two columns eight columns'>"
-            + "<p>Almost done!</p>"
-            + "<p>A confirmation email has been sent to <strong><%= email %></strong>. "
-            + "Please click the confirmation link in your email to complete the process.</p>"
+            + "<p>Thanks for submitting a Rent Request.  An email has been sent to the address you provided."
+            + "  Please click the link in the email to activate the request in our system.</p>"
             + "</div>"
             + "</div>");
 

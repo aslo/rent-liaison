@@ -1,0 +1,11 @@
+include ../../mixins/progress_bar
+
++progress_bar(rentalRequest.getCompletionPercentage())(class="js-progress-bar")
+
+p your Rent Request is&nbsp;
+  span.js-progress-percentage
+    = rentalRequest.getCompletionPercentage()
+  |&nbsp;% complete.
+
+p In order to make your request as attractive as possible to property owners,
+  | please add some more information about yourself and the party you will be traveling with.

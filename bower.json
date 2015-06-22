@@ -23,6 +23,7 @@
     "flip": "~1.0.1",
     "bootstrap": "~3.3.4",
     "jade": "~1.9.2",
-    "blueimp-file-upload-node": "~9.9.3"
+    "blueimp-file-upload-node": "~9.9.3",
+    "fontawesome": "git://github.com/FortAwesome/Font-Awesome.git#v4.3.0"
   }
 }

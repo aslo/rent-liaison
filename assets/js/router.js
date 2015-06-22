@@ -18,7 +18,7 @@ define([
     routes: {
       ''                     : 'home',
       'rentalrequest'        : 'rentalrequestIndex',
-      'rentalrequest/:uri'   : 'rentalrequest',
+      'rentalrequest/:uri'   : 'rentalRequest',
       'properties'           : 'properties'
     },
 

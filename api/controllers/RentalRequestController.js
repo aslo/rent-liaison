@@ -58,11 +58,19 @@ module.exports = {
         if (rentalRequests.length < 1) return next();
         rentalRequest = rentalRequests[0];
 
+        // find renterDetails for this user
+        RenterDetails.find({ id: rentalRequest.user.renterDetails , limit: 1})
+        .exec(this.parallel())
+
         // activate rentalrequest if necessary
-        RentalRequestService.activateRentalRequestIfInactive(rentalRequest, this);
+        RentalRequestService.activateRentalRequestIfInactive(rentalRequest, this.parallel());
       },
-      function(err, user) {
+      function(err, renterDetailses, user) {
         if (err) return next(err);
+
+        if (renterDetailses.length > 0) {
+          rentalRequest.user.renterDetails = renterDetailses[0];
+        }
 
         // if the user was just confirmed
         if (user) {

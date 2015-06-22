@@ -1,8 +1,9 @@
 define([
   'backbone',
   'pikaday',
-  'tab'
-], function(Backbone, Pikaday, tab){
+  'tab',
+  'modules/rentalRequest/views/completionProgressView',
+], function(Backbone, Pikaday, tab, CompletionProgressView){
 
   return Backbone.View.extend({
 
@@ -14,10 +15,16 @@ define([
     initialize: function() {
       this.model.set('id', this.$el.data('rentalRequestId'));
 
+      // subviews
+      this.progressSubview = new CompletionProgressView({
+        el: this.$('#js-rent-request-progress'),
+        model: this.model
+      });
+
+      // init plugins
       this.$('.js-pikaday').each(function(i, el){
         new Pikaday({ field: el });
       });
-
       this.$('[data-toggle=tab]').tab();
 
     },
@@ -31,13 +38,13 @@ define([
     _updateModelFromForm: function(e, model) {
       e.preventDefault()
       clean = function (obj) {
-        for (key in obj) {
-          if (typeof obj[key] == 'object') {
-            obj[key] = clean(obj[key]);
-          } else if (obj[key] == "") {
-            delete obj[key];
-          }
-        }
+        // for (key in obj) {
+        //   if (typeof obj[key] == 'object') {
+        //     obj[key] = clean(obj[key]);
+        //   } else if (obj[key] == "") {
+        //     delete obj[key];
+        //   }
+        // }
         return obj;
       }
 

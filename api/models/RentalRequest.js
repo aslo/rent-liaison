@@ -80,7 +80,8 @@ module.exports = {
         'passports',
         'status',
         'uri',
-        'datesAreFlexible'
+        'datesAreFlexible',
+        'address2'
       ];
 
       var totalFields = 0,
