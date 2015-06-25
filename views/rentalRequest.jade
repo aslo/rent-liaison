@@ -1,5 +1,6 @@
 include ./mixins/forms
 include ./mixins/tabs
+include ./mixins/rent_request
 
 extends layout
 
@@ -23,7 +24,7 @@ block body
 
         //- TODO - handle this properly
         if messages && messages.length
-          .row
+          .row.alert
             strong Your Rent Request has been confirmed!&nbsp;
             br
             | We are already working hard to find a vacation
@@ -48,7 +49,7 @@ block body
               .row
                 .eight.columns
                   label Email
-                  p= rentalRequest.user.renterDetails.email
+                  p= rentalRequest.user.email
 
               .row
                 .eight.columns
@@ -76,30 +77,39 @@ block body
                   +input('startDate', 'startDate', rentalRequest.startDate, 'Start Date')(class='js-pikaday')
                 .four.columns
                   +input('endDate', 'endDate', rentalRequest.endDate, 'End Date')(class='js-pikaday')
-              .row
-                .four.columns
-                  +input('travelers', 'travelers', rentalRequest.travelers, 'Number of Guests')(type='number')
-                .four.columns
-                  label Age Range
-                  p TODO -- implement this
-              .row
-                .eight.columns
-                  +input('occasion', 'occasion', rentalRequest.occasion, 'Occasion')(type='text')
 
               .row
+                .two.columns
+                  +input('adults', 'adults', rentalRequest.adults, 'Adults')(type='number')
+                .two.columns
+                  +input('children', 'children', rentalRequest.children, 'Children')(type='number')
                 .four.columns
                   +input('budget', 'budget', rentalRequest.budget, 'Budget')(type='number', step=".01")
 
               .row
                 .eight.columns
+                  +input('occasion', 'occasion', rentalRequest.occasion, 'Occasion')(type='text')
+              .row
+                .eight.columns
                   label(for="group-comments") Additional Comments
-                  textarea.u-full-width#group-comments(name="group-comments")= rentalRequest.comments
+                  textarea.u-full-width#group-comments(name="groupComments")= rentalRequest.groupComments
               .row
                 button(type="submit") Submit
 
           +tab_panel("property-info")
             form.js-rental-request-form
               h2 Property Characteristics
+              .row
+                .ten.columns
+                  label Destinations
+                  +destination_select(rentalRequest.destinations)
+                //- TODO location selector (on the water, in town, etc)
+              .row
+                .two.columns
+                  +input('bedrooms', 'bedrooms', rentalRequest.bedrooms, 'Bedrooms')(type='number')
+                .two.columns
+                  +input('sleeps', 'sleeps', rentalRequest.sleeps, 'Sleeps')(type='number')
+
               .row
                 button(type="submit") Submit
 

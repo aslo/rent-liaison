@@ -1,6 +1,20 @@
-mixin destination_select(selected)
+include ./forms
+
+mixin destination_select(selectedDestinations)
   //- TODO get from DB
-  select#destination(name="destination")&attributes(attributes)
-    option(value=null)
-    each val, key in {"EAST_HAMPTON": 'East Hampton', "WEST_HAMPTON": 'West Hampton', "MONTAUK": 'Montauk'}
-      option(value=key, selected=(selected==key ? 'selected' : null))= val
+  - var destinations = {}
+  - destinations.EAST_HAMPTON = 'East Hampton'
+  - destinations.WEST_HAMPTON = 'West Hampton'
+  - destinations.SOUTH_HAMPTON = 'South Hampton'
+  - destinations.HAMPTON_BAYS = 'Hampton Bays'
+  - destinations.MONTAUK = 'Montauk'
+  - destinations.FIRE_ISLAND = 'Fire Island'
+  - destinations.NORTH_FORK = 'North Fork'
+
+  each name, key in destinations
+    - var isSelected = selectedDestinations && selectedDestinations.indexOf(val) >= 0
+    - var id = 'destinations.' + key
+
+    .pull-left.tag
+      +checkbox_with_label(id, 'destinations[]', key, name, isSelected)
+

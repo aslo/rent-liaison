@@ -11,6 +11,7 @@ define([
 
     events: {
       'change #js-no-dates': 'toggleNoDates',
+      'click .tag input[type=checkbox]':'toggleDestination',
       'submit .js-rent-request-form': 'submitForm'
     },
 
@@ -65,6 +66,10 @@ define([
       $dates.attr('disabled', function(index, attr){
         return attr ? null : 'disabled';
       });
+    },
+
+    toggleDestination: function(e) {
+      this.$(e.target).parents('.tag').toggleClass('active');
     },
 
     // empty the view's content and stop listening to events,
