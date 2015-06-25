@@ -66,10 +66,14 @@ module.exports = {
         RentalRequestService.activateRentalRequestIfInactive(rentalRequest, this.parallel());
       },
       function(err, renterDetailses, user) {
+
         if (err) return next(err);
 
         if (renterDetailses.length > 0) {
           rentalRequest.user.renterDetails = renterDetailses[0];
+        } else {
+          // TODO should create one on user creation
+          rentalRequest.user.renterDetails = {};
         }
 
         // if the user was just confirmed

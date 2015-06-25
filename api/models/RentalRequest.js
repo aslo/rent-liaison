@@ -48,17 +48,26 @@ module.exports = {
       required: true,
       defaultsTo: false
     },
-    travelers: {
-      type: 'integer'
-    },
     occasion: {
       type: 'string'
+    },
+    adults: {
+      type: 'integer'
+    },
+    children: {
+      type: 'integer'
     },
     budget: {
       type: 'float'
     },
-    group_comments: {
+    groupComments: {
       type: 'string'
+    },
+    bedrooms: {
+      type: 'integer'
+    },
+    sleeps: {
+      type: 'integer'
     },
 
     // instance methods
@@ -90,7 +99,7 @@ module.exports = {
       function count(obj) {
         for (key in obj) {
           if (! _.contains(ignoreFields, key)) {
-            if (obj[key] && typeof obj[key] === 'object') {
+            if (typeof obj[key] === 'object') {
               count(obj[key]);
             } else if (typeof obj[key] !== 'function') {
               totalFields++;
@@ -113,15 +122,19 @@ module.exports = {
   },
 
   beforeCreate: function(values, cb) {
+    values.uri = this._generateRandomUri();
+    cb();
+  },
+
+  _generateRandomUri: function() {
     chars = 'abcdefghijklmnopqrstuvwxyz1234567890-_.';
 
     uri = '';
     for (var i = 0; i < URI_LENGTH; i++) {
       uri += chars[_.random(chars.length - 1)];
     }
-
-    values.uri = uri;
-    cb();
+    return uri;
   }
+
 };
 
