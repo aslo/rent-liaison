@@ -3,7 +3,8 @@ define([
   'pikaday',
   'tab',
   'modules/rentalRequest/views/completionProgressView',
-], function(Backbone, Pikaday, tab, CompletionProgressView){
+  'views/tag'
+], function(Backbone, Pikaday, tab, CompletionProgressView, Tag){
 
   return Backbone.View.extend({
 
@@ -19,6 +20,9 @@ define([
       this.progressSubview = new CompletionProgressView({
         el: this.$('#js-rent-request-progress'),
         model: this.model
+      });
+      this.$('.js-tag').each(function(){
+        new Tag({ el: this });
       });
 
       // init plugins

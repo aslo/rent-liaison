@@ -3,15 +3,15 @@ define([
   'pikaday',
   'serializeJSON',
 
+  'views/tag',
   'modules/rentalRequest/model'
 
-], function(Backbone, Pikaday, serializeJSON, RentalRequest){
+], function(Backbone, Pikaday, serializeJSON, Tag, RentalRequest){
 
   return Backbone.View.extend({
 
     events: {
       'change #js-no-dates': 'toggleNoDates',
-      'click .tag input[type=checkbox]':'toggleDestination',
       'submit .js-rent-request-form': 'submitForm'
     },
 
@@ -20,6 +20,12 @@ define([
       this.$('.js-pikaday').each(function(i, el){
         new Pikaday({ field: el });
       });
+
+      // init subviews
+      this.$('.js-tag').each(function(){
+        new Tag({ el: this });
+      });
+
 
     },
 
@@ -66,10 +72,6 @@ define([
       $dates.attr('disabled', function(index, attr){
         return attr ? null : 'disabled';
       });
-    },
-
-    toggleDestination: function(e) {
-      this.$(e.target).parents('.tag').toggleClass('active');
     },
 
     // empty the view's content and stop listening to events,
