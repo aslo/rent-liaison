@@ -26,14 +26,14 @@ include ../../mixins/rent_request
           .row
             .four.columns.offset-by-two
               label(for="js-start-date") Arrival Date
-              input#js-start-date.js-pikaday.u-full-width(name="startDate", type="text")
+              input#js-start-date.js-pikaday.u-full-width(name="startDate", type="text", required)
               label
                 input#datesAreFlexible(name="datesAreFlexible", value="true", type="checkbox")
                 .label-body my dates are flexible
 
             .four.columns
               label(for="js-end-date") Departure Date
-              input#js-end-date.js-pikaday.u-full-width(name="endDate", type="text")
+              input#js-end-date.js-pikaday.u-full-width(name="endDate", type="text", required)
               label
                 input#js-no-dates(value="true", type="checkbox")
                 .label-body no specific dates

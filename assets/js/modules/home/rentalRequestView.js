@@ -26,6 +26,7 @@ define([
         new Tag({ el: this });
       });
 
+      this.datesAreDisabled = false;
 
     },
 
@@ -40,6 +41,7 @@ define([
       $formInputs.attr('disabled', 'disabled');
 
       var model = new RentalRequest();
+
       model.save(attrs, {
         success: function(model, response, options){
           self.clear();
@@ -57,9 +59,11 @@ define([
         error: function(model, response, options){
           console.error(arguments);
 
+          // revert the form back to normal state
           $formInputs.removeAttr('disabled');
+          self._updateDatesDisabledAttr(self.datesAreDisabled);
 
-          this.$('.js-form-alert')
+          self.$('.js-form-alert')
             .html('Whoops! Looks like something went wrong on our end. Please try again.')
             .show();
         }
@@ -67,10 +71,15 @@ define([
     },
 
     toggleNoDates: function(e) {
+      this.datesAreDisabled = !this.datesAreDisabled;
+      this._updateDatesDisabledAttr(this.datesAreDisabled);
+    },
+
+    _updateDatesDisabledAttr: function(disable) {
       $dates = this.$('#js-start-date,#js-end-date,#datesAreFlexible')
 
       $dates.attr('disabled', function(index, attr){
-        return attr ? null : 'disabled';
+        return disable ? 'disabled' : null;
       });
     },
 
