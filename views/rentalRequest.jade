@@ -4,21 +4,15 @@ include ./mixins/rent_request
 
 extends layout
 
-block nav
-  //- empty
+//- block nav
+//-   //- empty
 
 block body
 
-  #js-rental-request(data-rental-request-id=rentalRequest.id)
+  #js-rental-request(data-rental-request-id=rentalRequest.id).p-rent-request
 
     .row
-      .three.columns
-        +side_tab_list()
-          +tab("personal-info", true) Personal Info
-          +tab("group-info") Group Info
-          +tab("property-info") Property Info
-
-      .nine.columns
+      .twelve.columns
         .row
           h1 Rental Request
 
@@ -36,6 +30,15 @@ block body
           #js-rent-request-progress
             include ./modules/rentalRequest/completion_progress
 
+    .row
+      .three.columns
+        .p-rent-request--tab-area
+          +side_tab_list()
+            +tab("personal-info", true)(class="tag") Personal Info
+            +tab("group-info")(class="tag") Group Info
+            +tab("property-info")(class="tag") Property Info
+
+      .nine.columns
         .row
           +tab_panel("personal-info", true)
             form.js-user-form

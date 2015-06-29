@@ -3,7 +3,7 @@ mixin side_tab_list(tabs)
     block
 
 mixin tab(tabPanelId, isActive)
-  li.tab(role="presentation", class= isActive ? 'active' : '')
+  li.tab(role="presentation", class=(isActive ? 'active' : ''))&attributes(attributes)
     a(href="##{tabPanelId}", role="tab", data-toggle="tab")
       block
 
