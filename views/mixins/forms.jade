@@ -3,17 +3,24 @@ mixin input(id, name, value, label)
     label(for=id)= label
   input.u-full-width(id=id, name=name, type="text", value=value)&attributes(attributes)
 
-mixin checkbox_with_label(id, name, value, label, isSelected)
-  label(for=id)
-    input(id=id, name=name, value=value, type="checkbox", checked=isSelected ? 'checked' : null)&attributes(attributes)
-    .label-body= label
-
-
 mixin state_select(selection)
   -var states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
   select&attributes(attributes)
     each state in states
       option(value=state, selected= selection == state ? 'selected' : null)= state
 
+mixin checkbox_with_label(id, name, value, label, isSelected)
+  label(for=id)
+    input(id=id, name=name, value=value, type="checkbox", checked=isSelected ? 'checked' : null)&attributes(attributes)
+    .label-body= label
 
+mixin attributeGroup(collectionName, allOptions, selected)
+  each option in allOptions
+    - var value = option.id;
+    - var label = _.startCase(option.name.toLowerCase());
+    - var isSelected = selected && _.findWhere(selected, { id: value })
+    - var id = collectionName + '.' + option.name
+    - var inputName = collectionName + '[]'
+    .pull-left.tag.js-tag(class=isSelected ? 'active' : '')
+      +checkbox_with_label(id, inputName, value, label, isSelected)
 

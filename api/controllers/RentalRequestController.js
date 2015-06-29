@@ -6,6 +6,7 @@
  */
 
 var Step = require('step');
+var _ = require('lodash');
 
 module.exports = {
 
@@ -43,48 +44,36 @@ module.exports = {
 
   findByUri: function(req, res, next) {
     // TODO validate the uri
+    var renderData = undefined;
 
-    var rentalRequest = undefined;
     Step(
       function(){
-        RentalRequest.find({ where: { uri: req.params.uri }, limit: 1 })
-        .populate('user')
-        .exec(this);
+        RentalRequestService.prepareRentalRequestDisplayData({ uri: req.params.uri }, this);
       },
-      function(err, rentalRequests) {
-        if (err) return next(err);
-
-        // 400
-        if (rentalRequests.length < 1) return next();
-        rentalRequest = rentalRequests[0];
-
-        // find renterDetails for this user
-        RenterDetails.find({ id: rentalRequest.user.renterDetails , limit: 1})
-        .exec(this.parallel())
-
-        // activate rentalrequest if necessary
-        RentalRequestService.activateRentalRequestIfInactive(rentalRequest, this.parallel());
-      },
-      function(err, renterDetailses, user) {
-
-        if (err) return next(err);
-
-        if (renterDetailses.length > 0) {
-          rentalRequest.user.renterDetails = renterDetailses[0];
+      function(err, result){
+        if (err) {
+          return next(err);
+        } else if (!result) {
+          return res.notFound();
         } else {
-          // TODO should create one on user creation
-          rentalRequest.user.renterDetails = {};
+          renderData = result;
+
+          // activate rentalrequest if necessary
+          RentalRequestService.activateRentalRequestIfInactive(renderData.rentalRequest, this.parallel());
         }
+      },
+      function(err, user) {
+        if (err) return next(err);
 
         // if the user was just confirmed
         if (user) {
           req.flash('message', 'welcome');
         }
 
-        res.render('rentalRequest', {
-          rentalRequest: rentalRequest,
+        res.view('rentalRequest', _.extend(renderData, {
+          _: _,
           messages: req.flash('message')
-        });
+        }));
       }
     )
   },
@@ -93,14 +82,13 @@ module.exports = {
     // TODO validate
 
     RentalRequest.update(req.params.id, req.body)
-    .exec(function(){
-      RentalRequest.findOne(req.params.id)
-      .populate('user')
-      .exec(function(err, result) {
-        if (err) return next(err);
-        res.json(result);
-      });
+    .then(function(){
+      RentalRequest.findOne(req.params.id).populate('user')
     })
+    .then(function(result){
+      res.json(result);
+    })
+    .catch(next)
   }
-};
 
+};

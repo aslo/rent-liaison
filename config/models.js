@@ -11,7 +11,7 @@
 
 module.exports.models = {
 
-  connection: 'postgres',
+  connection: 'localDiskDb',
   migrate: 'alter',
   schema: true
 

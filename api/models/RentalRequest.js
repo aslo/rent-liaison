@@ -18,6 +18,13 @@ module.exports = {
       model: 'user',
       required: true
     },
+    destinations: {
+      required: true,
+      collection: 'Destination'
+    },
+    desiredPropertyAttributes: {
+      collection: 'PropertyAttribute'
+    },
 
     // fields
     status: {
@@ -25,11 +32,6 @@ module.exports = {
       enum: ['ACTIVE', 'INACTIVE', 'UNCONFIRMED'],
       defaultsTo: 'UNCONFIRMED',
       required: true
-    },
-    destination: {
-      required: true,
-      type: 'string',
-      enum: ['EAST_HAMPTON', 'WEST_HAMPTON', 'MONTAUK']
     },
     uri: {
       type: 'string',

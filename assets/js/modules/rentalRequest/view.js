@@ -42,13 +42,13 @@ define([
     _updateModelFromForm: function(e, model) {
       e.preventDefault()
       clean = function (obj) {
-        // for (key in obj) {
-        //   if (typeof obj[key] == 'object') {
-        //     obj[key] = clean(obj[key]);
-        //   } else if (obj[key] == "") {
-        //     delete obj[key];
-        //   }
-        // }
+        for (key in obj) {
+          if (typeof obj[key] == 'object') {
+            obj[key] = clean(obj[key]);
+          } else if (obj[key] == "") {
+            delete obj[key];
+          }
+        }
         return obj;
       }
 

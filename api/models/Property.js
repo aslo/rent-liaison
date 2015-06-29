@@ -10,6 +10,10 @@ module.exports = {
       collection: 'Image',
       via: 'property'
     },
+    propertyAttributes: {
+      collection: 'PropertyAttribute',
+      via: 'properties'
+    },
 
     //attributes
     name: {
@@ -23,6 +27,11 @@ module.exports = {
       required: true,
       unique: true,
       alphanumericdashed: true
+    },
+    type: {
+      type: 'string',
+      enum: ['HOUSE', 'CONDO', 'HOTEL', 'MOTEL', 'B&B', 'BOAT'],
+      required: true
     },
     description: {
       type: 'string'

@@ -22,7 +22,7 @@
 
 module.exports.routes = {
 
-  'GET /': { view: 'modules/home/home' },
+  'GET /': 'HomeController.show',
 
   // property owner
   'GET /propertyowners': 'AuthController.login',

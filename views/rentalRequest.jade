@@ -102,8 +102,18 @@ block body
               .row
                 .ten.columns
                   label Destinations
-                  +destination_select(rentalRequest.destinations)
-                //- TODO location selector (on the water, in town, etc)
+                  +destination_select(destinations, rentalRequest)
+
+              .row
+                .ten.columns
+                  label Location Characteristics
+                  +location_select(locations, rentalRequest)
+
+              .row
+                .ten.columns
+                  label Desired Amenities
+                  +amenity_select(amenities, rentalRequest)
+
               .row
                 .two.columns
                   +input('bedrooms', 'bedrooms', rentalRequest.bedrooms, 'Bedrooms')(type='number')

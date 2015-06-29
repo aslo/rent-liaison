@@ -1,20 +1,10 @@
 include ./forms
 
-mixin destination_select(selectedDestinations)
-  //- TODO get from DB
-  - var destinations = {}
-  - destinations.EAST_HAMPTON = 'East Hampton'
-  - destinations.WEST_HAMPTON = 'West Hampton'
-  - destinations.SOUTH_HAMPTON = 'South Hampton'
-  - destinations.HAMPTON_BAYS = 'Hampton Bays'
-  - destinations.MONTAUK = 'Montauk'
-  - destinations.FIRE_ISLAND = 'Fire Island'
-  - destinations.NORTH_FORK = 'North Fork'
+mixin destination_select(all, rentalRequest)
+  +attributeGroup('destinations', all, rentalRequest.destinations)
 
-  each name, key in destinations
-    - var isSelected = selectedDestinations && selectedDestinations.indexOf(val) >= 0
-    - var id = 'destinations.' + key
+mixin amenity_select(all, rentalRequest)
+  +attributeGroup('desiredPropertyAttributes', all, rentalRequest.desiredPropertyAttributes)
 
-    .pull-left.tag
-      +checkbox_with_label(id, 'destinations[]', key, name, isSelected)
-
+mixin location_select(all, rentalRequest)
+  +attributeGroup('desiredPropertyAttributes', all, rentalRequest.desiredPropertyAttributes)

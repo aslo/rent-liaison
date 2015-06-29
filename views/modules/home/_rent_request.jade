@@ -16,7 +16,8 @@ include ../../mixins/rent_request
         legend Where to?
         .row
           .eight.columns.offset-by-two
-            +destination_select()(class="u-full-width", required="required")
+            - var allDestinations = destinations ? destinations : []
+            +destination_select(allDestinations, [])(class="u-full-width", required="required")
 
       fieldset
         legend When?
