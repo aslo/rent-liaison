@@ -2,6 +2,13 @@ module.exports = {
 
   attributes: {
 
+    // association
+    user: {
+      model: 'User',
+      via: 'renterDetails'
+    },
+
+
     dateOfBirth: {
       type: 'date'
     },

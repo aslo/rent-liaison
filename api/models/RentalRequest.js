@@ -98,6 +98,8 @@ module.exports = {
       var totalFields = 0,
           completedFields = 0;
 
+      // TODO handle this on the client
+
       function count(obj) {
         for (key in obj) {
           if (! _.contains(ignoreFields, key)) {
@@ -105,7 +107,7 @@ module.exports = {
               count(obj[key]);
             } else if (typeof obj[key] !== 'function') {
               totalFields++;
-              if (obj[key]) {
+              if (obj[key] || parseInt(obj[key]) == 0) {
                 completedFields++;
               }
             }

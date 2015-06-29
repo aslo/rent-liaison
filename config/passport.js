@@ -17,7 +17,7 @@
 module.exports.passport = {
   local: {
     strategy: require('passport-local').Strategy
-  }
+  },
 
   // bearer: {
   //   strategy: require('passport-http-bearer').Strategy
@@ -54,15 +54,16 @@ module.exports.passport = {
   //   }
   // },
 
-  // google: {
-  //   name: 'Google',
-  //   protocol: 'oauth2',
-  //   strategy: require('passport-google-oauth').OAuth2Strategy,
-  //   options: {
-  //     clientID: 'your-client-id',
-  //     clientSecret: 'your-client-secret'
-  //   }
-  // },
+  google: {
+    name: 'Google',
+    protocol: 'oauth2',
+    strategy: require('passport-google-oauth').OAuth2Strategy,
+    options: {
+      clientID: process.env.GOOGLE_CLIENT_ID,
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      scope: [ 'profile', 'email' ]
+    }
+  },
 
   // cas: {
   //   name: 'CAS',

@@ -52,12 +52,7 @@ module.exports = {
       }
     })
     .then(function(renterDetails){
-      if (renterDetails) {
-        // TODO should create one on user creation
-        result.rentalRequest.user.renterDetails = renterDetails;
-      } else {
-        result.rentalRequest.user.renterDetails = {};
-      }
+      result.rentalRequest.user.renterDetails = renterDetails;
       return result;
     })
   }

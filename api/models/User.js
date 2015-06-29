@@ -28,6 +28,7 @@ module.exports = {
     type: {
       type: 'string',
       enum: ['RENTER', 'PROPERTY_OWNER'],
+      defaultsTo: 'PROPERTY_OWNER',
       required: true
     },
     email: {
@@ -52,6 +53,18 @@ module.exports = {
 
     isPropertyOwner: function() {
       return this.type === 'PROPERTY_OWNER';
+    },
+
+    isRenter: function() {
+      return this.type === 'RENTER';
+    },
+
+    afterCreate: function(values, cb) {
+      if (this.isRenter()) {
+        RenterDetails.create({ user: values.id }, cb);
+      } else {
+        cb();
+      }
     }
   }
 };

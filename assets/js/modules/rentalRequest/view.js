@@ -46,7 +46,7 @@ define([
           if (typeof obj[key] == 'object') {
             obj[key] = clean(obj[key]);
           } else if (obj[key] == "") {
-            delete obj[key];
+            obj[key] = null;
           }
         }
         return obj;
