@@ -11,6 +11,7 @@
   "dependencies": {
     "bcryptjs": "^2.1.0",
     "bluebird": "^2.9.30",
+    "body-parser": "^1.13.1",
     "bower": "^1.4.1",
     "connect-redis": "1.4.5",
     "dotenv": "^1.1.0",

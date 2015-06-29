@@ -1,4 +1,3 @@
-var Step = require('step');
 var Promise = require('bluebird');
 
 module.exports = {
@@ -9,62 +8,57 @@ module.exports = {
    * Calls back with the user object if an update was peformed, null if otherwise. Also performs similar logic for
    * the rentalrequest's user.
    */
-  activateRentalRequestIfInactive: function(rentalRequest, cb) {
-    Step(
-      function(){
+  activateRentalRequestIfInactive: function(rentalRequest) {
+    return Promise.join(
+      UserService.confirmUserIfUnconfirmed(rentalRequest.user)
+    ,
+      Promise.try(function(){
         if (rentalRequest.isUnconfirmed()) {
           sails.log.debug('Confirming new rentalRequest with id', rentalRequest.id);
-          RentalRequest.update(rentalRequest.id, {status: 'ACTIVE'}, this.parallel());
+          return RentalRequest.update(rentalRequest.id, {status: 'ACTIVE'});
         } else {
-          this.parallel()(null, null);
+          return;
         }
-
-        UserService.confirmUserIfUnconfirmed(rentalRequest.user, this.parallel());
-
-      },
-      function(err, rentalrequest, user) {
-        if (err) return cb(err);
-
-        if (rentalrequest && user) {
-          rentalrequest.user = user
-        }
-        cb(null, rentalrequest);
-      }
+      })
     )
+    .then(function(user, rentalRequest){
+      var isNew = false;
+
+      if (rentalRequest) {
+        isNew = true;
+      }
+      return isNew;
+    })
   },
 
-  prepareRentalRequestDisplayData: function(searchParams, cb) {
+  prepareRentalRequestDisplayData: function(searchParams) {
     var result = undefined;
 
-    Promise.props({
-      rentalRequests: RentalRequest.find({ where: searchParams, limit: 1 })
+    return Promise.props({
+      rentalRequest: RentalRequest.findOne(searchParams)
         .populate('user')
         .populate('destinations')
         .populate('desiredPropertyAttributes'),
-      destinations: Destination.find({}),
+      destinations: Destination.findAll(),
       amenities: PropertyAttribute.findAllAmenities(),
       locations: PropertyAttribute.findAllLocations()
     })
     .then(function(r){
       result = r;
-      if (result.rentalRequests.length < 1) {
-        return cb();
+      if (!result.rentalRequest) {
+        return;
       } else {
-        result.rentalRequest = result.rentalRequests[0];
-
-        return RenterDetails.find({ id: result.rentalRequest.user.renterDetails , limit: 1})
+        return RenterDetails.findOne(result.rentalRequest.user.renterDetails)
       }
     })
-    .then(function(renterDetailses){
-      if (renterDetailses.length > 0) {
-        result.rentalRequest.user.renterDetails = renterDetailses[0];
-      } else {
+    .then(function(renterDetails){
+      if (renterDetails) {
         // TODO should create one on user creation
+        result.rentalRequest.user.renterDetails = renterDetails;
+      } else {
         result.rentalRequest.user.renterDetails = {};
       }
-
-      cb(null, result);
+      return result;
     })
-    .catch(cb)
   }
 }

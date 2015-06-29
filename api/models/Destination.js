@@ -6,5 +6,10 @@ module.exports = {
       required: true,
       unique: true
     }
+  },
+
+  findAll: function(){
+    return Destination.find({});
   }
+
 }

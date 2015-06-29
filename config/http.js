@@ -35,11 +35,13 @@ module.exports.http = {
       'cookieParser',
       'session',
       'myRequestLogger',
-      // 'bodyParser',
+      'jsonBodyParser',
+      'urlencBodyParser',
       'handleBodyParserError',
       'compress',
-      'methodOverride',
+      // 'methodOverride',
       'poweredBy',
+      'responseGlobals',
       '$custom',
       'router',
       'www',
@@ -67,6 +69,11 @@ module.exports.http = {
       require('response-time')()(req, res, next);
     },
 
+    responseGlobals: function(req, res, next) {
+      _.extend(res.locals, {}, sails.config.templateGlobals);
+      next();
+    },
+
   /***************************************************************************
   *                                                                          *
   * The body parser that will handle incoming multipart HTTP requests. By    *
@@ -76,7 +83,8 @@ module.exports.http = {
   *                                                                          *
   ***************************************************************************/
 
-    bodyParser: require('skipper')
+    jsonBodyParser: require('body-parser').json(),
+    urlencBodyParser: require('body-parser').urlencoded()
 
   }
 
