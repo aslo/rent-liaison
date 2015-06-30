@@ -7,6 +7,8 @@ module.exports = {
     Promise.join(
       Property.find({ user: req.user.id })
       .populate('images')
+      .populate('destination')
+      .populate('propertyAttributes')
       .sort({ createdAt: 'DESC' })
     ,
       PropertyService.getAllPropertyCharacteristics()

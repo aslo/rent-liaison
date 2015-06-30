@@ -6,6 +6,10 @@ module.exports = {
       model: 'User',
       required: true
     },
+    destination: {
+      model: 'Destination',
+      required: true
+    },
     images: {
       collection: 'Image',
       via: 'property'
@@ -35,13 +39,8 @@ module.exports = {
     },
     description: {
       type: 'string'
-    },
-    location: {
-      type: 'string'
-    },
-    amenities: {
-      type: 'string'
     }
+
   },
 
   beforeValidate: function(values, cb) {

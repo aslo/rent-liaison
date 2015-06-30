@@ -8,7 +8,15 @@ mixin select(id, name, label, options, selected)
     label(for=id)= label
   select.u-full-width(id=id, name=name)&attributes(attributes)
     each option in options
-      option(value=option, selected=(selected == option ? 'selected' : null))= _.startCase(option.toLowerCase())
+      - var name, value = null
+
+      if typeof option == 'object'
+        - name = option.name
+        - value = option.id
+      else
+        - name = value = option
+
+      option(value=value, selected=(selected == value ? 'selected' : null))= _.startCase(name.toLowerCase())
 
 mixin state_select(selection)
   -var states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
