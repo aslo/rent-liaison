@@ -27,6 +27,12 @@ form.js-property-form
 
   .row
     .six.columns
+      +input('bedrooms', 'bedrooms', property.bedrooms, 'Beds')(type="number")
+      +input('bathrooms', 'bathrooms', property.bathrooms, 'Baths')(type="number")
+      +input('sleeps', 'sleeps', property.sleeps, 'Sleeps')(type="number")
+
+  .row
+    .six.columns
       label(for="locations") Locations
       +location_select(locations, property)
 

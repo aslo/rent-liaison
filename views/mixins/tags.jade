@@ -1,3 +1,8 @@
 mixin tag()
   .tag.js-tag&attributes(attributes)
     block
+
+mixin tag_group(tags)
+  each tag in tags
+    +tag()(class='active')= helpers.humanize(tag.name)
+

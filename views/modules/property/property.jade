@@ -1,12 +1,66 @@
 extends ../../layout
 
+include ../../mixins/images
+include ../../mixins/tabs
+include ../../mixins/tags
+
 block nav
   include ../../_public_nav
 
 block body
-  h1 public listing, yo
-  p= property.name
 
+  .p-property
 
-  p TODO carousel
+    //- header row
+    .row.p-property--header
+      .seven.columns
+        h1= property.name
 
+      .four.columns.offset-by-one
+        h4 #{property.bedrooms} Bed, #{property.bathrooms} Bath, Sleeps #{property.sleeps}
+
+    //- main content row
+    .row
+
+      //- left side bar
+      .two.columns
+        +side_tab_list()
+          +tab("pictures", true)(class="tag") Photos
+          +tab("location")(class="tag") Location
+          +tab("amenities")(class="tag") Amenities
+
+      //- main content
+      .seven.columns
+        .row.p-property--content
+          +tab_panel('pictures', true)
+            //- main image
+            .row
+              +image(property.images && property.images[0] ? property.images[0].url : null, 540, 400)
+
+            //- other images
+            .row
+              p TODO secondary images here
+
+          +tab_panel('location')
+            h3 Location
+            +tag_group(locations)
+
+          +tab_panel('amenities')
+            h3 Amenities
+            +tag_group(amenities)
+
+        .row
+          h5 Description
+          p= property.description
+
+      //- right side bar
+      .three.columns
+        - var name = property.user.getFullName() ? property.user.getFullName() : property.user.email
+        p Contact: &nbsp;
+          a(href="mailto:#{property.user.email}")= name
+
+        p Listings:
+        each listing in property.externalListings
+          ul
+            li
+              a(href=listing.url)= listing.url

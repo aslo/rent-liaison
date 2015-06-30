@@ -1,3 +1,5 @@
+var _ = require('lodash')
+
 module.exports = {
 
   attributes: {
@@ -17,6 +19,9 @@ module.exports = {
     propertyAttributes: {
       collection: 'PropertyAttribute',
       via: 'properties'
+    },
+    externalListings: {
+      collection: 'ExternalListing'
     },
 
     //attributes
@@ -39,11 +44,46 @@ module.exports = {
     },
     description: {
       type: 'string'
+    },
+    bedrooms: {
+      type: 'integer',
+      required: true,
+      min: 1
+    },
+    bathrooms: {
+      type: 'integer',
+      required: true,
+      min: 1
+    },
+    sleeps: {
+      type: 'integer',
+      required: true,
+      min: 1
+    },
+
+    // instance methods
+    getAmenities: function() {
+      return this.getPropertyAttributesForType('AMENITY')
+    },
+
+    getLocations: function() {
+      return this.getPropertyAttributesForType('LOCATION')
+    },
+
+    getPropertyAttributesForType: function(type) {
+      if (this.propertyAttributes && this.propertyAttributes.length) {
+        return _.filter(this.propertyAttributes, { type: type })
+      }
+      return [];
+    },
+
+    getDestination: function() {
+      return this.destination ? this.destination : null;
     }
 
   },
 
-  beforeValidate: function(values, cb) {
+  beforeCreate: function(values, cb) {
     if (!values.name) return cb(); // will be caught in validation
 
     var slug = values.name.trim().toLowerCase().replace(/\s+/g, '-');

@@ -18,4 +18,4 @@ mixin location_select(all, property)
   +attributeGroup('propertyAttributes', all, property.propertyAttributes)
 
 mixin destination_select(all, property)
-  +select('destination', 'destination', 'Destination', all, property.destination.id)
+  +select('destination', 'destination', 'Destination', all, (property.destination ? property.destination.id : null))

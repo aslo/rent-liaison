@@ -77,11 +77,27 @@ module.exports = {
   },
 
   get: function(req, res, next) {
-    Property.findOne({ slug: req.params.slug }, function(err, property){
-      if(err) return next(err);
+    Property.findOne({ slug: req.params.slug })
+      .populate('user')
+      .populate('images')
+      .populate('destination')
+      .populate('propertyAttributes')
+      .populate('externalListings')
+
+    .then(function(property){
+
+      var amenities = []
+      var locations = []
+
       res.view('modules/property/property', {
-        property: property
+        property: property,
+        amenities: property.getAmenities(),
+        locations: property.getLocations(),
+        destination: property.getDestination()
       });
+    })
+    .catch(function(err){
+      next(err);
     })
   }
 }

@@ -37,14 +37,21 @@ module.exports = {
       unique: true
     },
     firstName: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
     lastName: {
-      type: 'string'
+      type: 'string',
+      required: true
     },
 
     getFullName: function() {
-      return this.firstName + " " + this.lastName;
+      if (this.firstName && this.lastName) {
+        return this.firstName + " " + this.lastName;
+      } else if (this.firstName) {
+        return this.firstName;
+      }
+      return '';
     },
 
     isUnconfirmed: function(){

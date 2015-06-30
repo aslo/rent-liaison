@@ -1,7 +1,11 @@
-mixin image_with_overlay(imgUrl)
+mixin image(imgUrl, width, height)
+  - var imgUrl = imgUrl ? imgUrl : 'http://placehold.it/' + width + 'x' + height
+  img.u-max-full-width(src=imgUrl)
+
+mixin image_with_overlay(imgUrl, width, height)
   .image-container
     a(href="#")&attributes(attributes)
-      img.u-max-full-width(src=imgUrl)
+      +image(imgUrl, width, height)
       .after
         block
 

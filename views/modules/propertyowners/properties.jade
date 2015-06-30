@@ -18,8 +18,8 @@ block body
         each p in properties
           .row.property-list-item
             .four.columns
-              - var imgUrl = (p.images && p.images.length ? p.images[0].url : 'http://placehold.it/300x200')
-              +image_with_overlay(imgUrl)
+              - var imgUrl = (p.images && p.images.length ? p.images[0].url : null)
+              +image_with_overlay(imgUrl, 300, 200)
                 | blah content
 
             .eight.columns
@@ -40,10 +40,6 @@ block body
 
               .row
                 p.property-list-item--description= helpers.shorten(p.description, 200)
-
-                //- = destName = p.destination ? p.destination.name : ''
-                //- br
-                //- |Amenities: #{p.amenities}
 
               .row
                 button.js-edit(data-property-id=p.id) Edit
