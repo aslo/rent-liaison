@@ -1,4 +1,22 @@
+include ./forms
+
 mixin create_button()
   button.button-primary&attributes(attributes)
     i.fa.fa-plus
     | &nbsp; Create
+
+mixin property_type_select(selected)
+  - var id = "type"
+  - var name = "type"
+  - var types = ['HOUSE', 'CONDO', 'HOTEL', 'MOTEL', 'BED_AND_BREAKFAST', 'BOAT'];
+  +select(id, name, 'Property Type', types, selected)
+
+mixin amenity_select(all, property)
+  +attributeGroup('amenities', all, property.amenities)
+
+mixin location_select(all, property)
+  +attributeGroup('locations', all, property.locations)
+
+mixin destination_select(all, property)
+  - var destOptions = all.map(function(dest){ return dest.name });
+  +select('destination', 'destination', 'Destination', destOptions, property.destination)

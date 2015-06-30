@@ -1,7 +1,8 @@
 define([
   'tpl',
-  'views/modal'
-], function(Tpl, Modal){
+  'views/modal',
+  'views/tag'
+], function(Tpl, Modal, Tag){
 
   return Modal.extend({
 
@@ -9,6 +10,13 @@ define([
 
     events: {
       'submit .js-property-form': 'submitForm'
+    },
+
+    initialize: function(options){
+      var fields = ['amenities', 'locations', 'destinations']
+      for (i in fields) {
+        this[fields[i]] = options[fields[i]];
+      }
     },
 
     render: function() {
@@ -19,11 +27,20 @@ define([
       }
 
       this.body = this.formTpl.render({
+        isNew: this.model.isNew(),
         property: this.model.toJSON(),
-        isNew: this.model.isNew()
+
+        amenities: this.amenities.toJSON(),
+        destinations: this.destinations.toJSON(),
+        locations: this.locations.toJSON()
+
       })
 
       Modal.prototype.render.apply(this)
+
+      this.$('.js-tag').each(function(){
+        new Tag({ el: this })
+      })
 
       return this;
     },

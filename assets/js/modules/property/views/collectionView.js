@@ -14,8 +14,13 @@ define([
       'click .js-upload': 'showUploadForm'
     },
 
-    initialize: function(){
-      this.formModal = new FormModal()
+    initialize: function(options){
+      this.formModal = new FormModal({
+        amenities: options.amenities,
+        destinations: options.destinations,
+        locations: options.locations
+      })
+
       this.uploadFormModal = new UploadForm()
     },
 

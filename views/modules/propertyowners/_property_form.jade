@@ -1,4 +1,4 @@
-include ../../mixins/rent_request
+include ../../mixins/forms
 include ../../mixins/property
 
 form.js-property-form
@@ -9,8 +9,7 @@ form.js-property-form
 
   .row
     .six.columns
-      label Property Name
-      input.u-full-width(name="name", type="text", value=property.name)
+      +input('name', 'name', property.name, 'Property Name')
 
   .row
     .six.columns
@@ -20,15 +19,24 @@ form.js-property-form
 
   .row
     .six.columns
-      label Location
-      +destination_select(property.location)(name="location", class="u-full-width")
+      +property_type_select(property.type)
 
   .row
     .six.columns
-      label Amenities
-      input.u-full-width(type="text", name="amenities", value=property.amenities)
+      +destination_select(destinations, property)
 
-  if isNew
-    +create_button()(type="submit")
-  else
-    button.button-primary(type="submit") Update
+  .row
+    .six.columns
+      label(for="locations") Locations
+      +location_select(locations, property)
+
+  .row
+    .six.columns
+      label(for="amenities") Amenities
+      +amenity_select(amenities, property)
+
+  .row
+    if isNew
+      +create_button()(type="submit")
+    else
+      button.button-primary(type="submit") Update

@@ -3,6 +3,13 @@ mixin input(id, name, value, label)
     label(for=id)= label
   input.u-full-width(id=id, name=name, type="text", value=value)&attributes(attributes)
 
+mixin select(id, name, label, options, selected)
+  if label
+    label(for=id)= label
+  select.u-full-width(id=id, name=name)&attributes(attributes)
+    each option in options
+      option(value=option, selected=(selected == option ? 'selected' : null))= _.startCase(option.toLowerCase())
+
 mixin state_select(selection)
   -var states = ['AL','AK','AZ','AR','CA','CO','CT','DE','FL','GA','HI','ID','IL','IN','IA','KS','KY','LA','ME','MD','MA','MI','MN','MS','MO','MT','NE','NV','NH','NJ','NM','NY','NC','ND','OH','OK','OR','PA','RI','SC','SD','TN','TX','UT','VT','VA','WA','WV','WI','WY'];
   select&attributes(attributes)

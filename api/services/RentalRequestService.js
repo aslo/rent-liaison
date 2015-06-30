@@ -34,6 +34,9 @@ module.exports = {
   prepareRentalRequestDisplayData: function(searchParams) {
     var result = undefined;
 
+    //TODO some of this code is shared with PropertyService.getAllPropertyCharacteristics.
+    // DRY this up
+
     return Promise.props({
       rentalRequest: RentalRequest.findOne(searchParams)
         .populate('user')

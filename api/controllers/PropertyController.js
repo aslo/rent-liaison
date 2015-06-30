@@ -1,16 +1,23 @@
-Step = require('step')
+var Step = require('step')
+var Promise = require('bluebird')
 
 module.exports = {
 
   index: function (req, res, next) {
-    Property.find({ user: req.user.id })
-    .populate('images')
-    .sort({ createdAt: 'DESC' })
-    .exec(function(err, properties){
-      res.view('modules/propertyowners/properties', {
-        properties: properties
-      });
-    });
+    Promise.join(
+      Property.find({ user: req.user.id })
+      .populate('images')
+      .sort({ createdAt: 'DESC' })
+    ,
+      PropertyService.getAllPropertyCharacteristics()
+    ,
+      function(properties, propData){
+        return res.view('modules/propertyowners/properties', _.extend({ properties: properties }, propData));
+      }
+    )
+    .catch(function(err){
+      next(err);
+    })
   },
 
   create: function (req, res, next) {

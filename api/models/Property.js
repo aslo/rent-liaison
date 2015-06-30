@@ -30,7 +30,7 @@ module.exports = {
     },
     type: {
       type: 'string',
-      enum: ['HOUSE', 'CONDO', 'HOTEL', 'MOTEL', 'B&B', 'BOAT'],
+      enum: ['HOUSE', 'CONDO', 'HOTEL', 'MOTEL', 'BED_AND_BREAKFAST', 'BOAT'],
       required: true
     },
     description: {
