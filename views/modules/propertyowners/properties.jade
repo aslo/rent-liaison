@@ -1,3 +1,4 @@
+include ../../mixins/tags
 include ../../mixins/images
 include ../../mixins/property
 
@@ -15,26 +16,36 @@ block body
     if properties.length > 0
       .property-list
         each p in properties
-          .row
-            .property-list-item.u-full-width
-              .property-list-item-url.pull-right
-                a(href="/property/#{p.slug}", target="_blank") view public listing &nbsp;
-                  i.fa.fa-external-link
-
+          .row.property-list-item
+            .four.columns
               - var imgUrl = (p.images && p.images.length ? p.images[0].url : 'http://placehold.it/300x200')
-              .pull-left
-                +image_with_overlay(imgUrl)(class="pull-left")
-                  | blah content
+              +image_with_overlay(imgUrl)
+                | blah content
 
-              .property-list-item-title
-                h4= p.name
+            .eight.columns
+              .row
+                .pull-left
+                  h4.property-list-item--title= p.name
 
-              .property-list-item-description
-                = p.location
-                br
-                |Amenities: #{p.amenities}
+                .pull-right
+                  a(href="/property/#{p.slug}", target="_blank") view public listing &nbsp;
+                    i.fa.fa-external-link
 
-              .property-list-item-controls
+              - var dest = p.destination ? p.destination.name : ''
+              if dest
+                .row
+                  | in &nbsp;
+                  +tag()(class="active")
+                    = helpers.humanize(dest)
+
+              .row
+                p.property-list-item--description= helpers.shorten(p.description, 200)
+
+                //- = destName = p.destination ? p.destination.name : ''
+                //- br
+                //- |Amenities: #{p.amenities}
+
+              .row
                 button.js-edit(data-property-id=p.id) Edit
                 button.js-upload(data-property-id=p.id) Upload Pics
 

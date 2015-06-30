@@ -1,21 +1,21 @@
 .p-properties {
 
   .property-list {
-    list-style: none;
 
     .property-list-item {
-      display: inline-block;
-      border: 1px solid @light-grey;
+      padding: 1em;
       margin-top: 15px;
-
-      .property-list-item-title {
-        margin-top: 10px;
-      }
-
-      .property-list-item-controls {
-        margin-top: 35px;
-      }
-
+      border: 1px solid @border-color;
+      border-radius: @global-radius;
     }
+
+    .property-list-item--title {
+      margin-bottom: 0px;
+    }
+
+    .property-list-item--description {
+      margin-top: 1em;
+    }
+
   }
 }

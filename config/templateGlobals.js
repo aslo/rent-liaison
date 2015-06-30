@@ -1,6 +1,7 @@
-module.exports = {
+module.exports.templateGlobals = {
 
   _: require('lodash'),
-  moment: require('moment')
+  moment: require('moment'),
+  helpers: require('../api/lib/helpers')
 
 }
