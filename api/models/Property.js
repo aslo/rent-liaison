@@ -21,7 +21,8 @@ module.exports = {
       via: 'properties'
     },
     externalListings: {
-      collection: 'ExternalListing'
+      collection: 'ExternalListing',
+      via: 'property'
     },
 
     //attributes

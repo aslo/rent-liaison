@@ -5,44 +5,50 @@ form.js-property-form
 
   .row
     .six.columns
-      .hide.alert.js-error-alert
+      .row
+        .hide.alert.js-error-alert
 
-  .row
+      .row
+        +input('name', 'name', property.name, 'Property Name')
+
+      .row
+        label Description
+        textarea.u-full-width(name="description")
+          =property.description
+
+      .row
+        .six.columns
+          +destination_select(destinations, property)
+        .six.columns
+          +property_type_select(property.type)
+
+      .row
+        .three.columns
+          +input('bedrooms', 'bedrooms', property.bedrooms, 'Beds')(type="number")
+        .three.columns
+          +input('bathrooms', 'bathrooms', property.bathrooms, 'Baths')(type="number")
+        .three.columns
+          +input('sleeps', 'sleeps', property.sleeps, 'Sleeps')(type="number")
+
     .six.columns
-      +input('name', 'name', property.name, 'Property Name')
+      .row
+        label(for="locations") Locations
+        +location_select(locations, property)
+
+      .row
+        label(for="amenities") Amenities
+        +amenity_select(amenities, property)
+
+      .row
+        - var listings = property.externalListings ? property.externalListings : []
+        label(for="externalUrls") External Listings
+        each i in [0,1,2]
+          - var val = listings[i] ? listings[i].url : ''
+          +input('externalListings['+ i +']', 'externalListings['+ i +'][url]', val, null)
 
   .row
-    .six.columns
-      label Description
-      textarea.u-full-width(name="description")
-        =property.description
-
-  .row
-    .six.columns
-      +property_type_select(property.type)
-
-  .row
-    .six.columns
-      +destination_select(destinations, property)
-
-  .row
-    .six.columns
-      +input('bedrooms', 'bedrooms', property.bedrooms, 'Beds')(type="number")
-      +input('bathrooms', 'bathrooms', property.bathrooms, 'Baths')(type="number")
-      +input('sleeps', 'sleeps', property.sleeps, 'Sleeps')(type="number")
-
-  .row
-    .six.columns
-      label(for="locations") Locations
-      +location_select(locations, property)
-
-  .row
-    .six.columns
-      label(for="amenities") Amenities
-      +amenity_select(amenities, property)
-
-  .row
-    if isNew
-      +create_button()(type="submit")
-    else
-      button.button-primary(type="submit") Update
+    .pull-right
+      if isNew
+        +create_button()(type="submit")
+      else
+        button.button-primary(type="submit") Update

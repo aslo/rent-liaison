@@ -1,8 +1,9 @@
 define([
+  'underscore',
   'tpl',
   'views/modal',
   'views/tag'
-], function(Tpl, Modal, Tag){
+], function(_, Tpl, Modal, Tag){
 
   return Modal.extend({
 
@@ -53,6 +54,13 @@ define([
       e.preventDefault();
 
       var attrs = this.$(e.target).serializeJSON()
+
+      // for externalListings, remove if url is falsy
+      if (attrs.externalListings) {
+        attrs.externalListings = _.filter(attrs.externalListings, function(listing){
+          return !!listing.url;
+        })
+      }
 
       self = this;
       this.model.save(attrs)

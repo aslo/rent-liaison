@@ -6,9 +6,10 @@ module.exports = {
   index: function (req, res, next) {
     Promise.join(
       Property.find({ user: req.user.id })
-      .populate('images')
-      .populate('destination')
-      .populate('propertyAttributes')
+        .populate('images')
+        .populate('destination')
+        .populate('propertyAttributes')
+        .populate('externalListings')
       .sort({ createdAt: 'DESC' })
     ,
       PropertyService.getAllPropertyCharacteristics()
@@ -85,11 +86,7 @@ module.exports = {
       .populate('externalListings')
 
     .then(function(property){
-
-      var amenities = []
-      var locations = []
-
-      res.view('modules/property/property', {
+      return res.view('modules/property/property', {
         property: property,
         amenities: property.getAmenities(),
         locations: property.getLocations(),
@@ -97,7 +94,7 @@ module.exports = {
       });
     })
     .catch(function(err){
-      next(err);
+      return next(err);
     })
   }
 }
