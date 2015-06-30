@@ -1,7 +1,10 @@
+include ./mixins/nav
+
 #js-nav.nav
   ul.nav-list
     li.nav-list-item
-      a.nav-link.active.js-nav-link(href="#", data-slide-index="0") Logo (TODO)
+      a.nav-link.active.js-nav-link(href="#", data-slide-index="0")
+        +logo()
     li.nav-list-item
       a.nav-link.js-nav-link(href="#", data-slide-index="1") Rent Request
     li.nav-list-item
