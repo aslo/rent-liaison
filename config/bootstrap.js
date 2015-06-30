@@ -14,7 +14,11 @@ Promise = require('bluebird');
 var PROPERTY_ATTRIBUTES = {
   AMENITY: [
     'HOT_TUB',
-    'POOL'
+    'POOL',
+    'TENNIS',
+    'WI-FI',
+    'HANDICAP_ACCESSIBLE',
+    'PET_FRIENDLY'
   ],
   LOCATION: [
     'IN_TOWN',

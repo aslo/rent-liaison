@@ -30,12 +30,13 @@ mixin checkbox_with_label(id, name, value, label, isSelected)
     .label-body= label
 
 mixin attributeGroup(collectionName, allOptions, selected)
-  each option in allOptions
-    - var value = option.id;
-    - var label = _.startCase(option.name.toLowerCase());
-    - var isSelected = selected && _.findWhere(selected, { id: value })
-    - var id = collectionName + '.' + option.name
-    - var inputName = collectionName + '[]'
-    .pull-left.tag.js-tag(class=isSelected ? 'active' : '')
-      +checkbox_with_label(id, inputName, value, label, isSelected)
+  .tag-group
+    each option in allOptions
+      - var value = option.id;
+      - var label = _.startCase(option.name.toLowerCase());
+      - var isSelected = selected && _.findWhere(selected, { id: value })
+      - var id = collectionName + '.' + option.name
+      - var inputName = collectionName + '[]'
+      .pull-left.tag.js-tag(class=isSelected ? 'active' : '')
+        +checkbox_with_label(id, inputName, value, label, isSelected)
 

@@ -1,3 +1,4 @@
+include ../../mixins/images
 include ../../mixins/property
 
 extends ../../property_owner_layout
@@ -21,9 +22,9 @@ block body
                   i.fa.fa-external-link
 
               - var imgUrl = (p.images && p.images.length ? p.images[0].url : 'http://placehold.it/300x200')
-              a.property-list-item-image.pull-left(href="#")
-                img(src=imgUrl)
-                span.property-list-item-image-text ASDF
+              .pull-left
+                +image_with_overlay(imgUrl)(class="pull-left")
+                  | blah content
 
               .property-list-item-title
                 h4= p.name

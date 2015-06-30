@@ -18,5 +18,4 @@ mixin location_select(all, property)
   +attributeGroup('propertyAttributes', all, property.propertyAttributes)
 
 mixin destination_select(all, property)
-  - console.log(all, property.destination)
   +select('destination', 'destination', 'Destination', all, property.destination.id)
