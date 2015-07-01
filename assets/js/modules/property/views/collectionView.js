@@ -25,22 +25,30 @@ define([
     },
 
     showCreateForm: function(e) {
+      e.preventDefault();
       this.formModal.setModel(new Property())
       this.formModal.render();
     },
 
     showEditForm: function(e) {
-      var model = this.collection.get($(e.target).data('propertyId'))
+      e.preventDefault();
 
+      var model = this._getModelForEl(e.target)
       this.formModal.setModel(model)
       this.formModal.render();
     },
 
     showUploadForm: function(e) {
-      var model = this.collection.get($(e.target).data('propertyId'))
+      e.preventDefault();
 
+      var model = this._getModelForEl(e.target)
       this.uploadFormModal.setModel(model)
       this.uploadFormModal.render();
+    },
+
+    _getModelForEl: function(el) {
+      var id = $(el).parents('[data-property-id]').data('propertyId')
+      return this.collection.get(id);
     }
 
   })
