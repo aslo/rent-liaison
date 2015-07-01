@@ -44,9 +44,9 @@ block body
               h2 Personal Information
               .row
                 .four.columns
-                  +input('firstName', 'firstName', rentalRequest.user.firstName, 'First Name')
+                  +user_first_name(rentalRequest)
                 .four.columns
-                  +input('lastName', 'lastName', rentalRequest.user.lastName, 'Last Name')
+                  +user_last_name(rentalRequest)
 
               .row
                 .eight.columns
@@ -76,15 +76,18 @@ block body
               h2 Group Information
               .row
                 .four.columns
-                  +input('startDate', 'startDate', rentalRequest.startDate, 'Start Date')(class='js-pikaday')
+                  +start_date(rentalRequest)
                 .four.columns
-                  +input('endDate', 'endDate', rentalRequest.endDate, 'End Date')(class='js-pikaday')
+                  +end_date(rentalRequest)
+
+              .row
+                +flexible_dates(rentalRequest)
 
               .row
                 .two.columns
-                  +input('adults', 'adults', rentalRequest.adults, 'Adults')(type='number')
+                  +number_adults(rentalRequest)
                 .two.columns
-                  +input('children', 'children', rentalRequest.children, 'Children')(type='number')
+                  +number_children(rentalRequest)
                 .four.columns
                   +input('budget', 'budget', rentalRequest.budget, 'Budget')(type='number', step=".01")
 

@@ -9,7 +9,7 @@ include ../../mixins/rent_request
 
     .js-form-alert.alert.hide
 
-    p.text-center Help us find a property that's right for you by answering a few questions
+    p.text-center Help us find a property that's right for you by answering a few questions.
 
     form.js-rent-request-form(action="/rentalrequest", method="POST")
       fieldset
@@ -21,43 +21,30 @@ include ../../mixins/rent_request
 
       fieldset
         legend When?
-
         .js-date-section
           .row
             .four.columns.offset-by-two
-              label(for="js-start-date") Arrival Date
-              input#js-start-date.js-pikaday.u-full-width(name="startDate", type="text", required)
-              label
-                input#datesAreFlexible(name="datesAreFlexible", value="true", type="checkbox")
-                .label-body my dates are flexible
+              +start_date()
+              +flexible_dates()
 
             .four.columns
-              label(for="js-end-date") Departure Date
-              input#js-end-date.js-pikaday.u-full-width(name="endDate", type="text", required)
-              label
-                input#js-no-dates(value="true", type="checkbox")
-                .label-body no specific dates
+              +end_date()
+              +checkbox_with_label('noSpecificDates', 'noSpecificDates', 'true', 'no specific dates', false)(class="js-no-dates")
 
       fieldset
         legend Who are you?
         .row
           .four.columns.offset-by-two
-            label(for="firstName") First Name
-            input#firstName.u-full-width(name="user[firstName]", type="text", required)
+            +user_first_name()
           .four.columns
-            label(for="lastName") Last Name
-            input#lastName.u-full-width(name="user[lastName]", type="text", required)
+            +user_last_name()
         .row
           .four.columns.offset-by-two
-            label(for="email") Email
-            input#email.u-full-width(name="user[email]", type="email", required)
-
+            +user_email()
           .two.columns
-            label(for="adults") Adults
-            input#adults.u-full-width(name="adults", type="number", required)
+            +number_adults()
           .two.columns
-            label(for="children") Children
-            input#children.u-full-width(name="children", type="number", required)
+            +number_children()
 
       .row
         .three.columns.offset-by-two

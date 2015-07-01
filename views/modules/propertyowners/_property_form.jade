@@ -24,11 +24,11 @@ form.js-property-form
 
       .row
         .three.columns
-          +input('bedrooms', 'bedrooms', property.bedrooms, 'Beds')(type="number")
+          +input('bedrooms', 'bedrooms', property.bedrooms, 'Beds')(type="number", step="0.5")
         .three.columns
-          +input('bathrooms', 'bathrooms', property.bathrooms, 'Baths')(type="number")
+          +input('bathrooms', 'bathrooms', property.bathrooms, 'Baths')(type="number", step="0.5")
         .three.columns
-          +input('sleeps', 'sleeps', property.sleeps, 'Sleeps')(type="number")
+          +input('sleeps', 'sleeps', property.sleeps, 'Sleeps')(type="number", step="0.5")
 
     .six.columns
       .row
