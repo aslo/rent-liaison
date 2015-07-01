@@ -37,6 +37,20 @@
           return input.slice(0, maxLength) + '...'
         }
         return input
+      },
+
+      // Returns a null-safe value for the object and given paths
+      getNullSafeValue: function(object, paths) {
+        if (!object) return object;
+
+        var current = object;
+        for (var i in paths) {
+          if (!current[paths[i]]) {
+            return current[paths[i]];
+          }
+          current = current[paths[i]]
+        }
+        return current;
       }
 
     };

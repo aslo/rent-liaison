@@ -50,8 +50,10 @@ module.exports = {
       result = r;
       if (!result.rentalRequest) {
         return;
-      } else {
+      } else if (result.rentalRequest.user.renterDetails) {
         return RenterDetails.findOne(result.rentalRequest.user.renterDetails)
+      } else {
+        return {};
       }
     })
     .then(function(renterDetails){

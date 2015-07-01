@@ -11,7 +11,7 @@ define([
   return Backbone.View.extend({
 
     events: {
-      'change #js-no-dates': 'toggleNoDates',
+      'change .js-no-dates': 'toggleNoDates',
       'submit .js-rent-request-form': 'submitForm'
     },
 
@@ -76,7 +76,7 @@ define([
     },
 
     _updateDatesDisabledAttr: function(disable) {
-      $dates = this.$('#js-start-date,#js-end-date,#datesAreFlexible')
+      $dates = this.$('.js-start-date,.js-end-date,.js-dates-are-flexible')
 
       $dates.attr('disabled', function(index, attr){
         return disable ? 'disabled' : null;

@@ -27,22 +27,19 @@ module.exports = {
    *
    * Upload file(s) to an S3 bucket.
    *
-   * NOTE:
-   * If this is a really big file, you'll want to change
-   * the TCP connection timeout.  This is demonstrated as the
-   * first line of the action below.
    */
-  s3upload: function (fileStream, cb) {
-    fileStream.upload({
-      maxBytes: MAX_BYTES,
-      adapter: require('skipper-s3'),
-      bucket: process.env.S3_BUCKET,
-      key: process.env.S3_KEY,
-      secret: process.env.S3_SECRET
-    }, function (err, uploadedFiles) {
-      if (err) return cb(err);
-      cb(null, uploadedFiles);
-    });
+  s3upload: function (fileStream) {
+    console.log('upload to s3', fileStream)
+
+    return Promise.fromNode(function(cb){
+      fileStream.upload({
+        maxBytes: MAX_BYTES,
+        adapter: require('skipper-s3'),
+        bucket: process.env.S3_BUCKET,
+        key: process.env.S3_KEY,
+        secret: process.env.S3_SECRET
+      }, cb);
+    })
   },
 
   // /**

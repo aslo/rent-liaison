@@ -35,8 +35,7 @@ module.exports.http = {
       'cookieParser',
       'session',
       'myRequestLogger',
-      'jsonBodyParser',
-      'urlencBodyParser',
+      'bodyParser',
       'handleBodyParserError',
       'compress',
       // 'methodOverride',
@@ -57,14 +56,14 @@ module.exports.http = {
   ****************************************************************************/
 
     myRequestLogger: function (req, res, next) {
-      sails.log.info("Requested :: ", req.method, req.url);
+      sails.log.info("REQ :: ", req.method, req.url);
       return next();
     },
 
     // Using response-time middleware
     responseLogger: function (req, res, next) {
       req.on("end", function() {
-        sails.log.info('Responded :: ', req.method, req.url, ' response time: ' + res.getHeader('X-Response-Time'));
+        sails.log.info('RES :: ', req.method, req.url, ' response time: ' + res.getHeader('X-Response-Time'));
       });
       require('response-time')()(req, res, next);
     },
@@ -73,18 +72,6 @@ module.exports.http = {
       _.extend(res.locals, {}, sails.config.templateGlobals);
       next();
     },
-
-  /***************************************************************************
-  *                                                                          *
-  * The body parser that will handle incoming multipart HTTP requests. By    *
-  * default as of v0.10, Sails uses                                          *
-  * [skipper](http://github.com/balderdashy/skipper). See                    *
-  * http://www.senchalabs.org/connect/multipart.html for other options.      *
-  *                                                                          *
-  ***************************************************************************/
-
-    jsonBodyParser: require('body-parser').json(),
-    urlencBodyParser: require('body-parser').urlencoded()
 
   }
 

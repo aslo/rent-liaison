@@ -62,6 +62,6 @@ block body
         h5 Listings
         ul
           each listing in property.externalListings
-            li.property-listing
+            li.property-listing.tag
               img(src="http://www.google.com/s2/favicons?domain_url=#{encodeURIComponent(listing.url)}")
               a(href="//#{listing.url}", target="_blank")= helpers.shorten(listing.url, 20)

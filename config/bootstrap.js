@@ -13,17 +13,26 @@ Promise = require('bluebird');
 
 var PROPERTY_ATTRIBUTES = {
   AMENITY: [
-    'HOT_TUB',
-    'POOL',
-    'TENNIS',
     'WI-FI',
-    'HANDICAP_ACCESSIBLE',
-    'PET_FRIENDLY'
+    'CABLE_/_SATELLITE_TV',
+    'WASHER_/_DRYER',
+    'POOL',
+    'HOT_TUB',
+    'BASKETBALL_COURT',
+    'TENNIS_COURT',
+    'BBQ_/_GRILL',
+    'AC_/_HEATING',
+    'TOWELS_&_LINENS_PROVIDED',
   ],
   LOCATION: [
-    'IN_TOWN',
-    'ON_THE_WATER',
-    'BEACHSIDE'
+    'BEACHFRONT/OCEANFRONT',
+    'OCEAN_VIEW',
+    'LAKE_FRONT_/_WATERFRONT',
+    'LAKE_VIEW_/_WATER_VIEW',
+    'HEART_OF_TOWN/VILLAGE',
+    'WALKING_DISTANCE_TO_TOWN/VILLAGE',
+    'GOLF_COURSE_FRONT',
+    'RURAL'
   ]
 };
 
@@ -34,7 +43,9 @@ var DESTINATIONS = [
   'HAMPTON_BAYS',
   'MONTAUK',
   'FIRE_ISLAND',
-  'NORTH_FORK'
+  'NORTH_FORK',
+  'BLOCK_ISLAND',
+  'SHELTER_ISLAND'
 ];
 
 module.exports.bootstrap = function(cb) {

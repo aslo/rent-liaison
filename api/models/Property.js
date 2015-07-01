@@ -47,19 +47,19 @@ module.exports = {
       type: 'string'
     },
     bedrooms: {
-      type: 'integer',
+      type: 'finite',
       required: true,
-      min: 1
+      min: 0
     },
     bathrooms: {
-      type: 'integer',
+      type: 'finite',
       required: true,
-      min: 1
+      min: 0
     },
     sleeps: {
-      type: 'integer',
+      type: 'finite',
       required: true,
-      min: 1
+      min: 0
     },
 
     // instance methods
@@ -84,8 +84,9 @@ module.exports = {
 
   },
 
-  beforeCreate: function(values, cb) {
+  beforeValidate: function(values, cb) {
     if (!values.name) return cb(); // will be caught in validation
+    if (values.slug) return cb();
 
     var slug = values.name.trim().toLowerCase().replace(/\s+/g, '-');
 
