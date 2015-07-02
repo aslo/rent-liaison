@@ -38,10 +38,7 @@ module.exports = {
     // DRY this up
 
     return Promise.props({
-      rentalRequest: RentalRequest.findOne(searchParams)
-        .populate('user')
-        .populate('destinations')
-        .populate('desiredPropertyAttributes'),
+      rentalRequest: RentalRequest.findOneWithAssociations(searchParams),
       destinations: Destination.findAll(),
       amenities: PropertyAttribute.findAllAmenities(),
       locations: PropertyAttribute.findAllLocations()

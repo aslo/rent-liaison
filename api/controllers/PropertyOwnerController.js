@@ -6,7 +6,7 @@
  */
 
 var Step = require('step'),
-    moment = require('moment');
+    Promise = require('bluebird');
 
 module.exports = {
 
@@ -17,27 +17,21 @@ module.exports = {
   },
 
   showRentalRequests: function (req, res) {
-    Step(
-      function(){
-
-        RentalRequest.find({ status: 'ACTIVE' })
-        .populate('user')
-        .exec(this.parallel())
-
-        Property.find({ user: req.user.id })
-        .exec(this.parallel())
-
-      },
-      function(err, rentalRequests, propertyProfiles) {
-        if (err) return res.serverError(err);
-
+    return Promise.join(
+      RentalRequest.findWithAssociations({ status: 'ACTIVE' }) // TODO limit, paginate
+    ,
+      Property.findForUser(req.user.id)
+    ,
+      function(rentalRequests, myProperties) {
         res.view('modules/propertyowners/rentalrequests', {
-          moment: moment,
           rentalRequests: rentalRequests,
-          propertyProfiles: propertyProfiles
+          propertyProfiles: myProperties
         })
       }
     )
+    .catch(function (err) {
+      return res.serverError(err);
+    })
   },
 
   respondToRentalRequest: function(req, res) {

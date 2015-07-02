@@ -49,17 +49,24 @@ module.exports = {
     bedrooms: {
       type: 'finite',
       required: true,
+      defaultsTo: 1,
       min: 0
     },
     bathrooms: {
       type: 'finite',
       required: true,
+      defaultsTo: 1,
       min: 0
     },
     sleeps: {
       type: 'finite',
       required: true,
+      defaultsTo: 1,
       min: 0
+    },
+    amenitiesDescription: {
+      type: 'string',
+      maxLength: 1500
     },
 
     // instance methods
@@ -82,6 +89,10 @@ module.exports = {
       return this.destination ? this.destination : null;
     }
 
+  },
+
+  findForUser: function(userId) {
+    return this.find({ user: userId })
   },
 
   beforeValidate: function(values, cb) {

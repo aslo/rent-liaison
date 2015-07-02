@@ -78,11 +78,6 @@ module.exports = {
       return this.status === 'UNCONFIRMED'
     },
 
-    getDestination: function() {
-      var arr = this.destination.toLowerCase().split('_').map(_.capitalize);
-      return arr.join(' ');
-    },
-
     getCompletionPercentage: function() {
       var ignoreFields = [
         'createdAt',
@@ -123,6 +118,24 @@ module.exports = {
         return 100;
       }
     }
+  },
+
+  findWithAssociations: function (searchParams) {
+    return this.find(searchParams)
+      .populate('user')
+      .populate('destinations')
+      .populate('desiredPropertyAttributes');
+  },
+
+  findOneWithAssociations: function (searchParams) {
+    return this.findWithAssociations(searchParams)
+    .then(function(results){
+      if (results.length > 0) {
+        return results[0];
+      } else {
+        return results;
+      }
+    })
   },
 
   beforeCreate: function(values, cb) {
