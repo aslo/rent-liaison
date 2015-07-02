@@ -14,7 +14,7 @@ define([
     },
 
     render: function() {
-      this.title = 'Upload Photos'
+      this.title = 'Manage Property Photos'
       Modal.prototype.render.apply(this)
 
       // render subviews

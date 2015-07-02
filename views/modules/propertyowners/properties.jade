@@ -1,5 +1,3 @@
-include ../../mixins/tags
-include ../../mixins/images
 include ../../mixins/property
 
 extends ../../property_owner_layout
@@ -15,36 +13,9 @@ block body
 
     if properties.length > 0
       .property-list
-        each p in properties
-          .row.property-list-item(data-property-id=p.id)
-            .four.columns
-              - var imgUrl = (p.images && p.images.length ? p.images[0].url : null)
-              +image_with_overlay(imgUrl, 300, 200)(class="js-upload")
-                i.fa.fa-picture-o.fa-4x.property-image-overlay-content
-
-            .eight.columns
-              .row
-                .pull-left
-                  h4.property-list-item--title= p.name
-
-                .pull-right
-                  a(href="/property/#{p.slug}", target="_blank") view public listing &nbsp;
-                    i.fa.fa-external-link
-
-              - var dest = p.destination ? p.destination.name : ''
-              if dest
-                .row
-                  | in &nbsp;
-                  +tag()(class="active")
-                    = helpers.humanize(dest)
-
-              .row
-                p.property-list-item--description= helpers.shorten(p.description, 200)
-
-              .row
-                button.js-edit Edit
-                button.js-upload Upload Pics
-
+        each property in properties
+          .row.property-list-item(data-property-id=property.id)
+            include ./property
 
   script.
     window.properties = !{JSON.stringify(properties)}

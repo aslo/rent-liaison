@@ -1,10 +1,12 @@
 define([
   'backbone',
+  'tpl',
   'modules/property/model',
-  'modules/property/views/formModal',
+  'modules/property/views/modelView',
+  'modules/property/views/editPropertyFormModal',
   'modules/property/views/imageFormModal'
 
-], function(Backbone, Property, FormModal, UploadForm){
+], function(Backbone, Tpl, Property, ModelView, FormModal, UploadForm){
 
   return Backbone.View.extend({
 
@@ -22,6 +24,18 @@ define([
       })
 
       this.uploadFormModal = new UploadForm()
+
+
+      // create model subviews for pre-rendered content
+      var self = this;
+      this.$('[data-property-id]').each(function(){
+        var modelId = $(this).data('propertyId')
+
+        new ModelView({
+          el: this,
+          model: self.collection.get(modelId)
+        })
+      })
     },
 
     showCreateForm: function(e) {

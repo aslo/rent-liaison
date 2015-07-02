@@ -9,8 +9,6 @@ module.exports = {
    *
    */
   s3upload: function (fileStream) {
-    console.log('upload to s3', fileStream)
-
     return Promise.fromNode(function(cb){
       fileStream.upload({
         maxBytes: MAX_BYTES,

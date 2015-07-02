@@ -1,8 +1,7 @@
 define([
   'backbone',
-  'tpl',
-  'modules/property/views/propertyImage'
-], function(Backbone, Tpl, LoadingImage){
+  'tpl'
+], function(Backbone, Tpl){
 
   return Backbone.View.extend({
 

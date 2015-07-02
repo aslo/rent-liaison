@@ -13,10 +13,10 @@ define([
         // see https://github.com/blueimp/jQuery-File-Upload/wiki/Options
         // for all possible options
         success: function(response) {
-          self.trigger('sync')
           if (response && response.files && response.files.length) {
             self.addImages(response.files)
           }
+          self.trigger('sync')
         },
         error: function() {
           self.trigger('error')
@@ -40,8 +40,8 @@ define([
       })
       .done(function(){
         _.remove(self.get('images'), { id: imageId })
-        self.trigger('sync')
         self.trigger('remove_image', imageId)
+        self.trigger('sync')
       })
       .fail(function() {
         self.trigger('error')
