@@ -36,10 +36,10 @@ mixin number_children(rentalRequest)
   +input('children', 'children', value, 'Children')(type="number", step="1", min="0", required)
 
 mixin destination_select(all, rentalRequest)
-  +attributeGroup('destinations', all, rentalRequest.destinations)
+  +attributeGroup('destinations', all, helpers.getNullSafeValue(rentalRequest, ['destinations']))
 
 mixin amenity_select(all, rentalRequest)
-  +attributeGroup('desiredPropertyAttributes', all, rentalRequest.desiredPropertyAttributes)
+  +attributeGroup('desiredPropertyAttributes', all, helpers.getNullSafeValue(rentalRequest, ['desiredPropertyAttributes']))
 
 mixin location_select(all, rentalRequest)
-  +attributeGroup('desiredPropertyAttributes', all, rentalRequest.desiredPropertyAttributes)
+  +attributeGroup('desiredPropertyAttributes', all, helpers.getNullSafeValue(rentalRequest, ['desiredPropertyAttributes']))

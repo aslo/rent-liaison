@@ -29,7 +29,7 @@ define([
 
     rentalrequestIndex: function() {
       new RentalRequestCollectionView({
-        el: Backbone.$('#js-rental-request-collection'),
+        el: Backbone.$('#js-rental-requests'),
         collection: new RentalRequestCollection(window.rentalRequests)
       });
     },

@@ -2,8 +2,9 @@ define([
   'underscore',
   'templates', // require the file so it gets executed - templates are added to a browser global
   'jade',
-  'helpers'
-], function(_, templates, jade, helpers){
+  'helpers',
+  'moment'
+], function(_, templates, jade, helpers, moment){
 
   function Tpl(path) {
     window.jade = jade;
@@ -14,7 +15,12 @@ define([
 
   Tpl.prototype = {
     render: function(data){
-      return this.templates[this.path](_.extend({ helpers: helpers }, data));
+      var templateGlobals = {
+        helpers: helpers,
+        moment: moment
+      }
+
+      return this.templates[this.path](_.extend(templateGlobals, data));
     }
   }
 

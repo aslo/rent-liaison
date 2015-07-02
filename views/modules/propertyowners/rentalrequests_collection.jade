@@ -1,0 +1,16 @@
+if rentalRequests.length > 0
+  table.u-full-width
+    thead
+      th Created
+      th Destination
+      th Budget
+      th Guests
+      th Start Date
+      th End Date
+      th Flexible Dates?
+      th Renter Name
+
+    tbody#js-rent-request-collection
+      each rentalRequest in rentalRequests
+        tr.clickable-tr.js-rent-request-model(data-rent-request-id=rentalRequest.id)
+          include ./rentalrequests_collection_model

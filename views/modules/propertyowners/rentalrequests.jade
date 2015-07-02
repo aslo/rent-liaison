@@ -1,72 +1,35 @@
-include ../../mixins/rent_request
+include ../../mixins/forms
 
 extends ../../property_owner_layout
-
-mixin rent_request_field(field, type)
-  if type === 'date'
-    if field
-      =moment(field).format('MMM D, YYYY')
-  else if type === 'boolean'
-    if field
-      span.text-center &#10003;
-  else
-    if field
-      =field
 
 mixin rr_td()
   td(data-rent-request-id=id)
     block
 
+mixin money_filter(id, name, label, filterOperator)
+  +input(id, name, null, label)(type="number", step=".01", class='js-filter', data-filter-operator=filterOperator)
+
 block body
 
-  #js-rental-request-collection
+  #js-rental-requests
 
-    h1 Rent Requests
+    .row
+      h1 Rent Requests
 
-    //- p Filter by
-    //- .u-pull-left
-    //-   label Destination
-    //-   +destination_select()
+    .row
+      p Filter by
+    .row
+      .four.columns
+        - var options = ['none', 'Destination matches one of my properties']
+        +select('filter_destination', 'filter_destination', 'Destination', options, null)
 
-    //- clear float
-    .u-cf
+      .two.columns
+        +money_filter('filter_minBudget', 'budget', 'Min Budget', '>=')
+      .two.columns
+        +money_filter('filter_maxBudget', 'budget', 'Max Budget', '<=')
 
-    if rentalRequests.length > 0
-      table
-        thead
-          th Created
-          th Destination
-          th Budget
-          th Guests
-          th Start Date
-          th End Date
-          th Flexible Dates?
-          th Renter Name
-
-        tbody
-          each rr in rentalRequests
-            tr.clickable-tr.js-show-rent-request-detail(data-rent-request-id=rr.id)
-              td
-                +rent_request_field(rr.createdAt, 'date')
-              td
-                +rent_request_field(rr.getDestination())
-              td
-                +rent_request_field(rr.budget)
-              td
-                +rent_request_field(rr.travelers)
-              td
-                +rent_request_field(rr.startDate, 'date')
-              td
-                +rent_request_field(rr.endDate, 'date')
-              td
-                +rent_request_field(rr.datesAreFlexible, 'boolean')
-              td
-                = rr.user.getFullName()
-
-    else
-      p Looks like there are currently no active rent requests in our system. Try checking back later!
-
+    .row
+      include ./rentalrequests_collection
 
   script.
     window.rentalRequests = !{JSON.stringify(rentalRequests)}
-    window.propertyProfiles = !{JSON.stringify(propertyProfiles)}

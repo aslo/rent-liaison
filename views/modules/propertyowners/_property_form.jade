@@ -9,11 +9,10 @@ form.js-property-form
         .hide.alert.js-error-alert
 
       .row
-        +input('name', 'name', property.name, 'Property Name')
+        +input('name', 'name', property.name, 'Property Name')(required)
 
       .row
-        label Description
-        textarea.u-full-width(name="description")
+        +textarea('description', 'description', 'Description')
           =property.description
 
       .row
@@ -22,13 +21,20 @@ form.js-property-form
         .six.columns
           +property_type_select(property.type)
 
+       .row
+        .three.columns
+          +input('bedrooms', 'bedrooms', property.bedrooms, 'Beds')(type="number", step="0.5", required)
+        .three.columns
+          +input('bathrooms', 'bathrooms', property.bathrooms, 'Baths')(type="number", step="0.5", required)
+        .three.columns
+          +input('sleeps', 'sleeps', property.sleeps, 'Sleeps')(type="number", step="0.5", required)
+
       .row
-        .three.columns
-          +input('bedrooms', 'bedrooms', property.bedrooms, 'Beds')(type="number", step="0.5")
-        .three.columns
-          +input('bathrooms', 'bathrooms', property.bathrooms, 'Baths')(type="number", step="0.5")
-        .three.columns
-          +input('sleeps', 'sleeps', property.sleeps, 'Sleeps')(type="number", step="0.5")
+        - var listings = property.externalListings ? property.externalListings : []
+        label(for="externalUrls") External Listings
+        each i in [0,1,2]
+          - var val = listings[i] ? listings[i].url : ''
+          +input('externalListings['+ i +']', 'externalListings['+ i +'][url]', val, null)
 
     .six.columns
       .row
@@ -40,11 +46,8 @@ form.js-property-form
         +amenity_select(amenities, property)
 
       .row
-        - var listings = property.externalListings ? property.externalListings : []
-        label(for="externalUrls") External Listings
-        each i in [0,1,2]
-          - var val = listings[i] ? listings[i].url : ''
-          +input('externalListings['+ i +']', 'externalListings['+ i +'][url]', val, null)
+        +textarea('amenitiesDescription', 'amenitiesDescription', 'Amenities Description')
+          =property.amenitiesDescription
 
   .row
     .pull-right

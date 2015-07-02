@@ -7,9 +7,9 @@ block body
   #js-properties.p-properties
 
     .row
-      h1 My Property Profiles
-
-      +create_button()(class='js-create', type='button')
+      .property-page-title
+        h1 My Property Profiles
+        +create_button()(class='js-create', type='button')
 
     if properties.length > 0
       .property-list

@@ -49,6 +49,9 @@ block body
             h3 Amenities
             +tag_group(amenities)
 
+            p= property.amenitiesDescription
+
+
         .row
           h5 Description
           p= property.description
@@ -59,9 +62,10 @@ block body
         h5 Contact: &nbsp;
           a(href="mailto:#{property.user.email}")= name
 
-        h5 Listings
-        ul
-          each listing in property.externalListings
-            li.property-listing.tag
-              img(src="http://www.google.com/s2/favicons?domain_url=#{encodeURIComponent(listing.url)}")
-              a(href="//#{listing.url}", target="_blank")= helpers.shorten(listing.url, 20)
+        if property.externalListings.length > 0
+          h5 Listings
+          ul
+            each listing in property.externalListings
+              li.property-listing.tag
+                img(src="http://www.google.com/s2/favicons?domain_url=#{encodeURIComponent(listing.url)}")
+                a(href="//#{listing.url}", target="_blank")= helpers.shorten(listing.url, 20)

@@ -7,6 +7,12 @@ mixin input(id, name, value, label)
     label(for=id)= label
   input.u-full-width(id=id, name=name, type="text", value=value)&attributes(attributes)
 
+mixin textarea(id, name, label)
+  if label
+    label(for=id)= label
+  textarea.u-full-width(id=id, name=name)&attributes(attributes)
+    block
+
 mixin select(id, name, label, options, selected)
   if label
     label(for=id)= label

@@ -1,0 +1,30 @@
+mixin rent_request_field(field, type)
+  if type === 'date'
+    if field
+      =moment(field).format('MMM D, YYYY')
+  else if type === 'boolean'
+    if field
+      span.text-center &#10003;
+  else
+    if field
+      =field
+
+//- END MIXINS
+
+td
+  +rent_request_field(rentalRequest.createdAt, 'date')
+td
+  //- +rent_request_field(rentalRequest.getDestination())
+td
+  +rent_request_field(rentalRequest.budget)
+td
+  +rent_request_field(rentalRequest.travelers)
+td
+  +rent_request_field(rentalRequest.startDate, 'date')
+td
+  +rent_request_field(rentalRequest.endDate, 'date')
+td
+  +rent_request_field(rentalRequest.datesAreFlexible, 'boolean')
+td TODO name
+
+  //- = rentalRequest.user.getFullName()
