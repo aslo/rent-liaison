@@ -4,8 +4,8 @@ mixin image(imgUrl, width, height)
 
 mixin image_with_overlay(imgUrl, width, height)
   .image-container
-    a(href="#")&attributes(attributes)
+    a(href="#")
       +image(imgUrl, width, height)
-      .after
+      .after&attributes(attributes)
         block
 

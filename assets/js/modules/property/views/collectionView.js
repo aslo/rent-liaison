@@ -2,7 +2,7 @@ define([
   'backbone',
   'modules/property/model',
   'modules/property/views/formModal',
-  'modules/property/views/imageUploadFormModal'
+  'modules/property/views/imageFormModal'
 
 ], function(Backbone, Property, FormModal, UploadForm){
 

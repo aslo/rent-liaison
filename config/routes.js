@@ -36,6 +36,7 @@ module.exports.routes = {
   'POST /property': 'PropertyController.create',
   'PUT /property/:id': 'PropertyController.update',
   'POST /property/:id/picture': 'PropertyController.addImageToProperty',
+  'DELETE /property/:id/picture/:imageId': 'PropertyController.deleteImage',
 
   // renter
   'GET /rentalrequest/:uri': 'RentalRequestController.findByUri',

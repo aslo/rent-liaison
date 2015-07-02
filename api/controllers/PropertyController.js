@@ -63,6 +63,17 @@ module.exports = {
     })
   },
 
+  deleteImage: function (req, res) {
+    Image.destroy(req.params.imageId)
+    .then(function(){
+      return res.ok()
+    })
+    .catch(function(){
+      return res.serverError(err)
+    })
+
+  },
+
   get: function(req, res, next) {
     Property.findOne({ slug: req.params.slug })
       .populate('user')

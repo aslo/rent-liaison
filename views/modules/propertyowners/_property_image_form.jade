@@ -1,4 +1,26 @@
+include ../../mixins/images
+
 form.js-property-image-form
+  .row
+    h3 Current Photos
+
+    - var imagesPerRow = 3
+    - var rows = Math.ceil(property.images.length / imagesPerRow)
+    - var rowCount = 0
+    while rowCount < rows
+      - var current = imagesPerRow * rowCount
+      - var end = Math.min(current + imagesPerRow, property.images.length)
+      .row
+        while current < end
+          .four.columns
+            - var img = property.images[current];
+            +image_with_overlay(img.url, 150, 150)(class='js-delete-image', data-image-id=img.id)
+              | Delete
+
+          - current++
+
+      - rowCount++
+
   .row
     label Upload Pictures
     input.js-file-input(type="file", name="file", data-url="/property/#{property.id}/picture")
