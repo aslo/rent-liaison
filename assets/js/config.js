@@ -9,6 +9,9 @@ require.config({
     underscore:       './vendor/lodash/lodash.min', // TODO
     backbone:         './vendor/backbone/backbone',
     pikaday:          './vendor/pikaday/pikaday',
+    moment:           './vendor/moment/min/moment.min',
+    jade:              './vendor/jade/runtime',
+
     // jquery plugins
     slick:            './vendor/slick.js/slick/slick.min',
     serializeJSON:    './vendor/jquery.serializeJSON/jquery.serializejson',
@@ -19,9 +22,7 @@ require.config({
 
     // bootstrap stuff
     modal: './vendor/bootstrap/js/modal',
-    tab: './vendor/bootstrap/js/tab',
-
-    jade: './vendor/jade/runtime'
+    tab: './vendor/bootstrap/js/tab'
   },
 
   // map: {
@@ -42,6 +43,7 @@ require.config({
     flip: ['jquery'],
     iFrameTransport: ['jquery'],
     'jquery.ui.widget': ['jquery'],
-    fileUpload: ['jquery', 'iFrameTransport', 'jquery.ui.widget']
+    fileUpload: ['jquery', 'iFrameTransport', 'jquery.ui.widget'],
+    pikaday: ['moment']
   }
 });

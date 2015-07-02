@@ -4,9 +4,11 @@ define([
   'serializeJSON',
 
   'views/tag',
+  'views/datePicker',
+
   'modules/rentalRequest/model'
 
-], function(Backbone, Pikaday, serializeJSON, Tag, RentalRequest){
+], function(Backbone, Pikaday, serializeJSON, Tag, DatePicker, RentalRequest){
 
   return Backbone.View.extend({
 
@@ -16,18 +18,17 @@ define([
     },
 
     initialize: function() {
-      // init date picker
-      this.$('.js-pikaday').each(function(i, el){
-        new Pikaday({ field: el });
-      });
-
       // init subviews
       this.$('.js-tag').each(function(){
         new Tag({ el: this });
       });
 
-      this.datesAreDisabled = false;
+      new DatePicker({
+        startDateEl: this.$('.js-start-date')[0],
+        endDateEl: this.$('.js-end-date')[0]
+      })
 
+      this.datesAreDisabled = false;
     },
 
     submitForm: function (e) {
