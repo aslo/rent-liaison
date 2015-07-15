@@ -25,18 +25,17 @@ module.exports.routes = {
   'GET /': 'HomeController.show',
 
   // property owner
-  'GET /propertyowners': 'AuthController.login',
   'GET /home': 'PropertyOwnerController.home',
   'GET /rentalrequest': 'PropertyOwnerController.showRentalRequests',
   'POST /rentalrequest/:id/respond': 'PropertyOwnerController.respondToRentalRequest',
+  'GET /properties': 'PropertyOwnerController.indexProperties',
+  'POST /property': 'PropertyOwnerController.create',
+  'PUT /property/:id': 'PropertyOwnerController.update',
+  'POST /property/:id/picture': 'PropertyOwnerController.addImageToProperty',
+  'DELETE /property/:id/picture/:imageId': 'PropertyOwnerController.deleteImage',
 
   // property
-  'GET /properties': 'PropertyController.index',
   'GET /property/:slug': 'PropertyController.get',
-  'POST /property': 'PropertyController.create',
-  'PUT /property/:id': 'PropertyController.update',
-  'POST /property/:id/picture': 'PropertyController.addImageToProperty',
-  'DELETE /property/:id/picture/:imageId': 'PropertyController.deleteImage',
 
   // renter
   'GET /rentalrequest/:uri': 'RentalRequestController.findByUri',
@@ -44,6 +43,7 @@ module.exports.routes = {
   'PATCH /user/:id': 'UserController.patch',
 
   // auth
+  'GET /propertyowners': 'AuthController.login',
   'GET /logout': 'AuthController.logout',
   'POST /auth/local': 'AuthController.callback',
   'POST /auth/local/:action': 'AuthController.callback',
@@ -51,14 +51,11 @@ module.exports.routes = {
   'GET /auth/:provider/callback': 'AuthController.callback',
   'GET /auth/:provider/:action': 'AuthController.callback',
 
-  /***************************************************************************
-  *                                                                          *
-  * Custom routes here...                                                    *
-  *                                                                          *
-  *  If a request to a URL doesn't match any of the custom routes above, it  *
-  * is matched against Sails route blueprints. See `config/blueprints.js`    *
-  * for configuration options and examples.                                  *
-  *                                                                          *
-  ***************************************************************************/
+  // admin
+  'get /admin': 'AdminController.home',
+  'get /admin/users': 'AdminController.users',
+  'get /admin/users/:id/confirm': 'AdminController.confirmUser',
+  'get /admin/users/:id/deactivate': 'AdminController.deactivateUser',
+  'get /admin/users/:id/mask': 'AdminController.maskAsUser',
 
 };

@@ -1,0 +1,30 @@
+table
+  thead
+    th ID
+    th Email
+    th Name
+    th Status
+    th Type
+    th Actions
+  tbody
+    each user in users
+      tr
+        td=user.id
+        td=user.email
+        td=user.getFullName()
+        td=user.status
+        td=user.type
+        td
+          - var actions = []
+          if user.status == 'UNCONFIRMED'
+            - actions.push('confirm')
+            - actions.push('deactivate')
+          else if user.status == 'ACTIVE'
+            - actions.push('deactivate')
+            - actions.push('mask')
+          else if user.status == 'INACTIVE'
+            - actions.push('activate')
+          ul
+            each action in actions
+              li
+                a(href="/admin/users/#{user.id}/#{action}")= action
