@@ -10,8 +10,7 @@ module.exports = {
    */
   activateRentalRequestIfInactive: function(rentalRequest) {
     return Promise.join(
-      UserService.confirmUserIfUnconfirmed(rentalRequest.user)
-    ,
+      UserService.confirmUserIfUnconfirmed(rentalRequest.user),
       Promise.try(function(){
         if (rentalRequest.isUnconfirmed()) {
           sails.log.debug('Confirming new rentalRequest with id', rentalRequest.id);
@@ -28,11 +27,11 @@ module.exports = {
         isNew = true;
       }
       return isNew;
-    })
+    });
   },
 
   prepareRentalRequestDisplayData: function(searchParams) {
-    var result = undefined;
+    var result;
 
     //TODO some of this code is shared with PropertyService.getAllPropertyCharacteristics.
     // DRY this up
@@ -48,7 +47,7 @@ module.exports = {
       if (!result.rentalRequest) {
         return;
       } else if (result.rentalRequest.user.renterDetails) {
-        return RenterDetails.findOne(result.rentalRequest.user.renterDetails)
+        return RenterDetails.findOne(result.rentalRequest.user.renterDetails);
       } else {
         return {};
       }
@@ -56,6 +55,6 @@ module.exports = {
     .then(function(renterDetails){
       result.rentalRequest.user.renterDetails = renterDetails;
       return result;
-    })
+    });
   }
-}
+};

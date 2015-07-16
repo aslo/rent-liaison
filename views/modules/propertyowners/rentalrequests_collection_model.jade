@@ -4,27 +4,30 @@ mixin rent_request_field(field, type)
       =moment(field).format('MMM D, YYYY')
   else if type === 'boolean'
     if field
-      span.text-center &#10003;
+      .text-center &#10003;
   else
     if field
       =field
 
+mixin destinations(destinations)
+  - var destinationNames = _(rentalRequest.destinations).pluck('name').map(helpers.humanize).value().join(', ')
+  +rent_request_field(destinationNames)
+
 //- END MIXINS
 
 td
-  +rent_request_field(rentalRequest.createdAt, 'date')
+  +rent_request_field(rentalRequest.user.getFullName())
 td
-  //- +rent_request_field(rentalRequest.getDestination())
+  +destinations(destinationNames)
 td
-  +rent_request_field(rentalRequest.budget)
+  +rent_request_field(accounting.formatMoney(rentalRequest.budget))
 td
-  +rent_request_field(rentalRequest.travelers)
+  +rent_request_field(rentalRequest.getTotalGuests())
 td
   +rent_request_field(rentalRequest.startDate, 'date')
 td
   +rent_request_field(rentalRequest.endDate, 'date')
 td
   +rent_request_field(rentalRequest.datesAreFlexible, 'boolean')
-td TODO name
-
-  //- = rentalRequest.user.getFullName()
+td
+  +rent_request_field(rentalRequest.createdAt, 'date')

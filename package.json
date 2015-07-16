@@ -9,6 +9,7 @@
     "npm": "~2.1.0"
   },
   "dependencies": {
+    "accounting": "^0.4.1",
     "bcryptjs": "^2.1.0",
     "bluebird": "^2.9.30",
     "body-parser": "^1.13.1",

@@ -25,7 +25,6 @@ define([
 
       this.uploadFormModal = new UploadForm()
 
-
       // create model subviews for pre-rendered content
       var self = this;
       this.$('[data-property-id]').each(function(){

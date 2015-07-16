@@ -22,6 +22,6 @@ module.exports.policies = {
 
   'PropertyOwnerController': ['passport', 'sessionAuth', 'isPropertyOwner'],
 
-  'AdminController': ['passport'] //'sessionAuth', 'isAdmin']
+  'AdminController': ['passport', 'sessionAuth', 'isAdmin']
 
 };

@@ -64,15 +64,14 @@ module.exports = {
 
     isRenter: function() {
       return this.type === 'RENTER';
-    },
+    }
+  },
 
-    afterCreate: function(values, cb) {
-      if (this.isRenter()) {
-        RenterDetails.create({ user: values.id }, cb);
-      } else {
-        cb();
-      }
+  afterCreate: function(values, cb) {
+    if (this.isRenter()) {
+      RenterDetails.create({ user: values.id }, cb);
+    } else {
+      cb();
     }
   }
 };
-

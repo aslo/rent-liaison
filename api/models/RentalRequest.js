@@ -1,10 +1,3 @@
-/**
-* RentalRequest.js
-*
-* @description :: TODO: You might write a short summary of how this model works and what it represents here.
-* @docs        :: http://sailsjs.org/#!documentation/models
-*/
-
 _ = require('lodash');
 
 var URI_LENGTH = 15;
@@ -75,8 +68,23 @@ module.exports = {
     // instance methods
 
     isUnconfirmed: function() {
-      return this.status === 'UNCONFIRMED'
+      return this.status === 'UNCONFIRMED';
     },
+
+
+    getTotalGuests: function() {
+      var parse = function(num){
+          if (isNaN(num)) {
+            return 0;
+          }
+          else {
+            return num;
+          }
+      };
+
+      return parse(this.adults) + parse(this.children);
+    },
+
 
     getCompletionPercentage: function() {
       var ignoreFields = [
@@ -96,13 +104,13 @@ module.exports = {
       // TODO handle this on the client
 
       function count(obj) {
-        for (key in obj) {
+        for (var key in obj) {
           if (! _.contains(ignoreFields, key)) {
             if (typeof obj[key] === 'object') {
               count(obj[key]);
             } else if (typeof obj[key] !== 'function') {
               totalFields++;
-              if (obj[key] || parseInt(obj[key]) == 0) {
+              if (obj[key] || parseInt(obj[key]) === 0) {
                 completedFields++;
               }
             }
@@ -135,7 +143,15 @@ module.exports = {
       } else {
         return results;
       }
-    })
+    });
+  },
+
+  afterValidate: function(values, cb) {
+    if (values.startDate && values.endDate && moment(startDate).after(endDate)) {
+        cb(new Error('start date can not be after end'));
+    } else {
+      cb();
+    }
   },
 
   beforeCreate: function(values, cb) {
@@ -154,4 +170,3 @@ module.exports = {
   }
 
 };
-
