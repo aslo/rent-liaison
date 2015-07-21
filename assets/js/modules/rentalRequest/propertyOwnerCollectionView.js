@@ -1,7 +1,8 @@
 define([
   'backbone',
-  'modules/rentalRequest/propertyOwnerModelView'
-], function(Backbone, ModelView){
+  'modules/rentalRequest/propertyOwnerModelView',
+  'modules/rentalRequest/views/filtersView'
+], function(Backbone, ModelView, FiltersView){
 
   return Backbone.View.extend({
 
@@ -12,41 +13,45 @@ define([
     initialize: function() {
       var self = this;
 
+      // init subview for filters
+      this.filtersView = new FiltersView({
+        el: this.$('.js-rental-request-filters'),
+        collection: self.collection
+      });
+
       // create model subview for pre-rendered content
-      this.modelViews = []
+      this.modelViews = [];
       this.$('.js-rent-request-model').each(function(){
         self.modelViews.push(new ModelView({
           el: this,
           model: self.collection.get($(this).data('rentRequestId'))
-        }))
-      })
-
-      this.listenTo(this.collection, 'filter', this.renderModels)
+        }));
+      });
     },
 
     renderModels: function(models) {
       // destroy existing model views
       while (this.modelViews.length > 0) {
-        this.modelViews.shift().remove()
+        this.modelViews.shift().remove();
       }
 
       var self = this;
       models.forEach(function(model){
-        var view = new ModelView({ model: model })
-        self.modelViews.push(view)
+        var view = new ModelView({ model: model });
+        self.modelViews.push(view);
 
-        self.getCollectionEl().append(view.render().el)
-      })
+        self.getCollectionEl().append(view.render().el);
+      });
 
     },
 
     getCollectionEl: function() {
-      return this.$('#js-rent-request-collection')
+      return this.$('#js-rent-request-collection');
     },
 
     onUpdateFilters: function(e) {
-      var filters = this._getCurrentFilters()
-      this.collection.applyFilters(filters)
+      var filters = this._getCurrentFilters();
+      this.collection.applyFilters(filters);
     },
 
     _getCurrentFilters: function() {
@@ -55,20 +60,20 @@ define([
         var filter = {};
         var $el = $(this);
 
-        var op = $el.data('filterOperator')
-        var name = $el.attr('name')
-        var value = $el.val()
+        var op = $el.data('filterOperator');
+        var name = $el.attr('name');
+        var value = $el.val();
 
         if (op && name && value) {
           filters.push({
             name: name,
             operator: op,
             value: value
-          })
+          });
         }
-      })
+      });
       return filters;
     }
 
-  })
-})
+  });
+});

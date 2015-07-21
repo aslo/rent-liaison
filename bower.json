@@ -25,6 +25,8 @@
     "jade": "~1.9.2",
     "blueimp-file-upload-node": "~9.9.3",
     "fontawesome": "git://github.com/FortAwesome/Font-Awesome.git#v4.3.0",
-    "moment": "~2.10.3"
+    "moment": "~2.10.3",
+    "nouislider": "~8.0.2",
+    "accounting": "~0.3.2"
   }
 }

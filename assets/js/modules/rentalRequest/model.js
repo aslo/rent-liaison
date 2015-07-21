@@ -7,18 +7,25 @@ define([
     urlRoot: '/rentalrequest',
 
     initialize: function() {
-      if (this.has('user')) {
-        var rawUser = this.get('user');
-        this.set('user', new UserModel(rawUser))
-      }
+      this.attributes = this._initializeAttributes(this.attributes);
     },
 
-    parse: function(response, options) {
-      if (response.user) {
-        var rawUser = response.user;
-        response.user = new UserModel(rawUser);
+    parse: function(response) {
+      return this.initializeAttributes(response);
+    },
+
+    _initializeAttributes: function(attributes) {
+      if (attributes.user) {
+        var rawUser = attributes.user;
+        attributes.user = new UserModel(rawUser);
       }
-      return response;
+
+      ['startDate', 'endDate'].forEach(function(date){
+        if (attributes[date]) {
+            attributes[date] = new Date(attributes[date]);
+          }
+        });
+      return attributes;
     }
 
   });

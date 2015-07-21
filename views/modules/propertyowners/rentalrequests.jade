@@ -12,22 +12,40 @@ mixin money_filter(id, name, label, filterOperator)
 block body
 
   #js-rental-requests
-
+    
     .row
       h1 Rent Requests
 
-    .row
-      p Filter by
-    .row
-      .four.columns
-        - var options = ['none', 'Destination matches one of my properties']
-        +select('filter_destination', 'filter_destination', 'Destination', options, null)
+    .js-rental-request-filters
+      .row
+        p Filter by
+      .row
+        .four.columns
+          - var options = ['none', 'Destination matches one of my properties']
+          +select('filter_destination', 'filter_destination', 'Destination', options, null)
 
-      .two.columns
-        +money_filter('filter_minBudget', 'budget', 'Min Budget', '>=')
-      .two.columns
-        +money_filter('filter_maxBudget', 'budget', 'Max Budget', '<=')
-
+        .four.columns
+          label Budget
+          .js-budget-slider
+            .js-slider
+            .four.columns
+              | Min:&nbsp;
+              span.js-filter-min
+            .four.columns.offset-by-four
+              | Max:&nbsp;
+              span.js-filter-max
+              
+        .four.columns
+          label Dates
+          .js-date-slider
+            .js-slider
+            .four.columns
+              | Min:&nbsp;
+              span.js-filter-min
+            .four.columns.offset-by-four
+              | Max:&nbsp;
+              span.js-filter-max
+                
     .row
       include ./rentalrequests_collection
 

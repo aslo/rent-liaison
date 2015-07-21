@@ -10,15 +10,17 @@ require.config({
     backbone:         './vendor/backbone/backbone',
     pikaday:          './vendor/pikaday/pikaday',
     moment:           './vendor/moment/min/moment.min',
-    jade:              './vendor/jade/runtime',
+    jade:             './vendor/jade/runtime',
+    accounting:       './vendor/accounting/accounting.min',
 
     // jquery plugins
-    slick:            './vendor/slick.js/slick/slick.min',
-    serializeJSON:    './vendor/jquery.serializeJSON/jquery.serializejson',
-    flip:             './vendor/flip/dist/jquery.flip.min',
-    'jquery.ui.widget':   './vendor/blueimp-file-upload-node/js/vendor/jquery.ui.widget',
-    fileUpload:       './vendor/blueimp-file-upload-node/js/jquery.fileupload',
-    iFrameTransport:  './vendor/blueimp-file-upload-node/js/jquery.iframe-transport',
+    slick:              './vendor/slick.js/slick/slick.min',
+    serializeJSON:      './vendor/jquery.serializeJSON/jquery.serializejson',
+    flip:               './vendor/flip/dist/jquery.flip.min',
+    'jquery.ui.widget': './vendor/blueimp-file-upload-node/js/vendor/jquery.ui.widget',
+    fileUpload:         './vendor/blueimp-file-upload-node/js/jquery.fileupload',
+    iFrameTransport:    './vendor/blueimp-file-upload-node/js/jquery.iframe-transport',
+    nouislider:         './vendor/nouislider/distribute/nouislider.min',
 
     // bootstrap stuff
     modal: './vendor/bootstrap/js/modal',
