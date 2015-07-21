@@ -20,12 +20,13 @@ define(['backbone'], function(Backbone){
 
     getFilter: function() {
       var params = {};
-      params[this.get('name')] = {};
 
       if (this.has('min')) {
+        params[this.get('minName')] = {};
         params[this.get('minName')]['>='] = this.get('min');
       }
       if (this.has('max')) {
+        params[this.get('maxName')] = {};
         params[this.get('maxName')]['<='] = this.get('max');
       }
 

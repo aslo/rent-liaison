@@ -10,12 +10,12 @@ define([
       // accommodate for dates
       for (var i in modelRange) {
         if (_.isDate(modelRange[i])) {
-          modelRange[i] = modelRange[i].getTime();
+          modelRange[i] = +modelRange[i].getTime();
         }
       }
 
       $slider.create(this.el, _.extend({
-        start: [0, 100],
+        start: modelRange,
         connect: true,
         animate: false,
         range: {
@@ -25,7 +25,7 @@ define([
       }, options));
 
       this.rangeSlider = this.el.noUiSlider;
-      this.listenTo(this.rangeSlider, 'update', _.bind(this.onSliderChange, this));
+      this.listenTo(this.rangeSlider, 'slide', _.bind(this.onSliderChange, this));
     },
 
     onSliderChange: function() {

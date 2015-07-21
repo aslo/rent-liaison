@@ -6,7 +6,7 @@ define([
   return RangeSliderView.extend({
 
     displayRange: function(val) {
-      return moment(new Date().setTime(val)).format('MM/DD/YYYY');
+      return moment(new Date().setTime(+val)).format('MMM D, YYYY');
     }
 
   });
