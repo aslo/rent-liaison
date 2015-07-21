@@ -16,13 +16,14 @@ mixin destinations(destinations)
 //- END MIXINS
 
 td
-  +rent_request_field(rentalRequest.user.getFullName())
+  - var name = rentalRequest.user.firstName + ' ' + rentalRequest.user.lastName
+  +rent_request_field(name)
 td
   +destinations(destinationNames)
 td
   +rent_request_field(accounting.formatMoney(rentalRequest.budget))
 td
-  +rent_request_field(rentalRequest.getTotalGuests())
+  +rent_request_field(rentalRequest.adults + rentalRequest.children)
 td
   +rent_request_field(rentalRequest.startDate, 'date')
 td

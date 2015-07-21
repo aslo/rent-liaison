@@ -3,8 +3,9 @@ define([
   'templates', // require the file so it gets executed - templates are added to a browser global
   'jade',
   'helpers',
-  'moment'
-], function(_, templates, jade, helpers, moment){
+  'moment',
+  'accounting'
+], function(_, templates, jade, helpers, moment, accounting){
 
   function Tpl(path) {
     window.jade = jade;
@@ -17,13 +18,14 @@ define([
     render: function(data){
       var templateGlobals = {
         helpers: helpers,
-        moment: moment
-      }
+        moment: moment,
+        accounting: accounting
+      };
 
       return this.templates[this.path](_.extend(templateGlobals, data));
     }
-  }
+  };
 
   return Tpl;
 
-})
+});

@@ -5,45 +5,34 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-var Step = require('step');
+// var Step = require('step');
 var _ = require('lodash');
 
 module.exports = {
 
   create: function(req, res, next) {
-    // TODO validate
-    // * end date after start, etc
-
     var rentRequest = req.body;
     rentRequest.user.type = 'RENTER';
 
-    Step(
-      function(){
-        RentalRequest.create(rentRequest, this);
-      },
-      function(err, result){
-        if (err) return next(err);
-        RentalRequest
-          .findOne(result.id)
-          .populate('user')
-          .exec(this);
-      },
-      function(err, result){
-        if (err) return next(err);
-
-        var mailTo = result.user.email;
-        var uri = result.uri;
-        MailService.sendActivationEmail(mailTo, uri, this);
-      },
-      function(err, mailerResult){
-        if (err) return next(err);
-        res.send(202, {});
-      }
-    )
+    RentalRequest.create(rentRequest, this)
+    .then(function(result){
+      return RentalRequest.findOne(result.id).populate('user');
+    })
+    .then(function(result){
+      var mailTo = result.user.email;
+      var uri = result.uri;
+      return MailService.sendActivationEmail(mailTo, uri, this);
+    })
+    .then(function(){
+      res.send(202, {});
+    })
+    .catch(function(err){
+      if (err) res.serverError(err);
+    });
   },
 
   findByUri: function(req, res, next) {
-    var renderData = undefined;
+    var renderData;
 
     RentalRequestService.prepareRentalRequestDisplayData({ uri: req.params.uri })
     .then(function(data){
@@ -61,14 +50,14 @@ module.exports = {
         welcome: isNew
       }));
     })
-    .catch(next)
+    .catch(next);
 
   },
 
   patch: function (req, res, next) {
     RentalRequest.update(req.params.id, req.body).populate('user')
-    .then(function(result) { res.json(result) })
-    .catch(next)
+    .then(function(result) { res.json(result); })
+    .catch(next);
   }
 
 };

@@ -9,10 +9,10 @@ define([
 
     initialize: function(options) {
       // init slider subview
-      new SliderView({
+      new SliderView(_.defaults({
         el: this.$('.js-slider'),
         model: this.model
-      });
+      }, options));
 
       // keep display elements in sync with the model
       this.listenTo(this.model, 'change:min', _.bind(this.updateMin, this));

@@ -1,7 +1,8 @@
 define([
   'backbone',
+  'underscore',
   'modules/user/model'
-], function(Backbone, UserModel){
+], function(Backbone, _, UserModel){
 
   return Backbone.Model.extend({
     urlRoot: '/rentalrequest',
@@ -11,11 +12,21 @@ define([
     },
 
     parse: function(response) {
-      return this.initializeAttributes(response);
+      return this._initializeAttributes(response);
+    },
+
+    toJSON: function() {
+      var json = _.clone(this.attributes);
+       for(var attr in json) {
+         if (json[attr] instanceof Backbone.Model) {
+           json[attr] = json[attr].toJSON();
+         }
+       }
+       return json;
     },
 
     _initializeAttributes: function(attributes) {
-      if (attributes.user) {
+      if (attributes.user && !(attributes.user instanceof Backbone.Model)) {
         var rawUser = attributes.user;
         attributes.user = new UserModel(rawUser);
       }

@@ -19,7 +19,7 @@ define([
         collection: self.collection
       });
 
-      // create model subview for pre-rendered content
+      // create model subviews for any pre-rendered content
       this.modelViews = [];
       this.$('.js-rent-request-model').each(function(){
         self.modelViews.push(new ModelView({
@@ -27,6 +27,9 @@ define([
           model: self.collection.get($(this).data('rentRequestId'))
         }));
       });
+
+      // wire up any listeners
+      this.listenTo(this.collection, 'reset', _.bind(this.renderModels, this));
     },
 
     renderModels: function(models) {

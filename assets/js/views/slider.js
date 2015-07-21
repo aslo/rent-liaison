@@ -18,6 +18,7 @@ define([
         start: modelRange,
         connect: true,
         animate: false,
+        behavior: 'drag',
         range: {
           'min': modelRange[0],
           'max': modelRange[1]

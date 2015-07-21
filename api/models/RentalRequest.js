@@ -71,7 +71,6 @@ module.exports = {
       return this.status === 'UNCONFIRMED';
     },
 
-
     getTotalGuests: function() {
       var parse = function(num){
           if (isNaN(num)) {
@@ -84,7 +83,6 @@ module.exports = {
 
       return parse(this.adults) + parse(this.children);
     },
-
 
     getCompletionPercentage: function() {
       var ignoreFields = [

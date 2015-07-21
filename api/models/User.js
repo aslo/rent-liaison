@@ -64,7 +64,8 @@ module.exports = {
 
     isRenter: function() {
       return this.type === 'RENTER';
-    }
+    },
+
   },
 
   afterCreate: function(values, cb) {

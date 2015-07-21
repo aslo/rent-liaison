@@ -17,14 +17,40 @@ module.exports = {
   },
 
   showRentalRequests: function (req, res) {
+    // TODO assert that req.query is a properly-formed waterline query
+
+    var query = { status: 'ACTIVE' };
+
+    var dates = ['startDate', 'endDate'];
+    if (req.query) {
+      for (var i in dates) {
+        var dateField = dates[i];
+        if (req.query[dateField]) {
+          for (var operator in req.query[dateField]) {
+            if (req.query[dateField][operator]) {
+              req.query[dateField][operator] = new Date(+req.query[dateField][operator]);
+            }
+          }
+        }
+      }
+      query = _.extend(query, req.query);
+    }
+
     return Promise.join(
-      RentalRequest.findWithAssociations({ status: 'ACTIVE' }), // TODO limit, paginate
+      RentalRequest.findWithAssociations({ where: query }), // TODO limit, paginate
       Property.findForUser(req.user.id),
 
       function(rentalRequests, myProperties) {
-        res.view('modules/propertyowners/rentalrequests', {
-          rentalRequests: rentalRequests,
-          propertyProfiles: myProperties
+        res.format({
+          json: function(){
+            res.json(rentalRequests);
+          },
+          html: function(){
+            res.view('modules/propertyowners/rentalrequests', {
+              rentalRequests: rentalRequests,
+              propertyProfiles: myProperties
+            });
+          }
         });
       }
     )

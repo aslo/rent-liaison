@@ -44,7 +44,7 @@ define([
       // TODO view
 
       this.filtersCollection = new FilterCollection([ budgetFilter, dateFilter ]);
-      this.listenTo(this.filtersCollection, 'change', _.throttle(this.onFilterUpdate, 1000));
+      this.listenTo(this.filtersCollection, 'change', _.throttle(this.onFilterUpdate, 500));
     },
 
     onFilterUpdate: function() {
