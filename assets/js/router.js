@@ -43,9 +43,9 @@ define([
 
     properties: function() {
       // TODO cache/make sure this doesnt cause a mem leak
-      this.amenitiesCollection = new Backbone.Collection(window.amenities)
-      this.locationsCollection = new Backbone.Collection(window.locations)
-      this.destinationsCollection = new Backbone.Collection(window.destinations)
+      this.amenitiesCollection = new Backbone.Collection(window.amenities);
+      this.locationsCollection = new Backbone.Collection(window.locations);
+      this.destinationsCollection = new Backbone.Collection(window.destinations);
 
       new PropertiesView({
         el: Backbone.$('#js-properties'),

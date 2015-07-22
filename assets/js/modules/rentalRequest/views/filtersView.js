@@ -4,8 +4,10 @@ define([
   'modules/filter/views/rangeSlider',
   'modules/filter/views/dateRangeSlider',
   'modules/filter/models/rangeFilter',
-  'modules/filter/collections/filters'
-], function(Backbone, _, RangeSliderView, DateRangeSliderView, RangeFilter, FilterCollection){
+  'modules/filter/models/containsFilter',
+  'modules/filter/collections/filters',
+  'modules/rentalRequest/views/rentRequestLocationFilter'
+], function(Backbone, _, RangeSliderView, DateRangeSliderView, RangeFilter, ContainsFilter, FilterCollection, RentRequestLocationFilterView){
 
   /**
   * A view that contains all filters for a collection of Rent Requests
@@ -39,11 +41,15 @@ define([
         model: dateFilter
       });
 
-      // location filter
-      // TODO model
-      // TODO view
+      // locations filter
+      var locationFilter = new ContainsFilter({ name: 'destinations' });
+      this.locationFilterView = new RentRequestLocationFilterView({
+        el: this.$('.js-location-filter'),
+        model: locationFilter,
+        myProperties: new Backbone.Collection(window.myProperties)
+      });
 
-      this.filtersCollection = new FilterCollection([ budgetFilter, dateFilter ]);
+      this.filtersCollection = new FilterCollection([ budgetFilter, dateFilter, locationFilter ]);
       this.listenTo(this.filtersCollection, 'change', _.throttle(this.onFilterUpdate, 500));
     },
 

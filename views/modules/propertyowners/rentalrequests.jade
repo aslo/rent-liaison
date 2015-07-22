@@ -21,8 +21,9 @@ block body
         p Filter by
       .row
         .four.columns
-          - var options = ['none', 'Destination matches one of my properties']
-          +select('filter_destination', 'filter_destination', 'Destination', options, null)
+          .js-location-filter
+            - var options = ['none', { name: 'Destination matches one of my properties', id: 'any'}]
+            +select('filter_destination', 'filter_destination', 'Destination', options, null)
 
         .four.columns
           label Budget
@@ -51,3 +52,4 @@ block body
 
   script.
     window.rentalRequests = !{JSON.stringify(rentalRequests)}
+    window.myProperties = !{JSON.stringify(myProperties)}

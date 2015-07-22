@@ -48,7 +48,7 @@ module.exports = {
           html: function(){
             res.view('modules/propertyowners/rentalrequests', {
               rentalRequests: rentalRequests,
-              propertyProfiles: myProperties
+              myProperties: myProperties
             });
           }
         });
