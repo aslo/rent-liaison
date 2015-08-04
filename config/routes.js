@@ -43,7 +43,7 @@ module.exports.routes = {
   'PATCH /user/:id': 'UserController.patch',
 
   // auth
-  'GET /propertyowners': 'AuthController.login',
+  'GET /login': 'AuthController.login',
   'GET /logout': 'AuthController.logout',
   'POST /auth/local': 'AuthController.callback',
   'POST /auth/local/:action': 'AuthController.callback',

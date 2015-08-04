@@ -5,7 +5,7 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-module.exports = {
+var User = {
 
   attributes: {
     // associations
@@ -37,12 +37,10 @@ module.exports = {
       unique: true
     },
     firstName: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
     lastName: {
-      type: 'string',
-      required: true
+      type: 'string'
     },
 
     getFullName: function() {
@@ -69,10 +67,13 @@ module.exports = {
   },
 
   afterCreate: function(values, cb) {
-    if (this.isRenter()) {
+    // TODO: figure out how to use instance methods in here (see `isRenter`)
+    if (values.type === 'RENTER') {
       RenterDetails.create({ user: values.id }, cb);
     } else {
       cb();
     }
   }
 };
+
+module.exports = User;

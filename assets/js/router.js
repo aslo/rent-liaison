@@ -1,6 +1,9 @@
 define([
   'backbone',
   'views/nav',
+
+  'modules/login/view',
+
   'modules/home/view',
 
   'modules/rentalRequest/propertyOwnerCollectionView',
@@ -11,12 +14,13 @@ define([
   'modules/property/collection',
   'modules/property/views/collectionView'
 
-], function(Backbone, NavView, HomeView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView){
+], function(Backbone, NavView, LoginView, HomeView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView){
 
   return Backbone.Router.extend({
 
     routes: {
       ''                     : 'home',
+      'login'                : 'login',
       'rentalrequest'        : 'rentalrequestIndex',
       'rentalrequest/:uri'   : 'rentalRequest',
       'properties'           : 'properties'
@@ -25,6 +29,10 @@ define([
     home: function(){
       this._initNav();
       new HomeView({ el: Backbone.$('#js-home') });
+    },
+
+    login: function(){
+      new LoginView({ el: Backbone.$('#js-login') });
     },
 
     rentalrequestIndex: function() {

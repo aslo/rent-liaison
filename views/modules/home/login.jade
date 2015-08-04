@@ -1,0 +1,50 @@
+extends ../../layout
+
+include ../../mixins/nav
+
+block nav
+  #js-nav.nav
+    ul.nav-list
+      li.nav-list-item
+        a.nav-link.js-nav-link(href="/") 
+          +logo()
+
+      .u-pull-right
+        li.nav-list-item
+          a.nav-link.active(href="/propertyowners") Property Owners
+
+block body
+  #js-login
+    .row  
+      .twelve.columns.text-center
+        h1 Rent Liaison
+        h3 Sign in or create an account
+
+    .row
+      if errors && errors.length
+        each error in errors
+          p= error
+
+    .row
+      .twelve.columns.text-center
+        .tab-pane.active
+          .row
+            a.button(href="/auth/google")
+              i.fa.fa-google-plus.fa-lg &nbsp;
+              | Sign in with google
+          .row
+            a.button(href="/auth/facebook")
+              i.fa.fa-facebook-official.fa-lg &nbsp;
+              | Sign in with facebook
+
+        //-   TODO implement email auth
+        //-   .row
+        //-     a.js-use-email(href="#js-email-login", data-toggle="tab") Sign in or sign up with email
+        //- 
+        //- .tab-pane#js-email-login
+        //-   form(role="form", action="/auth/local", method="post")
+        //-     .row
+        //-       input(type="text", name="identifier", placeholder="Email", required)
+        //-       input(type="password", name="password", placeholder="Password", required)
+        //-     .row
+        //-       button(type="submit") Sign in

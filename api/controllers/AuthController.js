@@ -14,25 +14,13 @@ var AuthController = {
    * @param {Object} res
    */
   login: function (req, res) {
-    var strategies = sails.config.passport
-      , providers  = {};
-
-    // Get a list of available providers for use in your templates.
-    Object.keys(strategies).forEach(function (key) {
-      if (key === 'local') {
-        return;
-      }
-
-      providers[key] = {
-        name: strategies[key].name
-      , slug: key
-      };
-    });
-
-    res.view('modules/home/propertyowners', {
-      providers : providers
-    , errors    : req.flash('error')
-    });
+    if (req.user) {
+      res.redirect('/home');
+    } else {
+      res.view('modules/home/login', {
+        errors : req.flash('error')
+      });
+    }
   },
 
   /**
@@ -55,7 +43,7 @@ var AuthController = {
     // mark the user as logged out for auth purposes
     req.session.authenticated = false;
 
-    res.redirect('/');
+    res.redirect('/login');
   },
 
   /**
@@ -97,7 +85,6 @@ var AuthController = {
       } else if (flashError) {
         req.flash('error', flashError);
       }
-      req.flash('form', req.body);
 
       // If an error was thrown, redirect the user to the
       // login, register or disconnect action initiator view.
@@ -106,13 +93,13 @@ var AuthController = {
 
       switch (action) {
         case 'register':
-          res.redirect('/propertyowners');
+          res.redirect('/login');
           break;
         case 'disconnect':
           res.redirect('back');
           break;
         default:
-          res.redirect('/propertyowners');
+          res.redirect('/login');
       }
     }
 
@@ -127,7 +114,7 @@ var AuthController = {
         }
 
         // Mark the session as authenticated to work with default Sails sessionAuth.js policy
-        req.session.authenticated = true
+        req.session.authenticated = true;
 
         // Upon successful login, send the user to the homepage were req.user
         // will be available.
