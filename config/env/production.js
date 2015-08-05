@@ -14,8 +14,8 @@ module.exports = {
 
   hookTimeout: 45000,
 
-  proxyHost: 'rent-liason.herokuapp.com'
-
+  proxyHost: 'rent-liason.herokuapp.com',
+  proxyPort: 80
   /***************************************************************************
    * Set the default database connection for models in the production        *
    * environment (see config/connections.js and config/models.js )           *
