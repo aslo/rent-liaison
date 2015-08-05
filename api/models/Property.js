@@ -47,19 +47,19 @@ module.exports = {
       type: 'string'
     },
     bedrooms: {
-      type: 'finite',
+      type: 'float',
       required: true,
       defaultsTo: 1,
       min: 0
     },
     bathrooms: {
-      type: 'finite',
+      type: 'float',
       required: true,
       defaultsTo: 1,
       min: 0
     },
     sleeps: {
-      type: 'finite',
+      type: 'float',
       required: true,
       defaultsTo: 1,
       min: 0
@@ -132,4 +132,3 @@ module.exports = {
   }
 
 }
-

@@ -1,9 +1,10 @@
 define([
   'underscore',
   'tpl',
+  'serializeJSON',
   'views/modal',
   'views/tag'
-], function(_, Tpl, Modal, Tag){
+], function(_, Tpl, $serializeJSON, Modal, Tag){
 
   return Modal.extend({
 
@@ -14,17 +15,17 @@ define([
     },
 
     initialize: function(options){
-      var fields = ['amenities', 'locations', 'destinations']
-      for (i in fields) {
+      var fields = ['amenities', 'locations', 'destinations'];
+      for (var i in fields) {
         this[fields[i]] = options[fields[i]];
       }
     },
 
     render: function() {
       if (this.model.isNew()) {
-        this.title = 'New Property Profile'
+        this.title = 'New Property Profile';
       } else {
-        this.title = this.model.get('name')
+        this.title = this.model.get('name');
       }
 
       this.body = this.formTpl.render({
@@ -35,31 +36,31 @@ define([
         destinations: this.destinations.toJSON(),
         locations: this.locations.toJSON()
 
-      })
+      });
 
-      Modal.prototype.render.apply(this)
+      Modal.prototype.render.apply(this);
 
       this.$('.js-tag').each(function(){
-        new Tag({ el: this })
-      })
+        new Tag({ el: this });
+      });
 
       return this;
     },
 
     setModel: function(model){
-      this.model = model
+      this.model = model;
     },
 
     submitForm: function(e) {
       e.preventDefault();
 
-      var attrs = this.$(e.target).serializeJSON()
+      var attrs = this.$(e.target).serializeJSON();
 
       // for externalListings, remove if url is falsy
       if (attrs.externalListings) {
         attrs.externalListings = _.filter(attrs.externalListings, function(listing){
           return !!listing.url;
-        })
+        });
       }
 
       self = this;
@@ -71,17 +72,17 @@ define([
       })
       .fail(function(xhr){
         if (xhr.responseJSON && xhr.responseJSON.error == "E_VALIDATION") {
-          self._showErrorAlert('Please fix and try again');
+          self._showErrorAlert('Looks like there\'s something wrong with your request. Please try again');
           self._showInvalidInputs(xhr.responseJSON.invalidAttributes);
 
         } else {
           self._showErrorAlert('Whoops! Looks like there\'s an issue on our end. Please try again.');
         }
-      })
+      });
     },
 
     _showInvalidInputs: function(invalidAttributes) {
-      for (attr in invalidAttributes) {
+      for (var attr in invalidAttributes) {
         $el = self.$('[name='+attr+']');
         if ($el.size() > 0) {
           console.log($el);
@@ -91,12 +92,12 @@ define([
     },
 
     _showErrorAlert: function(message){
-      this.$('.js-error-alert').text(message).show()
+      this.$('.js-error-alert').text(message).show();
     },
 
     _hideErrorAlert: function() {
-      this.$('.js-error-alert').hide().text('')
+      this.$('.js-error-alert').hide().text('');
     }
 
-  })
-})
+  });
+});

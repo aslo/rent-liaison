@@ -2,12 +2,17 @@ include ../../mixins/forms
 include ../../mixins/property
 
 form.js-property-form
+  
+  if ! property.id
+    .row
+      p This information will be used 
+        | to create a public Property Profile, which will be viewable by 
+        | potential renters.        
+    .row
+      .hide.alert.js-error-alert
 
   .row
     .six.columns
-      .row
-        .hide.alert.js-error-alert
-
       .row
         +input('name', 'name', property.name, 'Property Name')(required)
 
@@ -23,11 +28,11 @@ form.js-property-form
 
        .row
         .three.columns
-          +input('bedrooms', 'bedrooms', property.bedrooms, 'Beds')(type="number", step="0.5", required)
+          +input('bedrooms', 'bedrooms:number', property.bedrooms, 'Beds')(type="number", step="0.5", required)
         .three.columns
-          +input('bathrooms', 'bathrooms', property.bathrooms, 'Baths')(type="number", step="0.5", required)
+          +input('bathrooms', 'bathrooms:number', property.bathrooms, 'Baths')(type="number", step="0.5", required)
         .three.columns
-          +input('sleeps', 'sleeps', property.sleeps, 'Sleeps')(type="number", step="0.5", required)
+          +input('sleeps', 'sleeps:number', property.sleeps, 'Sleeps')(type="number", step="1", required)
 
       .row
         - var listings = property.externalListings ? property.externalListings : []

@@ -115,6 +115,16 @@ module.exports = {
     });
   },
 
+  updateProperty: function(req, res) {
+    Property.update(req.params.id, req.body)
+    .then(function(result){
+      res.json(result);
+    })
+    .catch(function(err){
+      res.serverError(err);
+    });
+  },
+
   addImageToProperty: function(req, res, next) {
     if (!req.file('file')) {
       return res.badRequest();

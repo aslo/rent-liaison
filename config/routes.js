@@ -29,8 +29,8 @@ module.exports.routes = {
   'GET /rentalrequest': 'PropertyOwnerController.showRentalRequests',
   'POST /rentalrequest/:id/respond': 'PropertyOwnerController.respondToRentalRequest',
   'GET /properties': 'PropertyOwnerController.indexProperties',
-  'POST /property': 'PropertyOwnerController.create',
-  'PUT /property/:id': 'PropertyOwnerController.update',
+  'POST /property': 'PropertyOwnerController.createProperty',
+  'PUT /property/:id': 'PropertyOwnerController.updateProperty',
   'POST /property/:id/picture': 'PropertyOwnerController.addImageToProperty',
   'DELETE /property/:id/picture/:imageId': 'PropertyOwnerController.deleteImage',
 
