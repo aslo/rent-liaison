@@ -5,23 +5,19 @@
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
 
-// var Step = require('step');
 var _ = require('lodash');
+var Promise = require('bluebird');
 
 module.exports = {
 
-  create: function(req, res, next) {
+  create: function(req, res) {
     var rentRequest = req.body;
-    rentRequest.user.type = 'RENTER';
 
     RentalRequest.create(rentRequest, this)
     .then(function(result){
-      return RentalRequest.findOne(result.id).populate('user');
-    })
-    .then(function(result){
-      var mailTo = result.user.email;
+      var mailTo = result.email;
       var uri = result.uri;
-      return MailService.sendActivationEmail(mailTo, uri, this);
+      return Promise.promisify(MailService.sendActivationEmail)(mailTo, uri);
     })
     .then(function(){
       res.send(202, {});
@@ -31,7 +27,7 @@ module.exports = {
     });
   },
 
-  findByUri: function(req, res, next) {
+  findByUri: function(req, res) {
     var renderData;
 
     RentalRequestService.prepareRentalRequestDisplayData({ uri: req.params.uri })
@@ -45,12 +41,13 @@ module.exports = {
       }
     })
     .then(function(isNew){
-      res.view('rentalRequest', _.extend(renderData, {
-        _: _,
+      return res.view('rentalRequest', _.extend(renderData, {
         welcome: isNew
       }));
     })
-    .catch(next);
+    .catch(function(err){
+      return res.serverError(err);
+    });
 
   },
 

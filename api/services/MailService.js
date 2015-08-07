@@ -22,7 +22,7 @@ module.exports = {
   },
 
   sendRentRequestResponseEmail: function(rentRequest, fromUser, properties, cb) {
-    var mailer = new Mailer()
+    var mailer = new Mailer();
 
     var message = 'Hello, I am reaching out via Rent Liason with a few properties that meet your parameters...'
     + '</br>'
@@ -36,7 +36,7 @@ module.exports = {
     + '</ul>'
 
     mailer.send({
-      to: rentRequest.user.email,
+      to: rentRequest.email,
       cc: fromUser.email,
       from: 'liason@rentliason.com',
       subject: 'Response to Your Rent Request on rentliason.com',

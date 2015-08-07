@@ -13,10 +13,6 @@ var User = {
       collection: 'Passport',
       via: 'user'
     },
-    renterDetails: {
-      model: 'RenterDetails',
-      via: 'user'
-    },
 
     // attributes
     status: {
@@ -27,7 +23,7 @@ var User = {
     },
     type: {
       type: 'string',
-      enum: ['RENTER', 'PROPERTY_OWNER'],
+      enum: ['PROPERTY_OWNER'],
       defaultsTo: 'PROPERTY_OWNER',
       required: true
     },
@@ -58,21 +54,8 @@ var User = {
 
     isPropertyOwner: function() {
       return this.type === 'PROPERTY_OWNER';
-    },
-
-    isRenter: function() {
-      return this.type === 'RENTER';
-    },
-
-  },
-
-  afterCreate: function(values, cb) {
-    // TODO: figure out how to use instance methods in here (see `isRenter`)
-    if (values.type === 'RENTER') {
-      RenterDetails.create({ user: values.id }, cb);
-    } else {
-      cb();
     }
+
   }
 };
 

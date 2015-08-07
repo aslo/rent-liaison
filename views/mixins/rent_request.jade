@@ -3,16 +3,16 @@ include ./forms
 //- Reusable form elements for the rent request
 
 mixin user_first_name(rentalRequest)
-  - var value = helpers.getNullSafeValue(rentalRequest, ['user', 'firstName'])
-  +input('firstName', 'user[firstName]', value, 'First Name')(required='required')
+  - var value = helpers.getNullSafeValue(rentalRequest, ['firstName'])
+  +input('firstName', 'firstName', value, 'First Name')(required='required')
 
 mixin user_last_name(rentalRequest)
-  - var value = helpers.getNullSafeValue(rentalRequest, ['user', 'lastName'])
-  +input('lastName', 'user[lastName]', value, 'Last Name')(required='required')
+  - var value = helpers.getNullSafeValue(rentalRequest, ['lastName'])
+  +input('lastName', 'lastName', value, 'Last Name')(required='required')
 
 mixin user_email(rentalRequest)
-  - var value = helpers.getNullSafeValue(rentalRequest, ['user', 'email'])
-  +input('email', 'user[email]', value, 'Email')(required='required')
+  - var value = helpers.getNullSafeValue(rentalRequest, ['email'])
+  +input('email', 'email', value, 'Email')(required='required')
 
 mixin start_date(rentalRequest)
   - var value = helpers.getNullSafeValue(rentalRequest, ['startDate'])

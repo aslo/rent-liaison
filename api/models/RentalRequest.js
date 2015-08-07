@@ -8,10 +8,6 @@ module.exports = {
   attributes: {
 
     // associations
-    user: {
-      model: 'user',
-      required: true
-    },
     destinations: {
       required: true,
       collection: 'Destination'
@@ -64,6 +60,45 @@ module.exports = {
     },
     sleeps: {
       type: 'integer'
+    },
+
+    // renter details fields (aka user-like fields)
+    // one day, we might want to just make these users
+    email: {
+      type: 'email',
+      required: true
+    },
+    firstName: {
+      type: 'string'
+    },
+    lastName: {
+      type: 'string'
+    },
+    dateOfBirth: {
+      type: 'date'
+    },
+    occupation: {
+      type: 'string'
+    },
+    phone: {
+      type: 'string'
+    },
+
+    // address
+    address1: {
+      type: 'string'
+    },
+    address2: {
+      type: 'string'
+    },
+    city: {
+      type: 'string'
+    },
+    state: {
+      type: 'string'
+    },
+    zip: {
+      type: 'string'
     },
 
     // instance methods
@@ -129,7 +164,6 @@ module.exports = {
 
   findWithAssociations: function (searchParams) {
     return this.find(searchParams)
-      .populate('user')
       .populate('destinations')
       .populate('desiredPropertyAttributes');
   },
@@ -143,6 +177,13 @@ module.exports = {
         return results;
       }
     });
+  },
+
+  beforeValidate: function(values, cb) {
+    // TODO check if this user currently has any other actiev ones?
+    // or maybe put some arbitrary limit?
+    // TODO also maybe auto-activate if this user has been seen before?
+    cb();
   },
 
   afterValidate: function(values, cb) {

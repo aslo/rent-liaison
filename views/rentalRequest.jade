@@ -51,22 +51,22 @@ block body
               .row
                 .eight.columns
                   label Email
-                  p= rentalRequest.user.email
+                  p= rentalRequest.email
 
               .row
                 .eight.columns
-                  +input('address1', 'renterDetails[address1]', rentalRequest.user.renterDetails.address1, 'Address')
-                  +input('address2', 'renterDetails[address2]', rentalRequest.user.renterDetails.address2)
+                  +input('address1', 'address1', rentalRequest.address1, 'Address')
+                  +input('address2', 'address2', rentalRequest.address2)
 
               .row
                 .eight.columns
-                  +input('city', 'renterDetails[city]', rentalRequest.user.renterDetails.city, 'City')
+                  +input('city', 'city', rentalRequest.city, 'City')
               .row
                 .five.columns
                   label(for="state") State
-                  +state_select(rentalRequest.user.renterDetails.state)(id="state", name="renterDetails[state]", class="u-full-width")
+                  +state_select(rentalRequest.state)(id="state", name="state", class="u-full-width")
                 .three.columns
-                  +input('zip', 'renterDetails[zip]', rentalRequest.user.renterDetails.zip, 'Zip')
+                  +input('zip', 'zip', rentalRequest.zip, 'Zip')
 
               .row
                 button(type="submit") Submit
