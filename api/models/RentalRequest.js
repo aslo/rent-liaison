@@ -44,22 +44,27 @@ module.exports = {
       type: 'string'
     },
     adults: {
-      type: 'integer'
+      type: 'integer',
+      min: 0
     },
     children: {
-      type: 'integer'
+      type: 'integer',
+      min: 0
     },
     budget: {
-      type: 'float'
+      type: 'float',
+      min: 0
     },
     groupComments: {
       type: 'string'
     },
     bedrooms: {
-      type: 'integer'
+      type: 'integer',
+      min: 0
     },
     sleeps: {
-      type: 'integer'
+      type: 'integer',
+      min: 0
     },
 
     // renter details fields (aka user-like fields)

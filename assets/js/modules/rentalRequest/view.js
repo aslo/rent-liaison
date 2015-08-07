@@ -3,14 +3,15 @@ define([
   'pikaday',
   'tab',
   'modules/rentalRequest/views/completionProgressView',
-  'views/tag'
-], function(Backbone, Pikaday, tab, CompletionProgressView, Tag){
+
+  'views/tag',
+  'views/datePicker'
+], function(Backbone, Pikaday, tab, CompletionProgressView, Tag, DatePicker){
 
   return Backbone.View.extend({
 
     events: {
-      'submit .js-rental-request-form': 'updateRentRequest',
-      'submit .js-user-form': 'updateUser'
+      'submit .js-rental-request-form': 'save'
     },
 
     initialize: function() {
@@ -26,33 +27,34 @@ define([
       });
 
       // init plugins
-      this.$('.js-pikaday').each(function(i, el){
-        new Pikaday({ field: el });
+      this.datePicker = new DatePicker({
+        startDateEl: this.$('.js-start-date')[0],
+        endDateEl: this.$('.js-end-date')[0]
       });
       this.$('[data-toggle=tab]').tab();
-
     },
 
-    updateRentRequest: function (e) {
+    save: function (e) {
       this._updateModelFromForm(e, this.model);
     },
-    updateUser: function(e){
-      this._updateModelFromForm(e, this.model.get('user'));
-    },
+
     _updateModelFromForm: function(e, model) {
-      e.preventDefault()
+      e.preventDefault();
       clean = function (obj) {
-        for (key in obj) {
-          if (typeof obj[key] == 'object') {
+        for (var key in obj) {
+          if (typeof obj[key] === 'object') {
             obj[key] = clean(obj[key]);
-          } else if (obj[key] == "") {
+          } else if (obj[key] === "") {
             obj[key] = null;
           }
         }
         return obj;
-      }
+      };
 
-      var attrs = this.$(e.target).serializeJSON()
+      var attrs = this.$(e.target).serializeJSON();
+      attrs.startDate = this.datePicker.getStartDate();
+      attrs.endDate = this.datePicker.getEndDate();
+
       attrs = clean(attrs);
       return model.save(attrs, {
         patch: true

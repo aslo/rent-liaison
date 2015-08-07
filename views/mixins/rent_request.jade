@@ -16,11 +16,11 @@ mixin user_email(rentalRequest)
 
 mixin start_date(rentalRequest)
   - var value = helpers.getNullSafeValue(rentalRequest, ['startDate'])
-  +input('startDate', 'startDate', value, 'Arrival Date')(class='js-start-date js-pikaday', required='required')
+  +input('startDate', 'startDate', value, 'Arrival Date')(class='js-start-date', required='required')
 
 mixin end_date(rentalRequest)
   - var value = helpers.getNullSafeValue(rentalRequest, ['endDate'])
-  +input('endDate', 'endDate', value, 'Departure Date')(class='js-end-date js-pikaday', required='required')
+  +input('endDate', 'endDate', value, 'Departure Date')(class='js-end-date', required='required')
 
 mixin flexible_dates(rentalRequest)
   - var isSelected = helpers.getNullSafeValue(rentalRequest, ['datesAreFlexible'])

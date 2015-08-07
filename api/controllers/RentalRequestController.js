@@ -52,7 +52,7 @@ module.exports = {
   },
 
   patch: function (req, res, next) {
-    RentalRequest.update(req.params.id, req.body).populate('user')
+    RentalRequest.update(req.params.id, req.body)
     .then(function(result) { res.json(result); })
     .catch(next);
   }
