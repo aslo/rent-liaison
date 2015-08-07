@@ -1,6 +1,7 @@
-_ = require('lodash');
+_      = require('lodash');
+moment = require('moment');
 
-var URI_LENGTH = 15;
+var URI_LENGTH = 24;
 
 module.exports = {
 
@@ -145,7 +146,7 @@ module.exports = {
   },
 
   afterValidate: function(values, cb) {
-    if (values.startDate && values.endDate && moment(startDate).after(endDate)) {
+    if (values.startDate && values.endDate && moment(values.startDate).isAfter(values.endDate)) {
         cb(new Error('start date can not be after end'));
     } else {
       cb();
@@ -158,7 +159,7 @@ module.exports = {
   },
 
   _generateRandomUri: function() {
-    chars = 'abcdefghijklmnopqrstuvwxyz1234567890-_.';
+    chars = 'abcdefghijklmnopqrstuvwxyz1234567890';
 
     uri = '';
     for (var i = 0; i < URI_LENGTH; i++) {

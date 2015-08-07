@@ -38,6 +38,7 @@ module.exports.routes = {
   'GET /property/:slug': 'PropertyController.get',
 
   // renter
+  'POST /rentalrequest': 'RentalRequestController.create',
   'GET /rentalrequest/:uri': 'RentalRequestController.findByUri',
   'PATCH /rentalrequest/:id': 'RentalRequestController.patch',
   'PATCH /user/:id': 'UserController.patch',

@@ -23,10 +23,10 @@ define([
         new Tag({ el: this });
       });
 
-      new DatePicker({
+      this.datePicker = new DatePicker({
         startDateEl: this.$('.js-start-date')[0],
         endDateEl: this.$('.js-end-date')[0]
-      })
+      });
 
       this.datesAreDisabled = false;
     },
@@ -35,15 +35,12 @@ define([
       e.preventDefault();
       var self = this;
 
-      var email = this.$('[name="user[email]"]').val();
-
+      // get all form attributes, then disable before saving
       var $formInputs = this.$(e.target).find('input, select');
-      var attrs = $formInputs.serializeJSON();
+      var formAttributes = this._getFormValues($formInputs);
       $formInputs.attr('disabled', 'disabled');
 
-      var model = new RentalRequest();
-
-      model.save(attrs, {
+      new RentalRequest().save(formAttributes, {
         success: function(model, response, options){
           self.clear();
 
@@ -55,7 +52,7 @@ define([
             + "</div>"
             + "</div>");
 
-          self.$el.html(template({ email: email }));
+          self.$el.html(template());
         },
         error: function(model, response, options){
           console.error(arguments);
@@ -77,11 +74,18 @@ define([
     },
 
     _updateDatesDisabledAttr: function(disable) {
-      $dates = this.$('.js-start-date,.js-end-date,.js-dates-are-flexible')
+      $dates = this.$('.js-start-date,.js-end-date,.js-dates-are-flexible');
 
       $dates.attr('disabled', function(index, attr){
         return disable ? 'disabled' : null;
       });
+    },
+
+    _getFormValues: function($form){
+      var attrs = $form.serializeJSON();
+      attrs.startDate = this.datePicker.getStartDate();
+      attrs.endDate = this.datePicker.getEndDate();
+      return attrs;
     },
 
     // empty the view's content and stop listening to events,

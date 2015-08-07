@@ -32,13 +32,22 @@ define([
     },
 
     onSelectStartDate: function(date) {
-      this.endDate.setMinDate(date)
-      this.endDate.setStartRange(date)
+      this.endDate.setMinDate(date);
+      this.endDate.setStartRange(date);
     },
 
     onSelectEndDate: function(date) {
-      this.startDate.setEndRange(date)
-    }
-  })
+      this.startDate.setEndRange(date);
+    },
 
-})
+    getStartDate: function() {
+      return this.startDate.getDate();
+    },
+
+    getEndDate: function() {
+      return this.endDate.getDate();
+    }
+
+  });
+
+});
