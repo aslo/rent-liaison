@@ -4,7 +4,6 @@ module.exports = function (grunt) {
     'jade:compile',
 		'jst:dev',
 		'less:dev',
-		'copy:dev',
-		'coffee:dev'
+		'copy:dev'
 	]);
 };

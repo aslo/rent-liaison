@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 
     assets: {
 			files: ['assets/**/*', '!assets/js/vendor/**', 'tasks/pipeline.js', '!**/node_modules/**'],
-			tasks: ['syncAssets' , 'linkAssets']
+			tasks: ['syncAssets']
 		},
 
     views: {
