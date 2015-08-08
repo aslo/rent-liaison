@@ -1,66 +1,38 @@
 define([
   'backbone',
-  'pikaday',
   'tab',
-  'modules/rentalRequest/views/completionProgressView',
-
-  'views/tag',
-  'views/datePicker'
-], function(Backbone, Pikaday, tab, CompletionProgressView, Tag, DatePicker){
+  'modules/rentalRequest/views/tabs',
+  'modules/rentalRequest/views/groupInfoFormView',
+  'modules/rentalRequest/views/personalInfoFormView',
+  'modules/rentalRequest/views/propertyInfoFormView',
+], function(Backbone, tab, RentRequestTabsView, GroupInfoFormView, PersonalInfoFormView, PropertyInfoFormView){
 
   return Backbone.View.extend({
-
-    events: {
-      'submit .js-rental-request-form': 'save'
-    },
 
     initialize: function() {
       this.model.set('id', this.$el.data('rentalRequestId'));
 
-      // subviews
-      this.progressSubview = new CompletionProgressView({
-        el: this.$('#js-rent-request-progress'),
-        model: this.model
-      });
-      this.$('.js-tag').each(function(){
-        new Tag({ el: this });
-      });
-
-      // init plugins
-      this.datePicker = new DatePicker({
-        startDateEl: this.$('.js-start-date')[0],
-        endDateEl: this.$('.js-end-date')[0]
-      });
-      this.$('[data-toggle=tab]').tab();
-    },
-
-    save: function (e) {
-      this._updateModelFromForm(e, this.model);
-    },
-
-    _updateModelFromForm: function(e, model) {
-      e.preventDefault();
-      clean = function (obj) {
-        for (var key in obj) {
-          if (typeof obj[key] === 'object') {
-            obj[key] = clean(obj[key]);
-          } else if (obj[key] === "") {
-            obj[key] = null;
-          }
+      // subview for managing the tab states
+      new RentRequestTabsView({
+        el: this.$('.js-rr-tabs'),
+        model: this.model,
+        tabViews: {
+          '#js-personal-info': new PersonalInfoFormView({
+            el: this.$('#js-personal-info'),
+            model: this.model
+          }),
+          '#js-group-info': new GroupInfoFormView({
+            el: this.$('#js-group-info'),
+            model: this.model
+          }),
+          '#js-property-info': new PropertyInfoFormView({
+            el: this.$('#js-property-info'),
+            model: this.model
+          }),
         }
-        return obj;
-      };
-
-      var attrs = this.$(e.target).serializeJSON();
-      attrs.startDate = this.datePicker.getStartDate();
-      attrs.endDate = this.datePicker.getEndDate();
-
-      attrs = clean(attrs);
-      return model.save(attrs, {
-        patch: true
-        // success: console.log,
-        // error: console.error
       });
+
+      this.$('[data-toggle=tab]').tab();
     }
 
   });

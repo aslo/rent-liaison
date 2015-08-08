@@ -41,7 +41,7 @@ module.exports = {
       }
     })
     .then(function(isNew){
-      return res.view('rentalRequest', _.extend(renderData, {
+      return res.view('modules/rentalRequest/rentalRequest', _.extend(renderData, {
         welcome: isNew
       }));
     })

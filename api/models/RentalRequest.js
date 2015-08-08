@@ -124,47 +124,6 @@ module.exports = {
 
       return parse(this.adults) + parse(this.children);
     },
-
-    getCompletionPercentage: function() {
-      var ignoreFields = [
-        'createdAt',
-        'updatedAt',
-        'id',
-        'passports',
-        'status',
-        'uri',
-        'datesAreFlexible',
-        'address2'
-      ];
-
-      var totalFields = 0,
-          completedFields = 0;
-
-      // TODO handle this on the client
-
-      function count(obj) {
-        for (var key in obj) {
-          if (! _.contains(ignoreFields, key)) {
-            if (typeof obj[key] === 'object') {
-              count(obj[key]);
-            } else if (typeof obj[key] !== 'function') {
-              totalFields++;
-              if (obj[key] || parseInt(obj[key]) === 0) {
-                completedFields++;
-              }
-            }
-          }
-        }
-      }
-
-      count(this);
-
-      if (totalFields > 0) {
-        return Math.round((completedFields / totalFields) * 100);
-      } else {
-        return 100;
-      }
-    }
   },
 
   findWithAssociations: function (searchParams) {

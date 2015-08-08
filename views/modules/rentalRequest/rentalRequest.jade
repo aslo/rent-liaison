@@ -1,11 +1,8 @@
-include ./mixins/forms
-include ./mixins/tabs
-include ./mixins/rent_request
+include ../../mixins/forms
+include ../../mixins/tabs
+include ../../mixins/rent_request
 
-extends layout
-
-//- block nav
-//-   //- empty
+extends ../../layout
 
 block body
 
@@ -26,20 +23,23 @@ block body
             | You can return to this page to modify your Rent Request at any time.
 
         .row
-          #js-rent-request-progress
-            include ./modules/rentalRequest/completion_progress
+          p In order to make your request as attractive as possible to property owners,
+            | please add some more information about yourself and the party you will be traveling with.
 
     .row
       .three.columns
-        .p-rent-request--tab-area
+        .js-rr-tabs.p-rent-request--tab-area
           +side_tab_list()
-            +tab("personal-info", true)(class="tag") Personal Info
-            +tab("group-info")(class="tag") Group Info
-            +tab("property-info")(class="tag") Property Info
+            +tab("js-personal-info", true)(class="tag") Personal Info
+              span.js-status-label.pull-right
+            +tab("js-group-info")(class="tag") Group Info
+              span.js-status-label.pull-right
+            +tab("js-property-info")(class="tag") Property Info
+              span.js-status-label.pull-right
 
       .nine.columns
         .row
-          +tab_panel("personal-info", true)
+          +tab_panel("js-personal-info", true)
             form.js-rental-request-form
               h2 Personal Information
               .row
@@ -71,7 +71,7 @@ block body
               .row
                 button(type="submit") Submit
 
-          +tab_panel("group-info")
+          +tab_panel("js-group-info")
             form.js-rental-request-form
               h2 Group Information
               .row
@@ -101,7 +101,7 @@ block body
               .row
                 button(type="submit") Submit
 
-          +tab_panel("property-info")
+          +tab_panel("js-property-info")
             form.js-rental-request-form
               h2 Property Characteristics
               .row
