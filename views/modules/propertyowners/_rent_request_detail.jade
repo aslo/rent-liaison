@@ -1,8 +1,73 @@
-h5 Rent request for #{model.user.firstName} #{model.user.lastName}
+mixin rr_field(label)
+  label=label
+  p
+    block
 
-p TODO show rent request details
+- function formatDate(date) {
+-   return moment(date).format('dddd, MMMM Do YYYY') 
+- }
 
+- function getNumDays(start, end) {
+-   return moment(start).diff(moment(end), 'days')
+- }
+
+- function showDestinations(destinations) {
+-   return _.map(destinations, function(d){ 
+-     return helpers.humanize(d.name); 
+-   }).join(', ');
+- }
+
+- function showFilteredAttrs(propertyAttributes, filter) {
+-   return _(propertyAttributes)
+-   .filter(filter)
+-   .map(function(d){ 
+-     return helpers.humanize(d.name); 
+-   }).value().join(', ');
+- }
+
+- function showLocationCharacteristics(attrs) {
+-   return showFilteredAttrs(attrs, {type: 'LOCATION'});
+- }
+
+- function showAmenities(attrs) {
+-   return showFilteredAttrs(attrs, {type: 'AMENITY'});
+- }
+
+
+.row
+  .four.columns
+    .row
+      +rr_field('Renter')
+        | #{model.firstName} #{model.lastName} (#{model.email})
+    .row
+      +rr_field('Dates')
+        | #{formatDate(model.startDate)} - #{formatDate(model.endDate)} (#{getNumDays(model.endDate, model.startDate)} days)
+    .row
+      +rr_field('Budget (total)')
+        = accounting.formatMoney(model.budget)
+    .row
+      +rr_field('Renter Group Size')
+        | #{model.adults} adults, #{model.children} children
+  
+  .eight.columns
+    .row
+      +rr_field('Desired Locations')
+        = showDestinations(model.destinations)
+    .row
+      +rr_field('Desired Location Characteristics')
+        = showLocationCharacteristics(model.desiredPropertyAttributes)
+    .row
+      +rr_field('Desired Amenities')
+        = showAmenities(model.desiredPropertyAttributes)
+    .row
+      +rr_field('Renter\'s Description of Occasion')
+        = model.occasion
+    .row
+      +rr_field('Renter\'s General Comments')
+        = model.groupComments
+  
+//- desired locations, desired location Characteristics, desired amenities
 
 button.button-primary.js-contact
   i.fa.fa-pencil
-  | &nbsp; Contact this fool
+  | &nbsp; Contact Renter

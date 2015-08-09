@@ -13,15 +13,15 @@ define([
     },
 
     initialize: function(){
-      this.title = 'Detalzzz'
+      this.title = 'Rent Request Details';
     },
 
     render: function(){
       this.body = this.detailTpl.render({
         model: this.model.toJSON()
-      })
+      });
 
-      Modal.prototype.render.apply(this)
+      Modal.prototype.render.apply(this);
 
       return this;
     },
@@ -31,10 +31,10 @@ define([
         rentRequest: this.model
       });
 
-      this.$('.modal').modal('hide')
+      this.$('.modal').modal('hide');
 
-      contactView.render()
+      contactView.render();
     }
 
-  })
-})
+  });
+});
