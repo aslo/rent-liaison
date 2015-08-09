@@ -12,9 +12,11 @@ define([
   'modules/rentalRequest/collection',
 
   'modules/property/collection',
-  'modules/property/views/collectionView'
+  'modules/property/views/collectionView',
 
-], function(Backbone, NavView, LoginView, HomeView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView){
+  'modules/property/views/listingView'
+
+], function(Backbone, NavView, LoginView, HomeView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView, PropertyListingView){
 
   return Backbone.Router.extend({
 
@@ -23,7 +25,8 @@ define([
       'login'                : 'login',
       'rentalrequest'        : 'rentalrequestIndex',
       'rentalrequest/:uri'   : 'rentalRequest',
-      'properties'           : 'properties'
+      'properties'           : 'properties',
+      'property/:slug'       : 'propertyListing'
     },
 
     home: function(){
@@ -62,6 +65,13 @@ define([
         amenities: this.amenitiesCollection,
         locations: this.locationsCollection,
         destinations: this.destinationsCollection
+      });
+    },
+
+    propertyListing: function() {
+      new PropertyListingView({
+        el: $('#js-property-listing'),
+        model: new Backbone.Model(window.property)
       });
     },
 

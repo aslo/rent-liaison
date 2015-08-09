@@ -33,14 +33,15 @@ block body
       .seven.columns
         .row.p-property--content
           +tab_panel('pictures', true)
-            //- main image
-            .row
-              +image(property.images && property.images[0] ? property.images[0].url : null, 540, 400)
-
-            //- other images
-            .row
-              p TODO secondary images here
-
+            
+            if property.images && property.images.length > 0
+              ul.js-image-carousel
+                each img in property.images
+                  li(data-thumb='http://placehold.it/54x40')
+                    +image(img.url, 540, 400)
+            else
+              +image(null, 540, 400)
+            
           +tab_panel('location')
             h3 Location
             +tag_group(locations)
@@ -51,10 +52,10 @@ block body
 
             p= property.amenitiesDescription
 
-
         .row
-          h5 Description
-          p= property.description
+          if !_.isEmpty(property.description)
+            h5 Description
+            p= property.description
 
       //- right side bar
       .three.columns
@@ -69,3 +70,6 @@ block body
               li.property-listing.tag
                 img(src="http://www.google.com/s2/favicons?domain_url=#{encodeURIComponent(listing.url)}")
                 a(href="//#{listing.url}", target="_blank")= helpers.shorten(listing.url, 20)
+
+  script.
+    window.property = !{JSON.stringify(property)}

@@ -21,6 +21,7 @@ require.config({
     fileUpload:         './vendor/blueimp-file-upload-node/js/jquery.fileupload',
     iFrameTransport:    './vendor/blueimp-file-upload-node/js/jquery.iframe-transport',
     nouislider:         './vendor/nouislider/distribute/nouislider.min',
+    lightslider:        './vendor/lightslider/dist/js/lightslider.min',
 
     // bootstrap stuff
     modal: './vendor/bootstrap/js/modal',

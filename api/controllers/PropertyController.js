@@ -1,8 +1,8 @@
-var Promise = require('bluebird')
+var Promise = require('bluebird');
 
 module.exports = {
 
-  get: function(req, res, next) {
+  get: function(req, res) {
     Property.findOne({ slug: req.params.slug })
       .populate('user')
       .populate('images')
@@ -19,7 +19,7 @@ module.exports = {
       });
     })
     .catch(function(err){
-      return next(err);
-    })
+      return res.serverError(err);
+    });
   }
-}
+};
