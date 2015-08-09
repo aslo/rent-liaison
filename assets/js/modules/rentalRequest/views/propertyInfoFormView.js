@@ -12,7 +12,15 @@ define([
     },
 
     getStatus: function() {
-      return this.POSSIBLE_STATES.OK;
+      if (this._destinationsAreEmpty()) {
+        return this.POSSIBLE_STATES.WARNING;
+      } else {
+        return this.POSSIBLE_STATES.OK;
+      }
+    },
+
+    _destinationsAreEmpty: function() {
+      return this.$('input[name="destinations[]"][type=checkbox]:checked').length < 1;
     }
 
   });
