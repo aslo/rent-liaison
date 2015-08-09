@@ -16,7 +16,7 @@ mixin destinations(destinations)
 //- END MIXINS
 
 td
-  - var name = rentalRequest.user.firstName + ' ' + rentalRequest.user.lastName
+  - var name = rentalRequest.firstName + ' ' + rentalRequest.lastName
   +rent_request_field(name)
 td
   +destinations(destinationNames)

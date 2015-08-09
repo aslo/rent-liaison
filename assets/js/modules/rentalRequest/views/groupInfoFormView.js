@@ -20,7 +20,6 @@ define([
       } else {
         return this.POSSIBLE_STATES.OK;
       }
-
     },
 
     // overriding parent class function
