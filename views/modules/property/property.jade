@@ -25,13 +25,13 @@ block body
       //- left side bar
       .two.columns
         +side_tab_list()
-          +tab("pictures", true)(class="tag") Photos
-          +tab("location")(class="tag") Location
-          +tab("amenities")(class="tag") Amenities
+          +tab("pictures", true) Photos
+          +tab("location") Location
+          +tab("amenities") Amenities
 
       //- main content
       .seven.columns
-        .row.p-property--content
+        .row.p-property--content.tab-content
           +tab_panel('pictures', true)
             
             if property.images && property.images.length > 0

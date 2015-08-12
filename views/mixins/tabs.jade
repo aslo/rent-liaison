@@ -1,9 +1,9 @@
 mixin side_tab_list(tabs)
-  ul.side-tabs(role="tablist")
+  ul.nav.nav-pills.nav-stacked
     block
 
 mixin tab(tabPanelId, isActive)
-  li.tab(role="presentation", class=(isActive ? 'active' : ''))&attributes(attributes)
+  li(role="presentation", class=(isActive ? 'active' : ''))&attributes(attributes)
     a(href="##{tabPanelId}", role="tab", data-toggle="tab")
       block
 

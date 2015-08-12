@@ -1,11 +1,10 @@
 define([
   'backbone',
-  'tab',
   'modules/rentalRequest/views/tabs',
   'modules/rentalRequest/views/groupInfoFormView',
   'modules/rentalRequest/views/personalInfoFormView',
   'modules/rentalRequest/views/propertyInfoFormView',
-], function(Backbone, tab, RentRequestTabsView, GroupInfoFormView, PersonalInfoFormView, PropertyInfoFormView){
+], function(Backbone, RentRequestTabsView, GroupInfoFormView, PersonalInfoFormView, PropertyInfoFormView){
 
   return Backbone.View.extend({
 
@@ -31,8 +30,6 @@ define([
           }),
         }
       });
-
-      this.$('[data-toggle=tab]').tab();
     }
 
   });

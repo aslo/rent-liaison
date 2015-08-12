@@ -1,7 +1,8 @@
 define([
   'backbone',
-  'tooltip'
-], function(Backbone, tooltip){
+  'tooltip',
+  'tab'
+], function(Backbone, tooltip, tab){
 
   // This view is responsible for managing the content of each tab.
   return Backbone.View.extend({
@@ -20,6 +21,8 @@ define([
         // set the initial statuses of each subview
         self.updateTabStatus(selector, view.getStatus());
       });
+
+      this.$('[data-toggle=tab]').tab();
     },
 
     updateTabStatus: function(tabSelector, status) {

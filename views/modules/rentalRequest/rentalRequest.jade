@@ -30,15 +30,15 @@ block body
       .three.columns
         .js-rr-tabs.p-rent-request--tab-area
           +side_tab_list()
-            +tab("js-personal-info", true)(class="tag") Personal Info
+            +tab("js-personal-info", true) Personal Info
               span.js-status-label.pull-right
-            +tab("js-group-info")(class="tag") Group Info
+            +tab("js-group-info") Group Info
               span.js-status-label.pull-right
-            +tab("js-property-info")(class="tag") Property Info
+            +tab("js-property-info") Property Info
               span.js-status-label.pull-right
 
       .nine.columns
-        .row
+        .row.tab-content
           +tab_panel("js-personal-info", true)
             form.js-rental-request-form
               h2 Personal Information
