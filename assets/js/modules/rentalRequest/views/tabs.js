@@ -1,6 +1,7 @@
 define([
-  'backbone'
-], function(Backbone){
+  'backbone',
+  'tooltip'
+], function(Backbone, tooltip){
 
   // This view is responsible for managing the content of each tab.
   return Backbone.View.extend({
@@ -26,20 +27,24 @@ define([
       var $tabStatusLabel = $tab.find('.js-status-label');
 
       var statusIcons = {
-        'ok':      '<i class="fa fa-check"></i>',
-        'warning': '<i class="fa fa-exclamation-triangle"></i>'
+        'ok':      '<i class="fa fa-check" data-toggle="tooltip" data-placement="right" title="This section is completed"></i>',
+        'warning': '<i class="fa fa-exclamation-triangle" data-toggle="tooltip" data-placement="right" title="Required fields are missing"></i>'
       };
 
       if (statusIcons[status]) {
         $tabStatusLabel.html(statusIcons[status]);
+        this._initTooltips();
       } else {
         console.warn('no tab state to match ', status);
       }
     },
 
     _getTabForSelector: function(selector) {
-      console.log(this.$('[href='+selector+']'));
       return this.$('[href='+selector+']');
+    },
+
+    _initTooltips: function() {
+      this.$('[data-toggle=tooltip]').tooltip();
     }
 
   });

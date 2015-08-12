@@ -25,7 +25,8 @@ require.config({
 
     // bootstrap stuff
     modal: './vendor/bootstrap/js/modal',
-    tab: './vendor/bootstrap/js/tab'
+    tab: './vendor/bootstrap/js/tab',
+    tooltip: './vendor/bootstrap/js/tooltip'
   },
 
   // map: {

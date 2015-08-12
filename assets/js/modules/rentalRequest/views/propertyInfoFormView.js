@@ -12,7 +12,7 @@ define([
     },
 
     getStatus: function() {
-      if (this._destinationsAreEmpty()) {
+      if (this._destinationsAreEmpty() || this._numberBedsIsEmpty()) {
         return this.POSSIBLE_STATES.WARNING;
       } else {
         return this.POSSIBLE_STATES.OK;
@@ -20,7 +20,11 @@ define([
     },
 
     _destinationsAreEmpty: function() {
-      return this.$('input[name="destinations[]"][type=checkbox]:checked').length < 1;
+      return this.$('input[name="destinations[]"][type=checkbox]:checked').length < 1 ;
+    },
+
+    _numberBedsIsEmpty: function() {
+      return $('[name=bedrooms]').val() === '';
     }
 
   });

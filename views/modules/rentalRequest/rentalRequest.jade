@@ -103,7 +103,12 @@ block body
 
           +tab_panel("js-property-info")
             form.js-rental-request-form
-              h2 Property Characteristics
+              h2 Property Information
+
+              .row
+                .two.columns
+                  +input('bedrooms', 'bedrooms', rentalRequest.bedrooms, 'Bedrooms')(type='number')
+
               .row
                 .ten.columns
                   label Destinations
@@ -118,12 +123,6 @@ block body
                 .ten.columns
                   label Desired Amenities
                   +amenity_select(amenities, rentalRequest)
-
-              .row
-                .two.columns
-                  +input('bedrooms', 'bedrooms', rentalRequest.bedrooms, 'Bedrooms')(type='number')
-                .two.columns
-                  +input('sleeps', 'sleeps', rentalRequest.sleeps, 'Sleeps')(type='number')
 
               .row
                 button(type="submit") Submit
