@@ -1,20 +1,28 @@
+mixin accordion(id)
+  .panel-group(id=id, role="tablist")
+    block
+
+mixin accordion_section(parentId, sectionId, heading, isActive)
+  .panel.panel-default
+    .panel-heading(role="tab")
+      h4.panel-title
+        a(role="button", data-toggle="collapse", data-parent="##{parentId}", href="##{sectionId}")= heading
+    .panel-collapse.collapse(id=sectionId, class=isActive ? 'in' : '', role="tabpanel")
+      .panel-body
+        block
+
 .row
   .twelve.columns
     h1.text-center About Us
 .row
-  .eight.columns.offset-by-two.p-home--info-card.js-info-card
-    .front
-      h2.text-center Mission
-    .back
+  +accordion('js-about--accordion')
+    +accordion_section('js-about--accordion', 'js-mission', 'Mission', true)
       p Rent Liaison’s mission is to enhance the way travelers find vacation rental properties.
         | We make this process more efficient by providing a platform that allows homeowners to
         | proactively target specific travelers based on the information and preferences that
         | the travelers communicate through “Rent Requests”.
-
-  .eight.columns.offset-by-two.p-home--info-card.js-info-card
-    .front
-      h2.text-center History
-    .back
+    
+    +accordion_section('js-about--accordion', 'js-history', 'History')
       p Founded in 2015 with the purpose of reinventing vacation renting, Rent Liaison set out
         | to solve a real problem in the nascent vacation rental industry; that is the process by
         | which travelers and homeowners find each other. From a traveler’s standpoint, you might
@@ -26,8 +34,5 @@
         | Rent Liaison tackles these issues by allowing homeowners to directly contact travelers with ready-to-go offers,
         |  thereby removing so many inefficiencies that are found in the vacation rental industry today.
 
-  .eight.columns.offset-by-two.p-home--info-card.js-info-card
-    .front
-      h2.text-center Contact Us
-    .back
+    +accordion_section('js-about--accordion', 'js-contact', 'Contact')
       p For any general or employment related questions, please contact us at info@rentliaison.com

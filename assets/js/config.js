@@ -24,9 +24,11 @@ require.config({
     lightslider:        './vendor/lightslider/dist/js/lightslider.min',
 
     // bootstrap stuff
+    transition: './vendor/bootstrap/js/transition',
     modal: './vendor/bootstrap/js/modal',
     tab: './vendor/bootstrap/js/tab',
-    tooltip: './vendor/bootstrap/js/tooltip'
+    tooltip: './vendor/bootstrap/js/tooltip',
+    collapse: './vendor/bootstrap/js/collapse'
   },
 
   // map: {
@@ -48,6 +50,7 @@ require.config({
     iFrameTransport: ['jquery'],
     'jquery.ui.widget': ['jquery'],
     fileUpload: ['jquery', 'iFrameTransport', 'jquery.ui.widget'],
-    pikaday: ['moment']
+    pikaday: ['moment'],
+    collapse: ['transition']
   }
 });
