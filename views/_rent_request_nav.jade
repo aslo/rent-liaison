@@ -1,0 +1,13 @@
+include ./mixins/nav
+
+#js-nav.navbar
+  ul.nav-list
+    li.nav-list-item
+      a.nav-link.active.js-nav-link(href="/")
+        +logo()
+    li.nav-list-item
+      a.nav-link.js-nav-link(href="/rentrequest") Rent Request
+    li.nav-list-item
+      a.nav-link.js-nav-link(href="/howitworks") How it Works
+    li.nav-list-item
+      a.nav-link.js-nav-link(href="/about") About Us

@@ -18,13 +18,6 @@ block body
 
     .js-rental-request-filters
       .row
-        p Filter by
-      .row
-        .four.columns
-          .js-location-filter
-            - var options = ['none', { name: 'Destination matches one of my properties', id: 'any'}]
-            +select('filter_destination', 'filter_destination', 'Destination', options, null)
-
         .four.columns
           label Budget
           .js-budget-slider
