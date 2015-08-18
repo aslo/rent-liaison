@@ -30,20 +30,32 @@ module.exports = {
   findByUri: function(req, res) {
     var renderData;
 
-    RentalRequestService.prepareRentalRequestDisplayData({ uri: req.params.uri })
-    .then(function(data){
-      renderData = data;
-      if (!renderData) {
+    RentalRequest.findOne({ uri: req.params.uri })
+    .then(function(result){
+      // if it doesn't exist, bail
+      if (!result) {
         return res.notFound();
+      // else, continue
       } else {
-        // activate rentalrequest if necessary
-        return RentalRequestService.activateRentalRequestIfInactive(renderData.rentalRequest);
+        return RentalRequestService.prepareRentalRequestDisplayData({ uri: req.params.uri })
+        .then(function(data){
+          renderData = data;
+          if (!renderData) {
+            return res.notFound();
+          } else {
+            // activate rentalrequest if necessary
+            return RentalRequestService.activateRentalRequestIfInactive(renderData.rentalRequest);
+          }
+        })
+        .then(function(isNew){
+          return res.view('modules/rentalRequest/rentalRequest', _.extend(renderData, {
+            welcome: isNew
+          }));
+        })
+        .catch(function(err){
+          return res.serverError(err);
+        });
       }
-    })
-    .then(function(isNew){
-      return res.view('modules/rentalRequest/rentalRequest', _.extend(renderData, {
-        welcome: isNew
-      }));
     })
     .catch(function(err){
       return res.serverError(err);
