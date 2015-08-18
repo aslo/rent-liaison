@@ -124,7 +124,9 @@ define([
         // init the plugin
         this._cache.$carouselEl.slick({
           accessibility: false,
-          arrows: false
+          arrows: false,
+          draggable: false,
+          swipe: false
         });
       }
 
