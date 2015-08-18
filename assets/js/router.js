@@ -7,7 +7,6 @@ define([
   'views/nav',
 
   'modules/home/aboutView',
-  'modules/home/landingView',
   'modules/home/rentalRequestView',
 
   'modules/login/view',
@@ -22,7 +21,7 @@ define([
 
   'modules/property/views/listingView'
 
-], function(Backbone, _, slick, $, NavView, AboutView, LandingView, RentRequestView, LoginView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView, PropertyListingView){
+], function(Backbone, _, slick, $, NavView, AboutView, RentRequestView, LoginView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView, PropertyListingView){
 
   return Backbone.Router.extend({
 
@@ -38,9 +37,7 @@ define([
     // TODO this should really be pulled into a separate router/module altogether.
     carouselViews: {
       '': {
-        view: LandingView,
-        index: 0,
-        el: '#js-landing'
+        index: 0
       },
       'rentrequest': {
         view: RentRequestView,
