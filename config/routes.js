@@ -22,7 +22,11 @@
 
 module.exports.routes = {
 
+  // static site
   'GET /': 'HomeController.show',
+  'GET /rentrequest': 'HomeController.show',
+  'GET /howitworks': 'HomeController.show',
+  'GET /about': 'HomeController.show',
 
   // property owner
   'GET /home': 'PropertyOwnerController.home',
