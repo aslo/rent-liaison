@@ -3,14 +3,14 @@ include ./mixins/nav
 #js-nav.navbar
   ul.nav-list
     li.nav-list-item
-      a.nav-link.active.js-nav-link(href="#", data-slide-index="0")
+      a.nav-link.active.js-nav-link(href="/", data-internal='true')
         +logo()
     li.nav-list-item
-      a.nav-link.js-nav-link(href="#", data-slide-index="1") Rent Request
+      a.nav-link.js-nav-link(href="/rentrequest", data-internal='true') Rent Request
     li.nav-list-item
-      a.nav-link.js-nav-link(href="#", data-slide-index="2") How it Works
+      a.nav-link.js-nav-link(href="/howitworks", data-internal='true') How it Works
     li.nav-list-item
-      a.nav-link.js-nav-link(href="#", data-slide-index="3") About Us
+      a.nav-link.js-nav-link(href="/about", data-internal='true') About Us
 
     .u-pull-right
       li.nav-list-item

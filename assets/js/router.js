@@ -1,10 +1,16 @@
 define([
   'backbone',
+  'underscore',
+  'slick',
+  'jquery',
+
   'views/nav',
 
-  'modules/login/view',
+  'modules/home/aboutView',
+  'modules/home/landingView',
+  'modules/home/rentalRequestView',
 
-  'modules/home/view',
+  'modules/login/view',
 
   'modules/rentalRequest/propertyOwnerCollectionView',
   'modules/rentalRequest/view',
@@ -16,12 +22,11 @@ define([
 
   'modules/property/views/listingView'
 
-], function(Backbone, NavView, LoginView, HomeView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView, PropertyListingView){
+], function(Backbone, _, slick, $, NavView, AboutView, LandingView, RentRequestView, LoginView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView, PropertyListingView){
 
   return Backbone.Router.extend({
 
     routes: {
-      ''                     : 'home',
       'login'                : 'login',
       'rentalrequest'        : 'rentalrequestIndex',
       'rentalrequest/:uri'   : 'rentalRequest',
@@ -29,9 +34,48 @@ define([
       'property/:slug'       : 'propertyListing'
     },
 
-    home: function(){
-      this._initNav();
-      new HomeView({ el: Backbone.$('#js-home') });
+    // Options map for DRYing up the routing for the static site.
+    // TODO this should really be pulled into a separate router/module altogether.
+    carouselViews: {
+      '': {
+        view: LandingView,
+        index: 0,
+        el: '#js-landing'
+      },
+      'rentrequest': {
+        view: RentRequestView,
+        index: 1,
+        el: '#js-rent-request'
+      },
+      'howitworks': {
+        index: 2
+      },
+      'about': {
+        view: AboutView,
+        index: 3,
+        el: '#js-about'
+      }
+    },
+
+    initialize: function(){
+      this._cache = {};
+
+      //
+      var self = this;
+      Object.keys(this.carouselViews).forEach(function(key){
+        self.route(key, key, function(){
+          var options = self.carouselViews[key];
+
+          // initialize view(s) idempotently
+          self._initStaticSite();
+          if (options.view) {
+            self._new(key, _.bind(options.view, options.view.prototype, { el: $(options.el) }));
+          }
+
+          // navigate there
+          self._cache.$carouselEl.slick('slickGoTo', options.index);
+        });
+      });
     },
 
     login: function(){
@@ -75,8 +119,29 @@ define([
       });
     },
 
-    _initNav: function(){
-      new NavView({ el: Backbone.$('#js-nav') });
+    // Private
+
+    _initStaticSite: function(){
+      if (! this._cache.$carouselEl) {
+        this._cache.$carouselEl = $('*[data-slick]');
+        // init the plugin
+        this._cache.$carouselEl.slick({
+          accessibility: false,
+          arrows: false
+        });
+      }
+
+      this._new('navView', _.bind(NavView, NavView.prototype, { el: Backbone.$('#js-nav') }));
+    },
+
+    // If an object with the matching key exists in the cache, return it.
+    // Otherwise, call the constructor fn to create new one and cache for later.
+    _new: function(key, constructor){
+      if (!this._cache[key]) {
+        this._cache[key] = constructor();
+      }
+      return this._cache[key];
     }
+
   });
 });

@@ -10,7 +10,8 @@
     margin-left: auto;
     margin-right: auto;
 
-    button {
+    .button {
+      width: 200px;
       display: block;
       margin-left: auto;
       margin-right: auto;
@@ -34,23 +35,4 @@
     margin-top: 20px;
   }
 
-  // TODO move to separate component?
-  .carousel {
-    .controls {
-      position: relative;
-      .arrow {
-        position: absolute;
-        z-index: @carousel-control-z-index;
-        top: @carousel-control-top;
-
-        &.right {
-          right: 0px;
-        }
-
-        &.left {
-          left: 0px;
-        }
-      }
-    }
-  }
 }

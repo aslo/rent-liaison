@@ -6,18 +6,12 @@ block body
     .row
       .twelve.columns
         .carousel
-          .controls
-            a(href="#")
-              i.js-prev.left.arrow.fa.fa-chevron-left.fa-4x
-            a(href="#")
-              i.js-next.right.arrow.fa.fa-chevron-right.fa-4x
-
           .slides(data-slick='{"slidesToShow": 1, "slidesToScroll": 1}')
-
+            
             .slide
               #js-landing
                 include ./_landing
-
+            
             .slide(hidden="true")
               #js-rent-request
                 include ./_rent_request
