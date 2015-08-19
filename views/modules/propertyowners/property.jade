@@ -8,23 +8,18 @@ include ../../mixins/tags
 
 .eight.columns
   .row
-    .pull-left
+    .eight.columns
       h4.property-list-item--title= property.name
 
-    .pull-right
-      a(href="/property/#{property.slug}", target="_blank") view public listing &nbsp;
-        i.fa.fa-external-link
-
-  - var dest = property.destination ? property.destination.name : ''
-  if dest
-    .row
-      | in &nbsp;
-      +tag()(class="active")
-        = helpers.humanize(dest)
+    .four.columns
+      .pull-right
+        a(href="/property/#{property.slug}", target="_blank") view public listing &nbsp;
+          i.fa.fa-external-link
 
   .row
-    property.property-list-item--description= helpers.shorten(property.description, 200)
+    .property-list-item--description= helpers.shorten(property.description, 200)
 
   .row
-    button.js-edit Edit
-    button.js-upload Upload Pics
+    .property-list-item--controls
+      button.js-edit Edit
+      button.js-upload Upload Pics

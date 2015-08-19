@@ -13,10 +13,10 @@ block body
 
     //- header row
     .row.p-property--header
-      .seven.columns
-        h1= property.name
-
-      .four.columns.offset-by-one
+      .row
+        .twelve.columns
+          h1= property.name
+      .row
         h4 #{property.bedrooms} Bed, #{property.bathrooms} Bath, Sleeps #{property.sleeps}
 
     //- main content row
