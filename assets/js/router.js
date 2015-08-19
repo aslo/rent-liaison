@@ -11,8 +11,8 @@ define([
 
   'modules/login/view',
 
-  'modules/rentalRequest/propertyOwnerCollectionView',
-  'modules/rentalRequest/view',
+  'modules/rentalRequest/views/main',
+  'modules/rentalRequest/views/propertyOwnerCollectionView',
   'modules/rentalRequest/model',
   'modules/rentalRequest/collection',
 
@@ -21,7 +21,7 @@ define([
 
   'modules/property/views/listingView'
 
-], function(Backbone, _, slick, $, NavView, AboutView, RentRequestView, LoginView, RentalRequestCollectionView, RentalRequestView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView, PropertyListingView){
+], function(Backbone, _, slick, $, NavView, AboutView, RentRequestView, LoginView, RentalRequestView, RentalRequestCollectionView, RentalRequestModel, RentalRequestCollection, PropertyCollection, PropertiesView, PropertyListingView){
 
   return Backbone.Router.extend({
 
@@ -82,7 +82,8 @@ define([
     rentalrequestIndex: function() {
       new RentalRequestCollectionView({
         el: Backbone.$('#js-rental-requests'),
-        collection: new RentalRequestCollection(window.rentalRequests)
+        collection: new RentalRequestCollection(window.rentalRequests),
+        myProperties: new Backbone.Collection(window.myProperties)
       });
     },
 

@@ -1,6 +1,6 @@
 define([
   'backbone',
-  'modules/rentalRequest/propertyOwnerModelView',
+  'modules/rentalRequest/views/propertyOwnerModelView',
   'modules/rentalRequest/views/filtersView'
 ], function(Backbone, ModelView, FiltersView){
 
@@ -10,7 +10,7 @@ define([
       'change .js-filter': 'onUpdateFilters'
     },
 
-    initialize: function() {
+    initialize: function(options) {
       var self = this;
 
       // init subview for filters

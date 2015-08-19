@@ -27,6 +27,8 @@ define([
     },
 
     showContact: function(e) {
+      // TODO trigger an event and let the supervising view handle the
+      // instantiation of this next view
       var contactView = new ContactView({
         rentRequest: this.model
       });

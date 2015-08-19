@@ -16,24 +16,24 @@ define([
     },
 
     initialize: function(options){
-      this.properties  = new PropertyCollection(window.propertyProfiles)
-      this.rentRequest = options.rentRequest
+      this.properties  = new PropertyCollection(window.myProperties);
+      this.rentRequest = options.rentRequest;
 
-      this.title = 'Compose Your Message'
+      this.title = 'Compose Your Message';
 
-      this.selectedProperties = new PropertyCollection()
+      this.selectedProperties = new PropertyCollection();
       // TODO subview for this?
-      this.listenTo(this.selectedProperties, 'add', this.addToSelection)
-      this.listenTo(this.selectedProperties, 'remove', this.removeFromSelection)
+      this.listenTo(this.selectedProperties, 'add', this.addToSelection);
+      this.listenTo(this.selectedProperties, 'remove', this.removeFromSelection);
     },
 
     render: function() {
       this.body = this.formTemplate.render({
         properties: this.properties.toJSON(),
         rentRequest: this.rentRequest.toJSON()
-      })
+      });
 
-      Modal.prototype.render.apply(this)
+      Modal.prototype.render.apply(this);
 
       return this;
     },
@@ -43,9 +43,9 @@ define([
       var model = this.properties.get(id);
 
       if (this.$(e.target).is(':checked')) {
-        this.selectedProperties.add(model)
+        this.selectedProperties.add(model);
       } else {
-        this.selectedProperties.remove(model)
+        this.selectedProperties.remove(model);
       }
     },
 
@@ -54,18 +54,18 @@ define([
         this.selectedPropertyTemplate.render({
           property: model.toJSON()
         })
-      )
+      );
     },
 
     removeFromSelection: function(model) {
-      this.$('.js-selected-properties [data-property-id='+ model.id +']').remove()
+      this.$('.js-selected-properties [data-property-id='+ model.id +']').remove();
     },
 
     sendMessage: function(e) {
       var propertyIds = [];
       $('input[type=checkbox]:checked').each(function(){
         propertyIds.push($(this).data('propertyId'));
-      })
+      });
 
       $.post(this.rentRequest.url() + '/respond', {
         propertyIds: propertyIds
@@ -75,7 +75,7 @@ define([
       })
       .fail(function(){
 
-      })
+      });
     }
-  })
-})
+  });
+});

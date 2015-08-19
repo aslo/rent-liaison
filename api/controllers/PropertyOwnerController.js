@@ -68,7 +68,6 @@ module.exports = {
     Step(
       function(){
         RentalRequest.findOne(req.params.id)
-        .populate('user')
         .exec(this.parallel());
 
         Property.find({id: req.body.propertyIds})
