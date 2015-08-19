@@ -93,7 +93,9 @@ block body
 
               .row
                 .eight.columns
-                  +input('occasion', 'occasion', rentalRequest.occasion, 'Occasion')(type='text')
+                  - var options = ['Just for Fun','Birthday','Wedding','Bachelor/Bachelorette','Just to Relax','Holiday','Graduation','Prom','Baby Shower'];
+                  +select('occasion', 'occasion', 'Occasion', options, rentalRequest.occasion)
+
               .row
                 .eight.columns
                   label(for="group-comments") Additional Comments
