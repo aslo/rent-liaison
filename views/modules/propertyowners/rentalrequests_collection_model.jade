@@ -21,7 +21,8 @@ td
 td
   +destinations(destinationNames)
 td
-  +rent_request_field(accounting.formatMoney(rentalRequest.budget))
+  if rentalRequest.budget > 0
+    +rent_request_field(accounting.formatMoney(rentalRequest.budget))
 td
   +rent_request_field(rentalRequest.adults + rentalRequest.children)
 td

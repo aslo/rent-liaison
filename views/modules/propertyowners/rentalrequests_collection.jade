@@ -14,3 +14,6 @@ if rentalRequests.length > 0
       each rentalRequest in rentalRequests
         tr.clickable-tr.js-rent-request-model(data-rent-request-id=rentalRequest.id)
           include ./rentalrequests_collection_model
+
+else 
+  h5 Looks like there are currently no active rent requests in our system. Please check back later!

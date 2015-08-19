@@ -16,30 +16,31 @@ block body
     .row
       h1 Rent Requests
 
-    .js-rental-request-filters
-      .row
-        .four.columns
-          label Budget
-          .js-budget-slider
-            .js-slider
-            .four.columns
-              | Min:&nbsp;
-              span.js-filter-min
-            .four.columns.offset-by-four
-              | Max:&nbsp;
-              span.js-filter-max
-              
-        .four.columns
-          label Dates
-          .js-date-slider
-            .js-slider
-            .four.columns
-              | Min:&nbsp;
-              span.js-filter-min
-            .four.columns.offset-by-four
-              | Max:&nbsp;
-              span.js-filter-max
+    if rentalRequests.length > 1
+      .js-rental-request-filters
+        .row
+          .four.columns
+            label Budget
+            .js-budget-slider
+              .js-slider
+              .four.columns
+                | Min:&nbsp;
+                span.js-filter-min
+              .four.columns.offset-by-four
+                | Max:&nbsp;
+                span.js-filter-max
                 
+          .four.columns
+            label Dates
+            .js-date-slider
+              .js-slider
+              .four.columns
+                | Min:&nbsp;
+                span.js-filter-min
+              .four.columns.offset-by-four
+                | Max:&nbsp;
+                span.js-filter-max
+                  
     .row
       include ./rentalrequests_collection
 
