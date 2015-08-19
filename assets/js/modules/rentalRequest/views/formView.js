@@ -1,6 +1,7 @@
 define([
   'backbone',
-], function(Backbone){
+  'views/loading'
+], function(Backbone, LoadingBehaviors){
 
   return Backbone.View.extend({
 
@@ -14,14 +15,22 @@ define([
     },
 
     save: function (e) {
-      e.preventDefault();
       var self = this;
+      e.preventDefault();
 
-      var data = this.serializeFormData($(e.target));
+      var $form = $(e.target);
+      var $btn = this.$('button[type=submit]');
+      LoadingBehaviors.prototype.loading($btn, $form);
+
+      var data = this.serializeFormData($form);
       return this.model.save(data, {
         patch: true,
         success: function(){
           self.triggerStatusUpdate();
+          LoadingBehaviors.prototype.success($btn, $form, 'Rent request successfully updated!');
+        },
+        error: function() {
+          LoadingBehaviors.prototype.error($btn, $form, 'There was an error, please try again later.');
         }
       });
     },
