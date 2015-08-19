@@ -12,6 +12,10 @@ define([
         if (_.isDate(modelRange[i])) {
           modelRange[i] = +modelRange[i].getTime();
         }
+
+        if (modelRange[i] === null || modelRange[i] === undefined) {
+          modelRange[i] = 0;
+        }
       }
 
       $slider.create(this.el, _.extend({
