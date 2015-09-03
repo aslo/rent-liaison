@@ -4,11 +4,14 @@ A real estate listings site Rent Liaison built using [Sails.js](http://sailsjs.o
 ## Getting started
 Rent Liaison requires node v0.10.38 and npm.
 
-#### Checkout this repo and run the setup script
-The setup script installs all required global and local node dependencies.
+#### Checkout this repo
 ```
 $ git checkout git://github.com/aslo/snorlax.git
-$ cd snorlax && ./setup.sh
+```
+
+#### Install global dependencies
+```
+$ npm install -g sails bower
 ```
 
 #### Install local dependencies
