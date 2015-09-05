@@ -14,7 +14,7 @@ module.exports = {
 
   hookTimeout: 45000,
 
-  proxyHost: 'rent-liason.herokuapp.com',
+  proxyHost: process.env.HOST,
   proxyPort: 80
 
   /***************************************************************************
