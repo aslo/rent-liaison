@@ -29,14 +29,12 @@ module.exports = {
     name: {
       type: 'string',
       required: true,
-      minLength: 8,
-      regex: /^[\w\s]+$/
+      minLength: 8
     },
     slug: {
       type: 'string',
       required: true,
-      unique: true,
-      alphanumericdashed: true
+      unique: true
     },
     type: {
       type: 'string',
@@ -99,7 +97,7 @@ module.exports = {
     if (!values.name) return cb(); // will be caught in validation
     if (values.slug) return cb();
 
-    var slug = values.name.trim().toLowerCase().replace(/\s+/g, '-');
+    var slug = encodeURIComponent(values.name.trim().toLowerCase().replace(/\s+/g, '-'));
 
     // check to make sure the slug is unique
     Property.find({ slug: slug }, function(err, properties){
