@@ -9,7 +9,9 @@ html
     block styles
       link(rel="stylesheet" href="/styles/importer.css")
     
-    script(src="//load.sumome.com/", data-sumo-site-id="c7c14b7b1ab9bc5fd04a74473f65fd89ebbb1e247891348a3871fc2e68fdf6e8", async="async")
+    if process.env.NODE_ENV === 'production'
+      script(src="//load.sumome.com/", data-sumo-site-id="c7c14b7b1ab9bc5fd04a74473f65fd89ebbb1e247891348a3871fc2e68fdf6e8", async="async")
+  
   body
     .container
 
