@@ -24,6 +24,9 @@
       border: 1px solid @border-color;
       border-radius: @global-radius;
       position: relative;
+
+      word-wrap: break-word;
+      overflow: hidden;
     }
 
     .property-list-item--title {
@@ -32,13 +35,14 @@
 
     .property-list-item--description {
       margin-top: 1em;
+      min-height: 100px;
     }
 
     .property-list-item--controls {
       margin-top: 1em;
-      margin-bottom: 0.75em;
-      position: absolute;
-      bottom: 0;
+      // margin-bottom: 0.75em;
+      // position: absolute;
+      // bottom: 0;
     }
   }
 
