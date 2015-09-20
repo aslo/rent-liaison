@@ -4,7 +4,7 @@ require.config({
   deps: ["main"],
 
   paths: {
-    jquery:           './vendor/jquery/dist/jquery.min',
+    jquery:           './vendor/jquery/jquery.min',
     // lodash:        '../vendor/lodash/lodash.min',
     underscore:       './vendor/lodash/lodash.min', // TODO
     backbone:         './vendor/backbone/backbone',
