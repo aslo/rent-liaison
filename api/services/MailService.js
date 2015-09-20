@@ -9,9 +9,9 @@ module.exports = {
 
     mailer.send({
       to:      to,
-      from:    'noreply@rentliason.com',
-      subject: 'Welcome to Rent Liason',
-      html:    '<strong>Welcome to Rent Liason!</strong>' +
+      from:    'noreply@rentliaison.com',
+      subject: 'Welcome to Rent Liaison',
+      html:    '<strong>Welcome to Rent Liaison!</strong>' +
         '<p>Congratulations on creating a Rent Request!' +
         '  Your request has been logged in our system, and as soon as you click the activation link below' +
         ' we will begin finding a match among our qualified property managers.</p>' +
@@ -24,7 +24,7 @@ module.exports = {
   sendRentRequestResponseEmail: function(rentRequest, fromUser, properties, cb) {
     var mailer = new Mailer();
 
-    var message = 'Hello, I am reaching out via Rent Liason with a few properties that meet your parameters...' +
+    var message = 'Hello, I am reaching out via Rent Liaison with a few properties that meet your parameters...' +
       '</br>' +
       '<ul>';
 
@@ -38,8 +38,8 @@ module.exports = {
     mailer.send({
       to: rentRequest.email,
       cc: fromUser.email,
-      from: 'liason@rentliason.com',
-      subject: 'Response to Your Rent Request on rentliason.com',
+      from: 'liaison@rentliaison.com',
+      subject: 'Response to Your Rent Request on rentliaison.com',
       html: message
     }, cb);
   }
