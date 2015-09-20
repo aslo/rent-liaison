@@ -13,11 +13,14 @@ define([
     initialize: function(options) {
       var self = this;
 
-      // init subview for filters
-      this.filtersView = new FiltersView({
-        el: this.$('.js-rental-request-filters'),
-        collection: self.collection
-      });
+
+      if (this.$('.js-rental-request-filters').length) {
+        // init subview for filters
+        this.filtersView = new FiltersView({
+          el: this.$('.js-rental-request-filters'),
+          collection: self.collection
+        });
+      }
 
       // create model subviews for any pre-rendered content
       this.modelViews = [];
