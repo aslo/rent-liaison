@@ -1,8 +1,8 @@
 var Sendgrid = require('sendgrid');
 
 Mailer = function(){
- this.sendgrid = Sendgrid(process.env.SENDGRID_API_USER, process.env.SENDGRID_API_PASS);
-}
+ this.sendgrid = Sendgrid(process.env.SENDGRID_API_KEY);
+};
 
 Mailer.prototype.send = function(options, cb) {
   sails.log.debug('called mailer.send');
@@ -23,6 +23,6 @@ Mailer.prototype.send = function(options, cb) {
     sails.log.info('MAIL_DELIVER env variable not set - mailer not sending');
     cb(null, {});
   }
-}
+};
 
-module.exports = Mailer
+module.exports = Mailer;
