@@ -1,5 +1,5 @@
 # Rent Liaison
-A real estate listings webapp, built using [Sails.js](http://sailsjs.org)
+A real estate listings web application, built using [Sails.js](http://sailsjs.org)
 
 ## Getting started
 Rent Liaison requires node v0.10.38 and npm.
