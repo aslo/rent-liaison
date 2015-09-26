@@ -9,14 +9,17 @@ module.exports = {
       .populate('destination')
       .populate('propertyAttributes')
       .populate('externalListings')
-
     .then(function(property){
-      return res.view('modules/property/property', {
-        property: property,
-        amenities: property.getAmenities(),
-        locations: property.getLocations(),
-        destination: property.getDestination()
-      });
+      if (!property) {
+        return res.notFound();
+      } else {
+        return res.view('modules/property/property', {
+          property: property,
+          amenities: property.getAmenities(),
+          locations: property.getLocations(),
+          destination: property.getDestination()
+        });
+      }
     })
     .catch(function(err){
       return res.serverError(err);
