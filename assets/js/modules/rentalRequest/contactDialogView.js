@@ -62,6 +62,7 @@ define([
     },
 
     sendMessage: function(e) {
+      var self = this;
       var propertyIds = [];
       $('input[type=checkbox]:checked').each(function(){
         propertyIds.push($(this).data('propertyId'));
@@ -71,10 +72,10 @@ define([
         propertyIds: propertyIds
       })
       .done(function(){
-
+        self.$('.modal').modal('hide');
       })
       .fail(function(){
-
+        // TODO
       });
     }
   });
